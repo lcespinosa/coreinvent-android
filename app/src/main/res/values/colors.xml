@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#BB86FC</color>
+    <color name="primary_20">#33BB86FC</color>
+    <color name="primaryLightVariant">#aa48c7</color>
+    <color name="primaryDarkVariant">#470067</color>
+    <color name="secondary">#fe017e</color>
+    <color name="secondaryLightVariant">#ff5dad</color>
+    <color name="secondaryLightVariantTransparent">#1AFF5DAD</color>
+    <color name="secondaryDarkVariant">#c40052</color>
+    <color name="background">#121212</color>
+    <color name="overBackground">#232323</color>
+    <color name="surface">#121212</color>
+    <color name="error">#FF5D5D</color>
+    <color name="onPrimary">#000000</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#FFFFFF</color>
+    <color name="blank_14">#24FFFFFF</color>
+    <color name="onSurface">#FFFFFF</color>
+    <color name="onError">#000000</color>
+    <color name="colorText">#E0E0E0</color>
+    <color name="colorStroke">#707070</color>
+    <color name="colorOverlay">#ffff</color>
+
+</resources>

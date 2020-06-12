@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/baja_navigation"
+    app:startDestination="@+id/tag_fragment">
+
+    <fragment
+        android:id="@+id/tag_fragment"
+        android:name="com.coresolutions.coreinvent.ui.baja.TagFragment"
+        android:label="Tag"
+        tools:layout="@layout/fragment_tag" >
+        <action
+            android:id="@+id/action_tag_fragment_to_reason_fragment"
+            app:destination="@id/reason_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reason_fragment"
+        android:name="com.coresolutions.coreinvent.ui.baja.BajaReasonFragment"
+        android:label="BajaReason"
+        tools:layout="@layout/fragment_baja_reason" />
+
+
+</navigation>

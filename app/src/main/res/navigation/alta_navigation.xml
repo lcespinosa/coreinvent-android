@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alta_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.coresolutions.coreinvent.ui.alta.ClassificationFragment"
+        android:label="Classification"
+        tools:layout="@layout/fragment_classification" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_scan"
+            app:destination="@id/nav_scan"
+            app:enterAnim="@anim/nav_default_enter_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_scan"
+        android:name="com.coresolutions.coreinvent.ui.alta.ScanFragment"
+        android:label="Scan"
+        tools:layout="@layout/fragment_scan">
+        <action
+            android:id="@+id/action_nav_scan_to_nav_location"
+            app:destination="@id/nav_location" />
+        <action
+            android:id="@+id/action_nav_scan_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_location"
+        android:name="com.coresolutions.coreinvent.ui.alta.LocationFragment"
+        android:label="Location"
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_nav_location_to_nav_properties"
+            app:destination="@id/nav_properties" />
+        <action
+            android:id="@+id/action_nav_location_to_nav_scan"
+            app:destination="@id/nav_scan" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_properties"
+        android:name="com.coresolutions.coreinvent.ui.alta.PropertiesFragment"
+        android:label="Properties"
+        tools:layout="@layout/fragment_properties" >
+        <action
+            android:id="@+id/action_nav_properties_to_nav_description"
+            app:destination="@id/nav_description"
+            />
+        <action
+            android:id="@+id/action_nav_properties_to_nav_location"
+            app:destination="@id/nav_location" />
+    </fragment>
+
+        <fragment
+        android:id="@+id/nav_description"
+        android:name="com.coresolutions.coreinvent.ui.alta.DescriptionFragment"
+        android:label="Description"
+        tools:layout="@layout/fragment_description" >
+            <action
+                android:id="@+id/action_nav_description_to_nav_confimation"
+                app:destination="@id/nav_confimation" />
+            <action
+                android:id="@+id/action_nav_description_to_nav_properties"
+                app:destination="@id/nav_properties" />
+        </fragment>
+
+
+      <fragment
+        android:id="@+id/nav_confimation"
+        android:name="com.coresolutions.coreinvent.ui.alta.ConfimationFragment"
+        android:label="Confimation"
+        tools:layout="@layout/fragment_confimation" >
+          <action
+              android:id="@+id/action_nav_confimation_to_nav_description"
+              app:destination="@id/nav_description" />
+      </fragment>
+
+
+
+
+</navigation>
