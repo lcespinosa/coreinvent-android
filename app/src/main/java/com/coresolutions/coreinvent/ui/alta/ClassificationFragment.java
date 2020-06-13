@@ -14,14 +14,16 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.SubFamilyPojo;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,8 +37,8 @@ public class ClassificationFragment extends Fragment {
     private AutoCompleteTextView sub_family_dropdown;
     private AutoCompleteTextView type_dropdown;
     private AltaViewModel altaViewModel;
-    private List<FamilyPojo> familys;
     private SharedPreferences settings;
+    private SubFamilyPojo subFamilyPojo;
 
     public ClassificationFragment() {
         // Required empty public constructor
@@ -59,24 +61,36 @@ public class ClassificationFragment extends Fragment {
         sub_family_dropdown = view.findViewById(R.id.sub_family_dropdown);
         type_dropdown = view.findViewById(R.id.type_dropdown);
 
-        String[] COUNTRIES = new String[]{"Item 1", "Item 2", "Item 3", "Item 4"};
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, COUNTRIES);
-
-
         altaViewModel.getFamilyResult().observe(this, new Observer<List<FamilyPojo>>() {
             @Override
             public void onChanged(List<FamilyPojo> familyPojos) {
                 if (familyPojos != null) {
-                    familys = familyPojos;
-                    List<String> familyNames = Collections.emptyList();
-                    for (FamilyPojo family : familyPojos) {
-                        familyNames.add(family.getName());
-                    }
-                    family_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, familyNames));
+                    family_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, familyPojos));
                 } else {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        family_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FamilyPojo familyPojo = (FamilyPojo) family_dropdown.getAdapter().getItem(position);
+                sub_family_dropdown.clearListSelection();
+                sub_family_dropdown.setText("");
+                type_dropdown.clearListSelection();
+                type_dropdown.setText("");
+                sub_family_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, familyPojo.getSubFamilies()));
+            }
+        });
+
+        sub_family_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                type_dropdown.clearListSelection();
+                type_dropdown.setText("");
+                subFamilyPojo = (SubFamilyPojo) sub_family_dropdown.getAdapter().getItem(position);
+                type_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, subFamilyPojo.getTypePojos()));
             }
         });
 
@@ -89,7 +103,9 @@ public class ClassificationFragment extends Fragment {
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_scan);
+                Bundle bundle = new Bundle();
+                bundle.putInt("subfamily", subFamilyPojo.getId());
+                Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_scan, bundle);
             }
         });
     }

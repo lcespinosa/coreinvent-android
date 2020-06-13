@@ -1,26 +1,18 @@
 package com.coresolutions.coreinvent.ui.alta;
 
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.util.Patterns;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
-import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
-import com.coresolutions.coreinvent.data.interfaces.LoginApi;
-import com.coresolutions.coreinvent.data.model.LoggedInUser;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,11 +20,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+
+import static android.os.Debug.waitForDebugger;
 
 public class AltaViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<FamilyPojo>> familyResult = new MutableLiveData<>();
+    private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     public AltaViewModel(@NonNull Application application) {
@@ -44,18 +38,23 @@ public class AltaViewModel extends AndroidViewModel {
         return familyResult;
     }
 
+    LiveData<List<FieldPojo>> getRegisterResult() {
+        return fieldResult;
+    }
+
     public void getFamily(String token) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.37:8001/api/")
+                .baseUrl(Constants.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
 
         AltasApi altaApi = retrofit.create(AltasApi.class);
-        Call<List<FamilyPojo>> family = altaApi.getFamily("Bearer " + token);
+        Call<List<FamilyPojo>> family = altaApi.getFamily(token);
         family.enqueue(new Callback<List<FamilyPojo>>() {
             @Override
             public void onResponse(Call<List<FamilyPojo>> call, Response<List<FamilyPojo>> response) {
+//                waitForDebugger();
                 if (response.isSuccessful()) {
 //                    waitForDebugger();
                     List<FamilyPojo> familyPojos = response.body();
@@ -76,6 +75,33 @@ public class AltaViewModel extends AndroidViewModel {
 //        } else {
 //            loginResult.setValue(new LoginResult(R.string.login_failed));
 //        }
+    }
+
+    public void getFields(int subfamilyid, String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+        Call<List<FieldPojo>> family = altaApi.getFields(subfamilyid, token);
+        family.enqueue(new Callback<List<FieldPojo>>() {
+            @Override
+            public void onResponse(Call<List<FieldPojo>> call, Response<List<FieldPojo>> response) {
+                waitForDebugger();
+                if (response.isSuccessful()) {
+//                    waitForDebugger();
+                    List<FieldPojo> fieldPojos = response.body();
+                    fieldResult.setValue(fieldPojos);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FieldPojo>> call, Throwable t) {
+                waitForDebugger();
+                familyResult.setValue(null);
+            }
+        });
     }
 
 }

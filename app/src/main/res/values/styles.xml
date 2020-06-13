@@ -6,13 +6,16 @@
         <item name="android:fontFamily">"@font/roboto"</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/onPrimary</item>
-        <item name="colorAccent">@color/background</item>
+        <item name="colorAccent">@color/secondaryLightVariant</item>
         <item name="checkboxStyle">@style/Widget.MaterialComponents.CompoundButton.CheckBox</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    <style name="switchStyle">
+        <item name="colorAccent">@color/secondaryLightVariant</item>
     </style>
 
     <style name="FullScreenDialog" parent="Theme.AppCompat.Light.DialogWhenLarge">

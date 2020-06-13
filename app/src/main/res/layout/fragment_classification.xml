@@ -72,7 +72,9 @@
 
                 <AutoCompleteTextView
                     android:textColor="@color/onBackground"
+                    android:inputType="none"
                     android:id="@+id/family_dropdown"
+                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -95,6 +97,9 @@
                 app:hintTextColor="@color/onBackground">
 
                 <AutoCompleteTextView
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:textColor="@color/onBackground"
                     android:id="@+id/sub_family_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -118,7 +123,9 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/type_dropdown"
+                    android:inputType="none"
                     android:textColor="@color/onBackground"
+                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

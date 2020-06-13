@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import android.content.SharedPreferences;
 import android.util.Patterns;
 
+import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.LoginApi;
 import com.coresolutions.coreinvent.data.model.LoggedInUser;
@@ -45,14 +46,14 @@ public class LoginViewModel extends ViewModel {
     public void login(String username, String password, final SharedPreferences settings) {
         // can be launched in a separate asynchronous job
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.37:8001/api/")
+                .baseUrl(Constants.API_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
 
         LoginApi loginApi = retrofit.create(LoginApi.class);
-        Call<String> loginUser = loginApi.loginUser("liuver.carrera@coresolutions.es", "4dm1nC0r3*2020");
-//        Call<String> loginUser = loginApi.loginUser(username, password);
+//        Call<String> loginUser = loginApi.loginUser("a@a.cu", "a");
+        Call<String> loginUser = loginApi.loginUser(username, password);
         loginUser.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -98,7 +99,7 @@ public class LoginViewModel extends ViewModel {
 
     public Call<Void> logout(String token) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.37:8001/api/")
+                .baseUrl(Constants.API_URL)
 //                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
         LoginApi loginApi = retrofit.create(LoginApi.class);

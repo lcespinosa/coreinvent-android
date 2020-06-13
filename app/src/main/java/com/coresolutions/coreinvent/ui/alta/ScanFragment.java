@@ -43,14 +43,19 @@ public class ScanFragment extends Fragment {
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_home);
+                Bundle bundle = new Bundle();
+                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
+                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_home, bundle);
             }
         });
+
 
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_location);
+                Bundle bundle = new Bundle();
+                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
+                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_location, bundle);
             }
         });
     }

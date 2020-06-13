@@ -43,93 +43,101 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Centro"
-                android:textColorHint="@color/colorText"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                app:endIconTint="@color/colorText"
-                app:hintTextColor="@color/onBackground">
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
-                <AutoCompleteTextView
-                    android:id="@+id/center_dropdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Nivel"
-                android:textColorHint="@color/colorText"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                app:endIconTint="@color/colorText"
-                app:hintTextColor="@color/onBackground">
-
-                <AutoCompleteTextView
-                    android:id="@+id/level_dropdown"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edificeLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/onBackground" />
+                    android:layout_margin="5dp"
+                    android:hint="Centro"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:endIconTint="@color/colorText"
+                    app:hintTextColor="@color/onBackground">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/edifice_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Espacio"
-                android:textColorHint="@color/colorText"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                app:endIconTint="@color/colorText"
-                app:hintTextColor="@color/onBackground"
-                app:startIconDrawable="@drawable/ic_codigo_qr_24"
-                app:startIconTintMode="screen">
-
-                <AutoCompleteTextView
-                    android:id="@+id/space_dropdown"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/levelLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/onBackground" />
+                    android:layout_margin="5dp"
+                    android:hint="Nivel"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:endIconTint="@color/colorText"
+                    app:hintTextColor="@color/onBackground">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/level_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/onBackground" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/spaceLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Espacio"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:endIconTint="@color/colorText"
+                    app:hintTextColor="@color/onBackground"
+                    app:startIconDrawable="@drawable/ic_codigo_qr_24"
+                    app:startIconTintMode="screen">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/space_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/onBackground" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/linearLayout3"
