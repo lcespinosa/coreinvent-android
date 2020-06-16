@@ -50,5 +50,6 @@
     <string name="measures">Medidas</string>
     <string name="in_use_date">Fecha instalación/inicio uso</string>
     <string name="scan_tag">Escanear Etiqueta</string>
+    <string name="tag">Etiqueta</string>
     <string name="virtual_tag">Asignar etiqueta virtual</string>
 </resources>

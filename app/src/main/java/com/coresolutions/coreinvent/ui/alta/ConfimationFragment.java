@@ -35,7 +35,6 @@ public class ConfimationFragment extends Fragment {
 
     private ImageView back_img;
     private ImageView forward_img;
-    private TextView info;
     private SharedPreferences settings;
     private AltaViewModel altaViewModel;
     private AssetPojo assetPojo;
@@ -70,14 +69,15 @@ public class ConfimationFragment extends Fragment {
 
         LayoutInflater inflater = this.getLayoutInflater();
         for (Map.Entry<Integer, String> entry : selectedMap.entrySet()) {
-            View inflatedView = inflater.inflate(R.layout.properties_item, null);
-
-            TextView property_name = inflatedView.findViewById(R.id.property_name);
-            TextView property_value = inflatedView.findViewById(R.id.property_value);
-            property_name.setText(entry.getKey());
-            property_value.setText(entry.getValue());
-            layout.addView(inflatedView);
-
+            if (!entry.getValue().equals("")) {
+                View inflatedView = inflater.inflate(R.layout.properties_item, null);
+                TextView property_name = inflatedView.findViewById(R.id.property_name);
+                TextView property_value = inflatedView.findViewById(R.id.property_value);
+                property_name.setText(entry.getKey());
+                property_name.setText(property_name.getText().toString() + ":");
+                property_value.setText(entry.getValue());
+                layout.addView(inflatedView);
+            }
         }
 
 
@@ -95,11 +95,7 @@ public class ConfimationFragment extends Fragment {
             }
         });
         back_img = view.findViewById(R.id.back_img);
-        info = view.findViewById(R.id.info);
         forward_img = view.findViewById(R.id.forward_img);
-        Gson gson = new Gson();
-        info.setText(gson.toJson(assetPojo));
-
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

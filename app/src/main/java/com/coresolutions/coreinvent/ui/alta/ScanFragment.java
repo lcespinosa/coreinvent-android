@@ -98,7 +98,7 @@ public class ScanFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     AssetPojo assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
                     HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
-                    selectedMap.put(R.string.scan_tag, tag.getText().toString());
+                    selectedMap.put(R.string.tag, tag.getText().toString());
                     bundle.putSerializable("fieldPojos", fieldPojoArrayList);
                     assetPojo.setTag(String.valueOf(tagId));
                     assetPojo.setTagType(virtualTagSwitch.isChecked() ? "3" : "2");
