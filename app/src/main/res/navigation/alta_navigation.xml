@@ -79,6 +79,20 @@
         <action
             android:id="@+id/action_nav_confimation_to_nav_description"
             app:destination="@id/nav_description" />
+        <action
+            android:id="@+id/action_nav_confimation_to_nav_result"
+            app:destination="@id/nav_result" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_result"
+        android:name="com.coresolutions.coreinvent.ui.alta.ResultFragment"
+        android:label="Results"
+        tools:layout="@layout/fragment_result">
+
+        <action
+            android:id="@+id/action_nav_result_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 
 

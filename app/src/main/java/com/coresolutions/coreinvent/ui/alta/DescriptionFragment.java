@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +28,9 @@ public class DescriptionFragment extends Fragment {
 
     private ImageView back_img;
     private ImageView forward_img;
+    private TextInputEditText observations;
+    private AssetPojo assetPojo;
+    private ArrayList<FieldPojo> fieldPojoArrayList;
 
     public DescriptionFragment() {
         // Required empty public constructor
@@ -41,18 +50,35 @@ public class DescriptionFragment extends Fragment {
 
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
+        observations = view.findViewById(R.id.observations);
+
+        fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
+        assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
 
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_description_to_nav_properties);
+                Bundle bundle = new Bundle();
+                HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
+                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
+                bundle.putSerializable("fieldPojos", fieldPojoArrayList);
+                bundle.putSerializable("assetPojo", assetPojo);
+                bundle.putSerializable("selectedMap", selectedMap);
+                Navigation.findNavController(v).navigate(R.id.action_nav_description_to_nav_properties, bundle);
             }
         });
 
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_description_to_nav_confimation);
+                assetPojo.setObservations(observations.getText().toString());
+                Bundle bundle = new Bundle();
+                HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
+                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
+                bundle.putSerializable("fieldPojos", fieldPojoArrayList);
+                bundle.putSerializable("assetPojo", assetPojo);
+                bundle.putSerializable("selectedMap", selectedMap);
+                Navigation.findNavController(v).navigate(R.id.action_nav_description_to_nav_confimation, bundle);
             }
         });
     }

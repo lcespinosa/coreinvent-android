@@ -21,10 +21,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.SubFamilyPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.TypePojo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +43,8 @@ public class ClassificationFragment extends Fragment {
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
     private SubFamilyPojo subFamilyPojo;
+    private TypePojo typePojo;
+
 
     public ClassificationFragment() {
         // Required empty public constructor
@@ -94,6 +100,13 @@ public class ClassificationFragment extends Fragment {
             }
         });
 
+        type_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                typePojo = (TypePojo) type_dropdown.getAdapter().getItem(position);
+            }
+        });
+
         altaViewModel.getFamily(settings.getString("access_token", ""));
 
         back_img = view.findViewById(R.id.back_img);
@@ -104,7 +117,15 @@ public class ClassificationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                HashMap<Integer, String> selectedMap = new HashMap<Integer, String>();
+                selectedMap.put(R.string.family, family_dropdown.getText().toString());
+                selectedMap.put(R.string.sub_family, sub_family_dropdown.getText().toString());
+                selectedMap.put(R.string.type, type_dropdown.getText().toString());
+                AssetPojo assetPojo = new AssetPojo();
+                assetPojo.setType(String.valueOf(typePojo.getId()));
                 bundle.putInt("subfamily", subFamilyPojo.getId());
+                bundle.putSerializable("assetPojo", assetPojo);
+                bundle.putSerializable("selectedMap", selectedMap);
                 Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_scan, bundle);
             }
         });

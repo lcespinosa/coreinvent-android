@@ -3,7 +3,9 @@ package com.coresolutions.coreinvent.ui.alta.pojos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TagType {
+import java.io.Serializable;
+
+public class TagType implements Serializable {
 
     @SerializedName("id")
     @Expose

@@ -1,11 +1,14 @@
 package com.coresolutions.coreinvent.ui.alta.pojos;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Level {
+public class EdificePojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -19,18 +22,18 @@ public class Level {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("edifice_id")
+    @SerializedName("center_id")
     @Expose
-    private Integer edificeId;
+    private Integer centerId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("spaces")
+    @SerializedName("levels")
     @Expose
-    private List<Space> spaces = null;
+    private List<LevelPojo> levelPojos = null;
 
     public Integer getId() {
         return id;
@@ -64,12 +67,12 @@ public class Level {
         this.description = description;
     }
 
-    public Integer getEdificeId() {
-        return edificeId;
+    public Integer getCenterId() {
+        return centerId;
     }
 
-    public void setEdificeId(Integer edificeId) {
-        this.edificeId = edificeId;
+    public void setCenterId(Integer centerId) {
+        this.centerId = centerId;
     }
 
     public String getCreatedAt() {
@@ -88,12 +91,17 @@ public class Level {
         this.updatedAt = updatedAt;
     }
 
-    public List<Space> getSpaces() {
-        return spaces;
+    public List<LevelPojo> getLevelPojos() {
+        return levelPojos;
     }
 
-    public void setSpaces(List<Space> spaces) {
-        this.spaces = spaces;
+    public void setLevelPojos(List<LevelPojo> levelPojos) {
+        this.levelPojos = levelPojos;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

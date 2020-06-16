@@ -6,8 +6,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class TypePojo implements Serializable {
+public class LevelPojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -21,18 +22,18 @@ public class TypePojo implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("in_app")
+    @SerializedName("edifice_id")
     @Expose
-    private Boolean inApp;
-    @SerializedName("sub_family_id")
-    @Expose
-    private Integer subFamilyId;
+    private Integer edificeId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("spaces")
+    @Expose
+    private List<SpacePojo> spacePojos = null;
 
     public Integer getId() {
         return id;
@@ -66,20 +67,12 @@ public class TypePojo implements Serializable {
         this.description = description;
     }
 
-    public Boolean getInApp() {
-        return inApp;
+    public Integer getEdificeId() {
+        return edificeId;
     }
 
-    public void setInApp(Boolean inApp) {
-        this.inApp = inApp;
-    }
-
-    public Integer getSubFamilyId() {
-        return subFamilyId;
-    }
-
-    public void setSubFamilyId(Integer subFamilyId) {
-        this.subFamilyId = subFamilyId;
+    public void setEdificeId(Integer edificeId) {
+        this.edificeId = edificeId;
     }
 
     public String getCreatedAt() {
@@ -96,6 +89,14 @@ public class TypePojo implements Serializable {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<SpacePojo> getSpacePojos() {
+        return spacePojos;
+    }
+
+    public void setSpacePojos(List<SpacePojo> spacePojos) {
+        this.spacePojos = spacePojos;
     }
 
     @NonNull

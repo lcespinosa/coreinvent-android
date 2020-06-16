@@ -10,38 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idBienLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="ID Bien:"
-            android:textColorHint="@color/colorText"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/secondaryLightVariant"
-            app:endIconTint="@color/colorText"
-            app:hintTextColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idBien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:focusable="false"
-                android:inputType="text"
-
-                android:text="45134859121564"
-                android:textColor="@color/colorText" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -64,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Centro"
+                    android:hint="@string/center"
                     android:textColorHint="@color/colorText"
                     android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
@@ -78,7 +46,9 @@
                     <AutoCompleteTextView
                         android:id="@+id/edifice_dropdown"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Nivel"
+                    android:hint="@string/level"
                     android:textColorHint="@color/colorText"
                     android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
@@ -103,6 +73,7 @@
                         android:id="@+id/level_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Espacio"
+                    android:hint="@string/space"
                     android:textColorHint="@color/colorText"
                     android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
@@ -131,6 +102,7 @@
                         android:id="@+id/space_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>

@@ -1,11 +1,14 @@
 package com.coresolutions.coreinvent.ui.alta.pojos;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Option {
+public class OptionPojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -27,7 +30,7 @@ public class Option {
     private String updatedAt;
     @SerializedName("edifices")
     @Expose
-    private List<Edifice> edifices = null;
+    private List<EdificePojo> edificePojos = null;
     @SerializedName("installation")
     @Expose
     private String installation;
@@ -40,6 +43,14 @@ public class Option {
     @SerializedName("tag_type")
     @Expose
     private TagType tagType;
+    @SerializedName("manufacturer_id")
+    @Expose
+    private Integer manufacturerId;
+    @SerializedName("asset_models")
+    @Expose
+    private List<AssetModelPojo> assetModels = null;
+    private final static long serialVersionUID = 2604884895258544769L;
+
 
     public Integer getId() {
         return id;
@@ -89,12 +100,12 @@ public class Option {
         this.updatedAt = updatedAt;
     }
 
-    public List<Edifice> getEdifices() {
-        return edifices;
+    public List<EdificePojo> getEdificePojos() {
+        return edificePojos;
     }
 
-    public void setEdifices(List<Edifice> edifices) {
-        this.edifices = edifices;
+    public void setEdificePojos(List<EdificePojo> edificePojos) {
+        this.edificePojos = edificePojos;
     }
 
     public String getInstallation() {
@@ -129,4 +140,28 @@ public class Option {
         this.tagType = tagType;
     }
 
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+
+    public List<AssetModelPojo> getAssetModels() {
+        return assetModels;
+    }
+
+    public void setAssetModels(List<AssetModelPojo> assetModels) {
+        this.assetModels = assetModels;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
+
+
+

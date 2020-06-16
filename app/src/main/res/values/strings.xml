@@ -27,4 +27,28 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="family">Familia</string>
+    <string name="sub_family">Sub Familia</string>
+    <string name="type">Tipo</string>
+    <string name="description">Descripción ampliada</string>
+    <string name="center">Centro</string>
+    <string name="level">Nivel</string>
+    <string name="space">Espacio</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="serie">Número de serie</string>
+    <string name="characteristics">Características</string>
+    <string name="plate">Matrícula</string>
+    <string name="frame_number">Número de bastidor</string>
+    <string name="address">Dirección</string>
+    <string name="postal_code">Código postal</string>
+    <string name="surface">Superficie</string>
+    <string name="length">Longitud</string>
+    <string name="width">Ancho</string>
+    <string name="heigth">Alto</string>
+    <string name="depth">Profundidad</string>
+    <string name="measures">Medidas</string>
+    <string name="in_use_date">Fecha instalación/inicio uso</string>
+    <string name="scan_tag">Escanear Etiqueta</string>
+    <string name="virtual_tag">Asignar etiqueta virtual</string>
 </resources>

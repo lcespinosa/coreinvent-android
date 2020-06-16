@@ -1,11 +1,13 @@
 package com.coresolutions.coreinvent.ui.alta.pojos;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class Edifice {
+public class SpacePojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -19,18 +21,15 @@ public class Edifice {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("center_id")
+    @SerializedName("level_id")
     @Expose
-    private Integer centerId;
+    private Integer levelId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("levels")
-    @Expose
-    private List<Level> levels = null;
 
     public Integer getId() {
         return id;
@@ -64,12 +63,12 @@ public class Edifice {
         this.description = description;
     }
 
-    public Integer getCenterId() {
-        return centerId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setCenterId(Integer centerId) {
-        this.centerId = centerId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public String getCreatedAt() {
@@ -88,12 +87,9 @@ public class Edifice {
         this.updatedAt = updatedAt;
     }
 
-    public List<Level> getLevels() {
-        return levels;
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
     }
-
-    public void setLevels(List<Level> levels) {
-        this.levels = levels;
-    }
-
 }

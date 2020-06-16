@@ -10,38 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idBienLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="ID Bien:"
-            android:textColorHint="@color/colorText"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/secondaryLightVariant"
-            app:endIconTint="@color/colorText"
-            app:hintTextColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idBien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:focusable="false"
-                android:inputType="text"
-
-                android:text="45134859121564"
-                android:textColor="@color/colorText" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
 
         <ScrollView
@@ -52,25 +20,26 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idBienLayout">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
 
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:id="@+id/brandLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Marca"
+                    android:hint="@string/brand"
                     android:textColorHint="@color/colorText"
+                    android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
                     app:boxCornerRadiusTopEnd="20dp"
@@ -82,17 +51,21 @@
                     <AutoCompleteTextView
                         android:id="@+id/brand_dropdown"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/modelLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Modelo"
+                    android:hint="@string/model"
                     android:textColorHint="@color/colorText"
+                    android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
                     app:boxCornerRadiusTopEnd="20dp"
@@ -104,20 +77,21 @@
                     <AutoCompleteTextView
                         android:id="@+id/model_dropdown"
                         android:layout_width="match_parent"
+                        android:focusable="false"
                         android:layout_height="wrap_content"
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:id="@+id/serieLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:focusable="false"
-                    android:hint="Número de serie"
+                    android:hint="@string/serie"
                     android:textColorHint="@color/colorText"
+                    android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
                     app:boxCornerRadiusTopEnd="20dp"
@@ -125,16 +99,14 @@
                     app:boxStrokeColor="@color/secondaryLightVariant"
                     app:endIconDrawable="@drawable/ic_codigo_qr_24"
                     app:endIconMode="custom"
-                    app:endIconTint="@color/colorText"
-                    app:endIconTintMode="multiply"
+                    app:endIconTintMode="screen"
                     app:hintTextColor="@color/onBackground">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/serie"
+                        android:id="@+id/serie_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
-                        android:focusable="false"
                         android:inputType="text"
                         android:selectAllOnFocus="true"
                         android:textColor="@color/colorText" />
@@ -143,14 +115,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:id="@+id/characteristicsLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:focusable="false"
-                    android:hint="Características"
+                    android:hint="@string/characteristics"
                     android:textColorHint="@color/colorText"
+                    android:visibility="gone"
                     app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
                     app:boxCornerRadiusTopEnd="20dp"
@@ -159,11 +131,10 @@
                     app:hintTextColor="@color/onBackground">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/username"
+                        android:id="@+id/characteristics_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
-                        android:focusable="false"
                         android:inputType="text"
                         android:selectAllOnFocus="true"
                         android:textColor="@color/colorText" />
@@ -173,28 +144,299 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:id="@+id/plateLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:hint="Espacio"
+                    android:hint="@string/plate"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/plate_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/frame_numberLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/frame_number"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/frame_number_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addressLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/address"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/postal_codeLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/postal_code"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/postal_code_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/surfaceLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/surface"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/surface_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="text"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/lengthLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/length"
+                    android:textColorHint="@color/colorText"
+                    android:visibility="gone"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeColor="@color/secondaryLightVariant"
+                    app:hintTextColor="@color/onBackground">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/length_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:inputType="numberDecimal"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/widthLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:hint="@string/width"
+                        android:textColorHint="@color/colorText"
+                        android:visibility="gone"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:boxStrokeColor="@color/secondaryLightVariant"
+                        app:hintTextColor="@color/onBackground">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/width_dropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:inputType="numberDecimal"
+                            android:selectAllOnFocus="true"
+                            android:textColor="@color/colorText" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/heightLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:hint="@string/heigth"
+                        android:textColorHint="@color/colorText"
+                        android:visibility="gone"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:boxStrokeColor="@color/secondaryLightVariant"
+                        app:hintTextColor="@color/onBackground">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/height_dropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:inputType="numberDecimal"
+                            android:selectAllOnFocus="true"
+                            android:textColor="@color/colorText" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/depthLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:hint="@string/depth"
+                        android:textColorHint="@color/colorText"
+                        android:visibility="gone"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:boxStrokeColor="@color/secondaryLightVariant"
+                        app:hintTextColor="@color/onBackground">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/depth_dropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:inputType="numberDecimal"
+                            android:selectAllOnFocus="true"
+                            android:textColor="@color/colorText" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dateLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/in_use_date"
                     android:textColorHint="@color/colorText"
                     app:boxCornerRadiusBottomEnd="20dp"
                     app:boxCornerRadiusBottomStart="20dp"
                     app:boxCornerRadiusTopEnd="20dp"
                     app:boxCornerRadiusTopStart="20dp"
                     app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
+                    app:endIconDrawable="@drawable/ic_date_range_black_24dp"
+                    app:endIconMode="custom"
+                    app:endIconTint="@color/secondaryLightVariant"
                     app:hintTextColor="@color/onBackground">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/space_dropdown"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/onBackground" />
+                        android:layout_marginTop="28dp"
+                        android:focusable="false"
+                        android:inputType="date"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorText" />
+
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+
             </LinearLayout>
         </ScrollView>
 

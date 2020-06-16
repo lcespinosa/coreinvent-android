@@ -50,7 +50,7 @@
         android:id="@+id/cardViewAltas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="60dp"
+        android:layout_margin="30dp"
         android:layout_weight="1"
         android:elevation="100dp"
         app:cardBackgroundColor="#232323"

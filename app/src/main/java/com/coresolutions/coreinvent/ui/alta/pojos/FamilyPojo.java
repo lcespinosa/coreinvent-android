@@ -3,12 +3,13 @@ package com.coresolutions.coreinvent.ui.alta.pojos;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FamilyPojo {
+public class FamilyPojo implements Serializable {
 
     @SerializedName("id")
     @Expose

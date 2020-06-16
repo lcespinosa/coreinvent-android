@@ -10,38 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idBienLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="ID Bien:"
-            android:textColorHint="@color/colorText"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/secondaryLightVariant"
-            app:endIconTint="@color/colorText"
-            app:hintTextColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idBien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:focusable="false"
-                android:inputType="text"
-
-                android:text="45134859121564"
-                android:textColor="@color/colorText" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -56,13 +24,12 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:focusable="false"
-                android:hint="Descripción ampliada"
+                android:hint="@string/description"
                 android:textColorHint="@color/colorText"
                 app:boxCornerRadiusBottomEnd="20dp"
                 app:boxCornerRadiusBottomStart="20dp"
@@ -72,11 +39,11 @@
                 app:hintTextColor="@color/onBackground">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username"
+                    android:id="@+id/observations"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginTop="28dp"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:selectAllOnFocus="true"
                     android:textColor="@color/colorText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -127,28 +94,25 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:clickable="true"
-                app:tint="@color/primary"
                 app:backgroundTint="@color/blank_14"
                 app:elevation="0dp"
                 app:pressedTranslationZ="0dp"
-                app:srcCompat="@drawable/ic_add_a_photo_24px" />
+                app:srcCompat="@drawable/ic_add_a_photo_24px"
+                app:tint="@color/primary" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:backgroundTint="@color/blank_14"
                 android:layout_margin="10dp"
-                app:tint="@color/primary"
                 android:clickable="true"
+                app:backgroundTint="@color/blank_14"
                 app:elevation="0dp"
                 app:pressedTranslationZ="0dp"
                 app:srcCompat="@drawable/ic_cloud_upload"
-                />
+                app:tint="@color/primary" />
 
         </LinearLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

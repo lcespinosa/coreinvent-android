@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
+import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 
@@ -27,6 +28,7 @@ public class AltaViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<FamilyPojo>> familyResult = new MutableLiveData<>();
     private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
+    private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     public AltaViewModel(@NonNull Application application) {
@@ -88,7 +90,7 @@ public class AltaViewModel extends AndroidViewModel {
         family.enqueue(new Callback<List<FieldPojo>>() {
             @Override
             public void onResponse(Call<List<FieldPojo>> call, Response<List<FieldPojo>> response) {
-                waitForDebugger();
+//                waitForDebugger();
                 if (response.isSuccessful()) {
 //                    waitForDebugger();
                     List<FieldPojo> fieldPojos = response.body();
@@ -98,10 +100,40 @@ public class AltaViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<List<FieldPojo>> call, Throwable t) {
-                waitForDebugger();
+//                waitForDebugger();
                 familyResult.setValue(null);
             }
         });
     }
 
+
+    public MutableLiveData<Integer> getSubscriptionResult() {
+        return subscriptionResult;
+    }
+
+    public void assetSubscription(String token, AssetPojo assetPojo) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+        Call<AssetPojo> family = altaApi.assetSubscription(token, assetPojo);
+        family.enqueue(new Callback<AssetPojo>() {
+            @Override
+            public void onResponse(Call<AssetPojo> call, Response<AssetPojo> response) {
+//                waitForDebugger();
+                subscriptionResult.setValue(response.code());
+            }
+
+            @Override
+            public void onFailure(Call<AssetPojo> call, Throwable t) {
+//                waitForDebugger();
+                subscriptionResult.setValue(null);
+            }
+
+        });
+
+
+    }
 }

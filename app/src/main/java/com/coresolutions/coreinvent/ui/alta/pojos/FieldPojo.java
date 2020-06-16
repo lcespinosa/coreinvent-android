@@ -1,12 +1,13 @@
 
 package com.coresolutions.coreinvent.ui.alta.pojos;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class FieldPojo {
+public class FieldPojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -49,7 +50,7 @@ public class FieldPojo {
     private Object constrain;
     @SerializedName("options")
     @Expose
-    private List<Option> options = null;
+    private List<OptionPojo> optionPojos = null;
 
     public Integer getId() {
         return id;
@@ -155,12 +156,12 @@ public class FieldPojo {
         this.constrain = constrain;
     }
 
-    public List<Option> getOptions() {
-        return options;
+    public List<OptionPojo> getOptionPojos() {
+        return optionPojos;
     }
 
-    public void setOptions(List<Option> options) {
-        this.options = options;
+    public void setOptionPojos(List<OptionPojo> optionPojos) {
+        this.optionPojos = optionPojos;
     }
 
 }

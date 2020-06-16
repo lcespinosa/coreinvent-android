@@ -82,6 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("user_name", loginResult.getSuccess().getDisplayName());
+                    editor.commit();
                     i.putExtra("user_name", loginResult.getSuccess().getDisplayName());
                     startActivity(i);
 //                    updateUiWithUser(loginResult.getSuccess());
