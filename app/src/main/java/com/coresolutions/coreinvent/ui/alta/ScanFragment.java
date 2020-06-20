@@ -15,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.OptionPojo;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -51,7 +53,6 @@ public class ScanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_scan, container, false);
     }
 
@@ -63,12 +64,10 @@ public class ScanFragment extends Fragment {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
 
-        altaViewModel.getRegisterResult().observe(this, new Observer<List<FieldPojo>>() {
+        altaViewModel.getRegisterResult().observe(this, new Observer<FieldListPojo>() {
             @Override
-            public void onChanged(List<FieldPojo> fieldPojos) {
-                for (FieldPojo field : fieldPojos) {
-                    fieldPojoArrayList = new ArrayList<FieldPojo>(fieldPojos);
-                }
+            public void onChanged(FieldListPojo fieldListPojo) {
+                fieldPojoArrayList = new ArrayList<FieldPojo>(fieldListPojo.getFields());
             }
         });
 
@@ -85,6 +84,15 @@ public class ScanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_home);
+            }
+        });
+
+        virtualTagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                }
             }
         });
 

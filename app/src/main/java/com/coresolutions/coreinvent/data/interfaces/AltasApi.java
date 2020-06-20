@@ -2,6 +2,7 @@ package com.coresolutions.coreinvent.data.interfaces;
 
 import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface AltasApi {
     Call<List<FamilyPojo>> getFamily(@Header("authorization") String token);
 
     @GET("operations/subscription/open/{subfamily}")
-    Call<List<FieldPojo>> getFields(@Path("subfamily") int subfamilyid, @Header("authorization") String token);
+    Call<FieldListPojo> getFields(@Path("subfamily") int subfamilyid, @Header("authorization") String token);
 
     @POST("operations/subscription/close")
     Call<AssetPojo> assetSubscription(@Header("authorization") String token, @Body AssetPojo assetPojo);
