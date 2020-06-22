@@ -25,6 +25,7 @@ import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.OptionPojo;
+import com.coresolutions.coreinvent.ui.alta.pojos.Tag;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -43,6 +44,7 @@ public class ScanFragment extends Fragment {
     private SharedPreferences settings;
     private AltaViewModel altaViewModel;
     private int subfamily;
+    private String typeTag;
     private ArrayList<FieldPojo> fieldPojoArrayList;
 
     public ScanFragment() {
@@ -58,16 +60,17 @@ public class ScanFragment extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subfamily = getArguments().getInt("subfamily");
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
+        typeTag = "real";
 
-        altaViewModel.getRegisterResult().observe(this, new Observer<FieldListPojo>() {
+        altaViewModel.getRegisterResult().observe(this, new Observer<List<FieldPojo>>() {
             @Override
-            public void onChanged(FieldListPojo fieldListPojo) {
-                fieldPojoArrayList = new ArrayList<FieldPojo>(fieldListPojo.getFields());
+            public void onChanged(List<FieldPojo> fieldPojos) {
+                fieldPojoArrayList = new ArrayList<FieldPojo>(fieldPojos);
             }
         });
 
@@ -91,7 +94,13 @@ public class ScanFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    tag.setFocusable(false);
+                    typeTag = "madeup";
+                    tag.setText(findFirstVirtualTag(fieldPojoArrayList));
+                } else {
+                    tag.setFocusable(true);
+                    typeTag = "real";
+                    tag.setText("");
                 }
             }
         });
@@ -101,7 +110,7 @@ public class ScanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String tagcode = tag.getText().toString();
-                int tagId = findIdTag(fieldPojoArrayList, tagcode);
+                int tagId = findIdTag(fieldPojoArrayList, tagcode, typeTag);
                 if (tagId != -1) {
                     Bundle bundle = new Bundle();
                     AssetPojo assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
@@ -121,16 +130,37 @@ public class ScanFragment extends Fragment {
         });
     }
 
-    private int findIdTag(List<FieldPojo> fieldPojos, String tag) {
+    private int findIdTag(List<FieldPojo> fieldPojos, String tag, String typeTag) {
         for (FieldPojo field : fieldPojos) {
-            if (field.getColumnName().equals("tag")) {
+            if (field.getColumnName().equals("tag_type")) {
                 for (OptionPojo option : field.getOptionPojos()) {
-                    if (option.getCode().equals(tag)) {
-                        return option.getId();
+                    if (option.getCode().equals(typeTag)) {
+                        for (Tag tagPojo : option.getTags()) {
+                            if (tagPojo.getCode().equals(tag)) {
+                                return tagPojo.getId();
+                            }
+                        }
                     }
+
                 }
             }
         }
         return -1;
+    }
+
+    private String findFirstVirtualTag(List<FieldPojo> fieldPojos) {
+        for (FieldPojo field : fieldPojos) {
+            if (field.getColumnName().equals("tag_type")) {
+                for (OptionPojo option : field.getOptionPojos()) {
+                    if (option.getCode().equals("madeup")) {
+                        if (!option.getTags().isEmpty()) {
+                            return option.getTags().get(0).getCode();
+                        }
+                    }
+
+                }
+            }
+        }
+        return "";
     }
 }

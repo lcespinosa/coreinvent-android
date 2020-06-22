@@ -20,7 +20,7 @@ public interface AltasApi {
     Call<List<FamilyPojo>> getFamily(@Header("authorization") String token);
 
     @GET("operations/subscription/open/{subfamily}")
-    Call<FieldListPojo> getFields(@Path("subfamily") int subfamilyid, @Header("authorization") String token);
+    Call<List<FieldPojo>> getFields(@Path("subfamily") int subfamilyid, @Header("authorization") String token);
 
     @POST("operations/subscription/close")
     Call<AssetPojo> assetSubscription(@Header("authorization") String token, @Body AssetPojo assetPojo);

@@ -12,7 +12,6 @@ import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
 import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import static android.os.Debug.waitForDebugger;
 public class AltaViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<FamilyPojo>> familyResult = new MutableLiveData<>();
-    private MutableLiveData<FieldListPojo> fieldResult = new MutableLiveData<>();
+    private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
@@ -41,7 +40,7 @@ public class AltaViewModel extends AndroidViewModel {
         return familyResult;
     }
 
-    LiveData<FieldListPojo> getRegisterResult() {
+    LiveData<List<FieldPojo>> getRegisterResult() {
         return fieldResult;
     }
 
@@ -87,20 +86,20 @@ public class AltaViewModel extends AndroidViewModel {
                 .build();
 
         AltasApi altaApi = retrofit.create(AltasApi.class);
-        Call<FieldListPojo> family = altaApi.getFields(subfamilyid, token);
-        family.enqueue(new Callback<FieldListPojo>() {
+        Call<List<FieldPojo>> family = altaApi.getFields(subfamilyid, token);
+        family.enqueue(new Callback<List<FieldPojo>>() {
             @Override
-            public void onResponse(Call<FieldListPojo> call, Response<FieldListPojo> response) {
+            public void onResponse(Call<List<FieldPojo>> call, Response<List<FieldPojo>> response) {
 //                waitForDebugger();
                 if (response.isSuccessful()) {
 //                    waitForDebugger();
-                    FieldListPojo fieldPojos = response.body();
+                    List<FieldPojo> fieldPojos = response.body();
                     fieldResult.setValue(fieldPojos);
                 }
             }
 
             @Override
-            public void onFailure(Call<FieldListPojo> call, Throwable t) {
+            public void onFailure(Call<List<FieldPojo>> call, Throwable t) {
 //                waitForDebugger();
                 familyResult.setValue(null);
             }

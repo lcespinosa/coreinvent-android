@@ -49,6 +49,9 @@ public class OptionPojo implements Serializable {
     @SerializedName("asset_models")
     @Expose
     private List<AssetModelPojo> assetModels = null;
+    @SerializedName("tags")
+    @Expose
+    private List<Tag> tags = null;
     private final static long serialVersionUID = 2604884895258544769L;
 
 
@@ -154,6 +157,14 @@ public class OptionPojo implements Serializable {
 
     public void setAssetModels(List<AssetModelPojo> assetModels) {
         this.assetModels = assetModels;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     @NonNull
