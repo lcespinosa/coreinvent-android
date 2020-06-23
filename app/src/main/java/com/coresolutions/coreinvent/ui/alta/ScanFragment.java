@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.coresolutions.coreinvent.ui.alta.pojos.OptionPojo;
 import com.coresolutions.coreinvent.ui.alta.pojos.Tag;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +42,7 @@ public class ScanFragment extends Fragment {
     private ImageView back_img;
     private ImageView forward_img;
     private TextInputEditText tag;
+    private TextInputLayout tagLayout;
     private SwitchMaterial virtualTagSwitch;
     private SharedPreferences settings;
     private AltaViewModel altaViewModel;
@@ -81,6 +84,7 @@ public class ScanFragment extends Fragment {
 
         virtualTagSwitch = view.findViewById(R.id.virtualTagSwitch);
         tag = view.findViewById(R.id.tag);
+        tagLayout = view.findViewById(R.id.tagLayout);
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
         back_img.setOnClickListener(new View.OnClickListener() {
@@ -94,11 +98,13 @@ public class ScanFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tag.setFocusable(false);
+//                    tag.setFocusable(false);
                     typeTag = "madeup";
+                    tag.setInputType(0);
                     tag.setText(findFirstVirtualTag(fieldPojoArrayList));
                 } else {
-                    tag.setFocusable(true);
+//                    tagLayout.setFocusable(true);
+                    tag.setInputType(InputType.TYPE_CLASS_TEXT);
                     typeTag = "real";
                     tag.setText("");
                 }
