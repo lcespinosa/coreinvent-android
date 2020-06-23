@@ -12,7 +12,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -139,7 +139,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -147,14 +146,13 @@
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:text="1.126" />
 
                     <TextView
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="2dp"
                         android:text="M€" />
 
                 </LinearLayout>
@@ -163,14 +161,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/thirdLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
                         android:alpha="0.5"
                         android:text="126" />
 
@@ -178,15 +175,14 @@
                         style="@style/thirdLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
                         android:alpha="0.5"
+                        android:layout_gravity="center"
                         android:text="bienes" />
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/textView6"
@@ -280,7 +276,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -288,14 +283,13 @@
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:text="23.11" />
 
                     <TextView
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="2dp"
                         android:text="K€" />
 
                 </LinearLayout>
@@ -304,14 +298,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/thirdLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
                         android:alpha="0.5"
                         android:text="3" />
 
@@ -319,15 +312,14 @@
                         style="@style/thirdLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
                         android:alpha="0.5"
                         android:text="bienes" />
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/textView61"
