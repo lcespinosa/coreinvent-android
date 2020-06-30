@@ -1,15 +1,14 @@
-
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import androidx.annotation.NonNull;
-
-import java.io.Serializable;
-import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FamilyPojo implements Serializable {
+import java.io.Serializable;
+import java.util.List;
+
+public class SubFamilyPojo implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -26,18 +25,30 @@ public class FamilyPojo implements Serializable {
     @SerializedName("in_app")
     @Expose
     private Boolean inApp;
-    @SerializedName("nature_id")
+    @SerializedName("prefered_account")
     @Expose
-    private Integer natureId;
+    private Integer preferedAccount;
+    @SerializedName("can_amortize")
+    @Expose
+    private Boolean canAmortize;
+    @SerializedName("useful_life")
+    @Expose
+    private Integer usefulLife;
+    @SerializedName("amortize_percent")
+    @Expose
+    private String amortizePercent;
+    @SerializedName("family_id")
+    @Expose
+    private Integer familyId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("sub_families")
+    @SerializedName("types")
     @Expose
-    private List<SubFamilyPojo> subFamilies = null;
+    private List<Type> types = null;
 
     public Integer getId() {
         return id;
@@ -79,12 +90,44 @@ public class FamilyPojo implements Serializable {
         this.inApp = inApp;
     }
 
-    public Integer getNatureId() {
-        return natureId;
+    public Integer getPreferedAccount() {
+        return preferedAccount;
     }
 
-    public void setNatureId(Integer natureId) {
-        this.natureId = natureId;
+    public void setPreferedAccount(Integer preferedAccount) {
+        this.preferedAccount = preferedAccount;
+    }
+
+    public Boolean getCanAmortize() {
+        return canAmortize;
+    }
+
+    public void setCanAmortize(Boolean canAmortize) {
+        this.canAmortize = canAmortize;
+    }
+
+    public Integer getUsefulLife() {
+        return usefulLife;
+    }
+
+    public void setUsefulLife(Integer usefulLife) {
+        this.usefulLife = usefulLife;
+    }
+
+    public String getAmortizePercent() {
+        return amortizePercent;
+    }
+
+    public void setAmortizePercent(String amortizePercent) {
+        this.amortizePercent = amortizePercent;
+    }
+
+    public Integer getFamilyId() {
+        return familyId;
+    }
+
+    public void setFamilyId(Integer familyId) {
+        this.familyId = familyId;
     }
 
     public String getCreatedAt() {
@@ -103,12 +146,12 @@ public class FamilyPojo implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<SubFamilyPojo> getSubFamilies() {
-        return subFamilies;
+    public List<Type> getTypes() {
+        return types;
     }
 
-    public void setSubFamilies(List<SubFamilyPojo> subFamilies) {
-        this.subFamilies = subFamilies;
+    public void setTypes(List<Type> types) {
+        this.types = types;
     }
 
 
@@ -118,5 +161,3 @@ public class FamilyPojo implements Serializable {
         return getName();
     }
 }
-
-

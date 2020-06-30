@@ -45,7 +45,7 @@ public class LoginDataSource {
             loginUser.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    waitForDebugger();
+//                    waitForDebugger();
                     String json = response.body();
                     Gson gson = new GsonBuilder().create();
                     JsonParser parser = new JsonParser();
@@ -55,7 +55,7 @@ public class LoginDataSource {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    waitForDebugger();
+//                    waitForDebugger();
                     String ms = t.getMessage();
                 }
             });

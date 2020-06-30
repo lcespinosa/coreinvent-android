@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.alta;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,18 +16,15 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.OptionPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.Tag;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.OptionPojo;
+import com.coresolutions.coreinvent.data.pojos.Tag;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -49,6 +47,7 @@ public class ScanFragment extends Fragment {
     private int subfamily;
     private String typeTag;
     private ArrayList<FieldPojo> fieldPojoArrayList;
+    private ProgressDialog progressDialog;
 
     public ScanFragment() {
         // Required empty public constructor
@@ -69,11 +68,17 @@ public class ScanFragment extends Fragment {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
         typeTag = "real";
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Cargando datos...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         altaViewModel.getRegisterResult().observe(this, new Observer<List<FieldPojo>>() {
             @Override
             public void onChanged(List<FieldPojo> fieldPojos) {
                 fieldPojoArrayList = new ArrayList<FieldPojo>(fieldPojos);
+                progressDialog.dismiss();
             }
         });
 

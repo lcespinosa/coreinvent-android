@@ -10,9 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Search;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -28,6 +31,7 @@ public class AltaViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<FamilyPojo>> familyResult = new MutableLiveData<>();
     private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
+    private MutableLiveData<List<FindAssetPojo>> findResult = new MutableLiveData<>();
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
@@ -79,6 +83,10 @@ public class AltaViewModel extends AndroidViewModel {
 //        }
     }
 
+    public MutableLiveData<List<FindAssetPojo>> getFindResult() {
+        return findResult;
+    }
+
     public void getFields(int subfamilyid, String token) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.API_URL)
@@ -118,6 +126,8 @@ public class AltaViewModel extends AndroidViewModel {
                 .build();
 
         AltasApi altaApi = retrofit.create(AltasApi.class);
+        Gson gson = new Gson();
+        String json = gson.toJson(assetPojo);
         Call<AssetPojo> family = altaApi.assetSubscription(token, assetPojo);
         family.enqueue(new Callback<AssetPojo>() {
             @Override
@@ -136,4 +146,34 @@ public class AltaViewModel extends AndroidViewModel {
 
 
     }
+
+
+    public void findAsset(String token, Search search) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(assetPojo);
+        Call<List<FindAssetPojo>> family = altaApi.findAsset(token, search);
+        family.enqueue(new Callback<List<FindAssetPojo>>() {
+            @Override
+            public void onResponse(Call<List<FindAssetPojo>> call, Response<List<FindAssetPojo>> response) {
+//                waitForDebugger();
+                List<FindAssetPojo> findAssetPojos = response.body();
+                findResult.setValue(findAssetPojos);
+            }
+
+            @Override
+            public void onFailure(Call<List<FindAssetPojo>> call, Throwable t) {
+//                waitForDebugger();
+                findResult.setValue(null);
+            }
+
+        });
+    }
+
+
 }

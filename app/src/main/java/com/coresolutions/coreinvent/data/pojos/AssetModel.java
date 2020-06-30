@@ -1,12 +1,13 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class TagType implements Serializable {
-
+public class AssetModel implements Serializable {
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -19,12 +20,19 @@ public class TagType implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("brand_id")
+    @Expose
+    private Integer brandId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("brand")
+    @Expose
+    private Brand brand;
+    private final static long serialVersionUID = -7322457029187397277L;
 
     public Integer getId() {
         return id;
@@ -58,6 +66,14 @@ public class TagType implements Serializable {
         this.description = description;
     }
 
+    public Integer getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
@@ -74,4 +90,18 @@ public class TagType implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

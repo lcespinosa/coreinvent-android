@@ -1,6 +1,6 @@
 
 
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import androidx.annotation.Nullable;
 
@@ -14,6 +14,9 @@ public class AssetPojo implements Serializable {
     @SerializedName("subfamily")
     @Expose
     private String subfamily;
+    @SerializedName("center")
+    @Expose
+    private String center;
     @SerializedName("edifice_id")
     @Expose
     private String edificeId;
@@ -86,30 +89,15 @@ public class AssetPojo implements Serializable {
     private final static long serialVersionUID = 6673953449430446904L;
 
     public AssetPojo() {
-        this.subfamily = "";
-        this.edificeId = "";
-        this.space = "";
-        this.tagType = "";
-        this.tag = "";
-        this.type = "";
-        this.area = "";
-        this.oldTag = "";
-        this.inUseDate = "";
-        this.usefulLife = "";
-        this.measures = "";
-        this.address = "";
-        this.postalCode = "";
-        this.surface = "";
-        this.length = "";
-        this.startAssigmentDate = "";
-        this.endAssigmentDate = "";
-        this.characteristics = "";
-        this.brand = "";
-        this.assetModel = "";
-        this.serialNumber = "";
-        this.plate = "";
-        this.frameNumber = "";
-        this.observations = "";
+    }
+
+
+    public String getCenter() {
+        return center;
+    }
+
+    public void setCenter(String center) {
+        this.center = center;
     }
 
     public String getSubfamily() {

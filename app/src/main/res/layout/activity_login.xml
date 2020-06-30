@@ -18,7 +18,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:hint="@string/prompt_email"
         android:textColorHint="@color/colorText"
         app:boxStrokeColor="@color/secondaryLightVariant"
@@ -34,9 +34,9 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:textColor="@color/colorText"
             android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            android:textColor="@color/colorText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,9 +50,9 @@
         android:textColorHint="@color/colorText"
         app:boxStrokeColor="@color/secondaryLightVariant"
         app:boxStrokeWidth="2dp"
-        app:hintTextColor="@color/colorText"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/colorText"
+        app:hintTextColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +63,9 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/colorText"
             android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            android:textColor="@color/colorText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,14 +75,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginTop="15dp"
         android:background="@null"
         android:enabled="false"
         android:tint="#707070"
-        android:layout_marginTop="15dp"
-        app:srcCompat="@drawable/ic_arrow_forward_60px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
+        app:srcCompat="@drawable/ic_arrow_forward_60px" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -104,13 +104,13 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:srcCompat="@drawable/ic_codigo_qr"
+        android:layout_marginTop="30dp"
         android:tint="@color/secondaryLightVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_codigo_qr" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -154,18 +154,17 @@
 
     <ImageView
         android:id="@+id/errorIcon"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:tint="@color/error"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/ic_error_black_24dp" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/errorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -173,6 +172,7 @@
         android:text="Este usuario no se encuentra registrado"
         android:textColor="@color/onBackground"
         android:textSize="10sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/errorIcon" />
@@ -182,7 +182,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +206,5 @@
             android:text="solutions"
             android:textColor="#ffff"
             android:textSize="28sp" />
-
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

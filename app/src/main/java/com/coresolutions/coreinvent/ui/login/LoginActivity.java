@@ -87,12 +87,13 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                     i.putExtra("user_name", loginResult.getSuccess().getDisplayName());
                     startActivity(i);
+                    finish();
 //                    updateUiWithUser(loginResult.getSuccess());
                 }
 
-                setResult(Activity.RESULT_OK);
+//                setResult(Activity.RESULT_OK);
 //                //Complete and destroy login activity once successful
-                finish();
+
             }
         });
 

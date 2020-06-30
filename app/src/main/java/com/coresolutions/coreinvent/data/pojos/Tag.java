@@ -1,4 +1,4 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

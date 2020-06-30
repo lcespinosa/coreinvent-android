@@ -1,13 +1,11 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
-import androidx.annotation.NonNull;
+import java.io.Serializable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class SpacePojo implements Serializable {
+public class Brand implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -21,15 +19,16 @@ public class SpacePojo implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("level_id")
+    @SerializedName("manufacturer_id")
     @Expose
-    private Integer levelId;
+    private Integer manufacturerId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    private final static long serialVersionUID = -277826400088899153L;
 
     public Integer getId() {
         return id;
@@ -63,12 +62,12 @@ public class SpacePojo implements Serializable {
         this.description = description;
     }
 
-    public Integer getLevelId() {
-        return levelId;
+    public Integer getManufacturerId() {
+        return manufacturerId;
     }
 
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
+    public void setManufacturerId(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
     public String getCreatedAt() {
@@ -87,9 +86,5 @@ public class SpacePojo implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return getName();
-    }
 }
+

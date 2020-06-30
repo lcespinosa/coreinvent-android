@@ -1,14 +1,11 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
-
-import androidx.annotation.NonNull;
+package com.coresolutions.coreinvent.data.pojos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class EdificePojo implements Serializable {
+public class TagType implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -22,18 +19,12 @@ public class EdificePojo implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("center_id")
-    @Expose
-    private Integer centerId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("levels")
-    @Expose
-    private List<LevelPojo> levelPojos = null;
 
     public Integer getId() {
         return id;
@@ -67,14 +58,6 @@ public class EdificePojo implements Serializable {
         this.description = description;
     }
 
-    public Integer getCenterId() {
-        return centerId;
-    }
-
-    public void setCenterId(Integer centerId) {
-        this.centerId = centerId;
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
@@ -91,17 +74,4 @@ public class EdificePojo implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<LevelPojo> getLevelPojos() {
-        return levelPojos;
-    }
-
-    public void setLevelPojos(List<LevelPojo> levelPojos) {
-        this.levelPojos = levelPojos;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return getName();
-    }
 }

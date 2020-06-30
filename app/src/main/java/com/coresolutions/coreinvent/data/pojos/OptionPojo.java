@@ -1,4 +1,4 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import androidx.annotation.NonNull;
 
@@ -30,7 +30,7 @@ public class OptionPojo implements Serializable {
     private String updatedAt;
     @SerializedName("edifices")
     @Expose
-    private List<EdificePojo> edificePojos = null;
+    private List<Edifice> edifices = null;
     @SerializedName("installation")
     @Expose
     private String installation;
@@ -48,7 +48,7 @@ public class OptionPojo implements Serializable {
     private Integer manufacturerId;
     @SerializedName("asset_models")
     @Expose
-    private List<AssetModelPojo> assetModels = null;
+    private List<AssetModel> assetModels = null;
     @SerializedName("tags")
     @Expose
     private List<Tag> tags = null;
@@ -103,12 +103,12 @@ public class OptionPojo implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<EdificePojo> getEdificePojos() {
-        return edificePojos;
+    public List<Edifice> getEdifices() {
+        return edifices;
     }
 
-    public void setEdificePojos(List<EdificePojo> edificePojos) {
-        this.edificePojos = edificePojos;
+    public void setEdifices(List<Edifice> edifices) {
+        this.edifices = edifices;
     }
 
     public String getInstallation() {
@@ -151,11 +151,11 @@ public class OptionPojo implements Serializable {
         this.manufacturerId = manufacturerId;
     }
 
-    public List<AssetModelPojo> getAssetModels() {
+    public List<AssetModel> getAssetModels() {
         return assetModels;
     }
 
-    public void setAssetModels(List<AssetModelPojo> assetModels) {
+    public void setAssetModels(List<AssetModel> assetModels) {
         this.assetModels = assetModels;
     }
 

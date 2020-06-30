@@ -79,13 +79,15 @@ public class LoginViewModel extends ViewModel {
                     } catch (Exception e) {
                         loginResult.setValue(new LoginResult(R.string.login_failed));
                     }
+                } else {
+                    loginResult.setValue(new LoginResult(R.string.login_failed));
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
 //                waitForDebugger();
-                loginResult.setValue(new LoginResult(R.string.login_failed));
+                loginResult.setValue(new LoginResult(R.string.time_out));
             }
         });
 

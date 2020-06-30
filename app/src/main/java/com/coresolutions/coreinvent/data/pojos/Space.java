@@ -1,4 +1,4 @@
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import androidx.annotation.NonNull;
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class AssetModelPojo implements Serializable {
+public class Space implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -21,16 +21,27 @@ public class AssetModelPojo implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("brand_id")
+    @SerializedName("level_id")
     @Expose
-    private Integer brandId;
+    private Integer levelId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    private final static long serialVersionUID = 5827417775112473659L;
+    @SerializedName("level")
+    @Expose
+    private Level level;
+    private final static long serialVersionUID = -2214288525772824251L;
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 
     public Integer getId() {
         return id;
@@ -64,12 +75,12 @@ public class AssetModelPojo implements Serializable {
         this.description = description;
     }
 
-    public Integer getBrandId() {
-        return brandId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setBrandId(Integer brandId) {
-        this.brandId = brandId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public String getCreatedAt() {

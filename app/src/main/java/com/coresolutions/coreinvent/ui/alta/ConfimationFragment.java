@@ -17,12 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
-import com.google.gson.Gson;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,7 +99,6 @@ public class ConfimationFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("subfamily", getArguments().getInt("subfamily"));
-
                 bundle.putString("from", "properties");
                 bundle.putSerializable("fieldPojos", fieldPojoArrayList);
                 bundle.putSerializable("assetPojo", assetPojo);

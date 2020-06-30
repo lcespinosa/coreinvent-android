@@ -85,6 +85,7 @@
                 android:text="Configurar perfil"
                 android:textColor="@color/onBackground" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"

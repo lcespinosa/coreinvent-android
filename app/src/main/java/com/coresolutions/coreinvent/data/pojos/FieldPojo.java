@@ -1,5 +1,5 @@
 
-package com.coresolutions.coreinvent.ui.alta.pojos;
+package com.coresolutions.coreinvent.data.pojos;
 
 import java.io.Serializable;
 import java.util.List;

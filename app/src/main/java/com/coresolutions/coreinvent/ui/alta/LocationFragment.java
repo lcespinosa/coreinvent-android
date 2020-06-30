@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
@@ -20,16 +19,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import com.coresolutions.coreinvent.R;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.EdificePojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.LevelPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.SpacePojo;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Edifice;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.Level;
+import com.coresolutions.coreinvent.data.pojos.OptionPojo;
+import com.coresolutions.coreinvent.data.pojos.Space;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,14 +40,17 @@ public class LocationFragment extends Fragment {
     private int subfamily;
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
+    private TextInputLayout centerLayout;
+    private AutoCompleteTextView center_dropdown;
     private TextInputLayout edificeLayout;
     private AutoCompleteTextView edifice_dropdown;
     private TextInputLayout levelLayout;
     private AutoCompleteTextView level_dropdown;
     private TextInputLayout spaceLayout;
     private AutoCompleteTextView space_dropdown;
-    private EdificePojo edificePojo;
-    private SpacePojo spacePojo;
+    private OptionPojo optionPojo;
+    private Edifice edifice;
+    private Space space;
     private ArrayList<FieldPojo> fieldPojoArrayList;
     private AssetPojo assetPojo;
 
@@ -70,6 +72,8 @@ public class LocationFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        centerLayout = view.findViewById(R.id.centerLayout);
+        center_dropdown = view.findViewById(R.id.center_dropdown);
         edificeLayout = view.findViewById(R.id.edificeLayout);
         edifice_dropdown = view.findViewById(R.id.edifice_dropdown);
         levelLayout = view.findViewById(R.id.levelLayout);
@@ -104,7 +108,8 @@ public class LocationFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
-                selectedMap.put(R.string.center, edifice_dropdown.getText().toString());
+                selectedMap.put(R.string.center, center_dropdown.getText().toString());
+                selectedMap.put(R.string.edifice, edifice_dropdown.getText().toString());
                 selectedMap.put(R.string.level, level_dropdown.getText().toString());
                 selectedMap.put(R.string.space, space_dropdown.getText().toString());
                 bundle.putSerializable("fieldPojos", fieldPojoArrayList);
@@ -118,11 +123,9 @@ public class LocationFragment extends Fragment {
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         for (FieldPojo field : fieldPojoArrayList) {
             if (field.getColumnName().equals("center")) {
-                if (field.getOptionPojos().get(0).getEdificePojos() != null) {
-                    edificeLayout.setVisibility(View.VISIBLE);
-                    levelLayout.setVisibility(View.VISIBLE);
-                    spaceLayout.setVisibility(View.VISIBLE);
-                    edifice_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, field.getOptionPojos().get(0).getEdificePojos()));
+                if (!field.getOptionPojos().isEmpty() ) {
+                    centerLayout.setVisibility(View.VISIBLE);
+                    center_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, field.getOptionPojos()));
                 } else {
                     if (getArguments().getString("from") != null) {
                         back_img.callOnClick();
@@ -130,38 +133,59 @@ public class LocationFragment extends Fragment {
                         forward_img.callOnClick();
                     }
                 }
+            } else if (field.getColumnName().equals("edifice")) {
+                edificeLayout.setVisibility(View.VISIBLE);
+            } else if (field.getColumnName().equals("level")) {
+                levelLayout.setVisibility(View.VISIBLE);
+            } else if (field.getColumnName().equals("space")) {
+                spaceLayout.setVisibility(View.VISIBLE);
             }
         }
 
 
-        edifice_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        center_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                edificePojo = (EdificePojo) edifice_dropdown.getAdapter().getItem(position);
-                assetPojo.setEdificeId(String.valueOf(edificePojo.getId()));
+                optionPojo = (OptionPojo) center_dropdown.getAdapter().getItem(position);
+                assetPojo.setCenter(String.valueOf(optionPojo.getId()));
+                edifice_dropdown.clearListSelection();
+                edifice_dropdown.setText("");
                 level_dropdown.clearListSelection();
                 level_dropdown.setText("");
                 space_dropdown.clearListSelection();
                 space_dropdown.setText("");
-                level_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, edificePojo.getLevelPojos()));
+                edifice_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, optionPojo.getEdifices()));
+            }
+        });
+
+        edifice_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                edifice = (Edifice) edifice_dropdown.getAdapter().getItem(position);
+                assetPojo.setEdificeId(String.valueOf(edifice.getId()));
+                level_dropdown.clearListSelection();
+                level_dropdown.setText("");
+                space_dropdown.clearListSelection();
+                space_dropdown.setText("");
+                level_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, edifice.getLevels()));
             }
         });
 
         level_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LevelPojo levelPojo = (LevelPojo) level_dropdown.getAdapter().getItem(position);
+                Level level = (Level) level_dropdown.getAdapter().getItem(position);
                 space_dropdown.clearListSelection();
                 space_dropdown.setText("");
-                space_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, levelPojo.getSpacePojos()));
+                space_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, level.getSpaces()));
             }
         });
 
         space_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                spacePojo = (SpacePojo) space_dropdown.getAdapter().getItem(position);
-                assetPojo.setSpace(String.valueOf(spacePojo.getId()));
+                space = (Space) space_dropdown.getAdapter().getItem(position);
+                assetPojo.setSpace(String.valueOf(space.getId()));
             }
         });
 

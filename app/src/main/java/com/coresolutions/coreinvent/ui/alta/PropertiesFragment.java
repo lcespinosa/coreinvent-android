@@ -18,10 +18,10 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import com.coresolutions.coreinvent.R;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetModelPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.OptionPojo;
+import com.coresolutions.coreinvent.data.pojos.AssetModel;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.OptionPojo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -169,8 +169,8 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         model_dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AssetModelPojo assetModelPojo = (AssetModelPojo) model_dropdown.getAdapter().getItem(position);
-                assetPojo.setAssetModel(String.valueOf(assetModelPojo.getId()));
+                AssetModel assetModel = (AssetModel) model_dropdown.getAdapter().getItem(position);
+                assetPojo.setAssetModel(String.valueOf(assetModel.getId()));
             }
         });
         dateLayout.setEndIconOnClickListener(new View.OnClickListener() {
@@ -208,7 +208,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                 assetPojo.setAddress(address_dropdown.getText().toString());
                 selectedMap.put(R.string.address, address_dropdown.getText().toString());
                 assetPojo.setSubfamily(String.valueOf(subfamily));
-                assetPojo.setArea(surface_dropdown.getText().toString());
+                assetPojo.setSurface(surface_dropdown.getText().toString());
                 selectedMap.put(R.string.surface, surface_dropdown.getText().toString());
                 assetPojo.setLength(length_dropdown.getText().toString());
                 selectedMap.put(R.string.length, length_dropdown.getText().toString());
@@ -237,6 +237,6 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        date_dropdown.setText(year + "/" + month + "/" + dayOfMonth);
+        date_dropdown.setText(dayOfMonth + "/" + month + "/" + year);
     }
 }

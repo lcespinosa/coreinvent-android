@@ -84,6 +84,15 @@ public class DashboardActivity extends AppCompatActivity {
                 });
             }
         });
+
+        findViewById(R.id.search_img).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DashboardActivity.this, SearchActivity.class);
+                startActivity(i);
+            }
+        });
+
         String user_name = getIntent().getStringExtra("user_name");
         ((TextView) customView.findViewById(R.id.display_name)).setText(user_name);
         popUp = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

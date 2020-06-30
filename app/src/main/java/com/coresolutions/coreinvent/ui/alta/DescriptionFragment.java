@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.coresolutions.coreinvent.R;
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;

@@ -1,9 +1,10 @@
 package com.coresolutions.coreinvent.data.interfaces;
 
-import com.coresolutions.coreinvent.ui.alta.pojos.AssetPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FamilyPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldListPojo;
-import com.coresolutions.coreinvent.ui.alta.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Search;
 
 import java.util.List;
 
@@ -25,5 +26,7 @@ public interface AltasApi {
     @POST("operations/subscription/close")
     Call<AssetPojo> assetSubscription(@Header("authorization") String token, @Body AssetPojo assetPojo);
 
+    @POST("assets/search")
+    Call<List<FindAssetPojo>> findAsset(@Header("authorization") String token, @Body Search search);
 
 }
