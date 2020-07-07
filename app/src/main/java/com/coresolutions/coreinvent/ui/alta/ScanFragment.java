@@ -95,7 +95,7 @@ public class ScanFragment extends Fragment {
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_home);
+//                Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_home);
             }
         });
 
@@ -125,15 +125,15 @@ public class ScanFragment extends Fragment {
                 if (tagId != -1) {
                     Bundle bundle = new Bundle();
                     AssetPojo assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
-                    HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
-                    selectedMap.put(R.string.tag, tag.getText().toString());
+                    HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
+                    selectedMap.put("tag", tag.getText().toString());
                     bundle.putSerializable("fieldPojos", fieldPojoArrayList);
                     assetPojo.setTag(String.valueOf(tagId));
                     assetPojo.setTagType(virtualTagSwitch.isChecked() ? "3" : "2");
                     bundle.putInt("subfamily", subfamily);
                     bundle.putSerializable("assetPojo", assetPojo);
                     bundle.putSerializable("selectedMap", selectedMap);
-                    Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_location, bundle);
+//                    Navigation.findNavController(v).navigate(R.id.action_nav_scan_to_nav_location, bundle);
                 } else {
                     Toast.makeText(getContext(), "La etiqueta seleccionada no es válida", Toast.LENGTH_LONG).show();
                 }

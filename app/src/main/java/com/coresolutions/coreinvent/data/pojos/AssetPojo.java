@@ -2,6 +2,8 @@
 
 package com.coresolutions.coreinvent.data.pojos;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.Nullable;
 
 import java.io.Serializable;
@@ -86,11 +88,22 @@ public class AssetPojo implements Serializable {
     @SerializedName("observations")
     @Expose
     private String observations;
+    @SerializedName("image")
+    @Expose
+    private Bitmap image;
     private final static long serialVersionUID = 6673953449430446904L;
 
     public AssetPojo() {
     }
 
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
 
     public String getCenter() {
         return center;

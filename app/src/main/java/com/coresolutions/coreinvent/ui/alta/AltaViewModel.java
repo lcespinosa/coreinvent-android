@@ -1,11 +1,13 @@
 package com.coresolutions.coreinvent.ui.alta;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
@@ -177,3 +179,4 @@ public class AltaViewModel extends AndroidViewModel {
 
 
 }
+

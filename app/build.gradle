@@ -43,6 +43,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.github.jkwiecien:EasyImage:3.0.4'
+    implementation 'io.alterac.blurkit:blurkit:1.0.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61'
 
 
 }

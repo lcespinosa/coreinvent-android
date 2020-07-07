@@ -110,22 +110,21 @@ public class ClassificationFragment extends Fragment {
 
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
-        back_img.setVisibility(View.INVISIBLE);
 
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                HashMap<Integer, String> selectedMap = new HashMap<Integer, String>();
-                selectedMap.put(R.string.family, family_dropdown.getText().toString());
-                selectedMap.put(R.string.sub_family, sub_family_dropdown.getText().toString());
-                selectedMap.put(R.string.type, type_dropdown.getText().toString());
+                HashMap<String, String> selectedMap = new HashMap<String, String>();
+                selectedMap.put("family", family_dropdown.getText().toString());
+                selectedMap.put("subfamily", sub_family_dropdown.getText().toString());
+                selectedMap.put("type", type_dropdown.getText().toString());
                 AssetPojo assetPojo = new AssetPojo();
                 assetPojo.setType(String.valueOf(type.getId()));
                 bundle.putInt("subfamily", subFamilyPojo.getId());
                 bundle.putSerializable("assetPojo", assetPojo);
                 bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_scan, bundle);
+                Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_properties, bundle);
             }
         });
     }

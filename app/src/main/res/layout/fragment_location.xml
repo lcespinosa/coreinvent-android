@@ -28,20 +28,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/centerLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    app:boxBackgroundColor="@color/overBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="@string/center"
-                    android:textColorHint="@color/colorText"
-                    android:visibility="gone"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground">
+                    android:visibility="gone">
 
                     <AutoCompleteTextView
                         android:id="@+id/center_dropdown"
@@ -54,20 +47,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/edificeLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    app:boxBackgroundColor="@color/overBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="@string/edifice"
-                    android:textColorHint="@color/colorText"
-                    android:visibility="gone"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground">
+                    android:visibility="gone">
 
                     <AutoCompleteTextView
                         android:id="@+id/edifice_dropdown"
@@ -80,20 +66,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/levelLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    app:boxBackgroundColor="@color/overBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="@string/level"
-                    android:textColorHint="@color/colorText"
-                    android:visibility="gone"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground">
+                    android:visibility="gone">
 
                     <AutoCompleteTextView
                         android:id="@+id/level_dropdown"
@@ -107,22 +86,15 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/spaceLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    app:boxBackgroundColor="@color/overBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="@string/space"
-                    android:textColorHint="@color/colorText"
                     android:visibility="gone"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground"
                     app:startIconDrawable="@drawable/ic_codigo_qr_24"
-                    app:startIconTintMode="screen">
+                    app:startIconTint="@color/secondaryLightVariant">
 
                     <AutoCompleteTextView
                         android:id="@+id/space_dropdown"

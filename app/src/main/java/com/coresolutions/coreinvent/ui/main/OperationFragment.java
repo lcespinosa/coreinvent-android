@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.coresolutions.coreinvent.R;
@@ -28,6 +29,7 @@ public class OperationFragment extends DialogFragment {
     private LinearLayout alta_layout;
     private LinearLayout baja_layout;
     private LinearLayout movement_layout;
+    private ImageView back_img;
 
     public OperationFragment() {
         // Required empty public constructor
@@ -36,7 +38,8 @@ public class OperationFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(STYLE_NO_TITLE, R.style.DialogTheme_transparent);
+//        setStyle(STYLE_NO_TITLE, R.style.DialogTheme_transparent);
+        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light);
 //        setCancelable(false);
     }
 
@@ -60,6 +63,7 @@ public class OperationFragment extends DialogFragment {
         alta_layout = view.findViewById(R.id.alta_layout);
         baja_layout = view.findViewById(R.id.baja_layout);
         movement_layout = view.findViewById(R.id.movement_layout);
+        back_img = view.findViewById(R.id.back_img);
         alta_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +84,13 @@ public class OperationFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MovementActivity.class);
                 startActivity(i);
+            }
+        });
+
+        back_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
             }
         });
     }

@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.coresolutions.coreinvent.ui.main.DashboardActivity;
 import com.coresolutions.coreinvent.R;
 
+import pl.aprilapps.easyphotopicker.EasyImage;
+
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final ImageButton loginButton = findViewById(R.id.login);
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

@@ -24,78 +24,56 @@
 
             <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                app:boxBackgroundColor="@color/overBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/family"
                 android:layout_margin="5dp"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:endIconTint="@color/colorText"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                android:textColorHint="@color/colorText"
-                app:hintTextColor="@color/onBackground">
+                android:hint="@string/family"
+                app:endIconTint="@color/colorText">
 
                 <AutoCompleteTextView
-                    android:textColor="@color/onBackground"
-                    android:inputType="none"
                     android:id="@+id/family_dropdown"
-                    android:focusable="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                app:boxBackgroundColor="@color/overBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sub_family"
                 android:layout_margin="5dp"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:endIconTint="@color/colorText"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                android:textColorHint="@color/colorText"
-                app:hintTextColor="@color/onBackground">
+                android:hint="@string/sub_family"
+                app:endIconTint="@color/colorText">
 
                 <AutoCompleteTextView
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:textColor="@color/onBackground"
                     android:id="@+id/sub_family_dropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                app:boxBackgroundColor="@color/overBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:endIconTint="@color/colorText"
-                app:boxStrokeColor="@color/secondaryLightVariant"
-                android:textColorHint="@color/colorText"
-                app:hintTextColor="@color/onBackground"
-                android:hint="@string/type">
+                app:endIconTint="@color/colorText">
 
                 <AutoCompleteTextView
                     android:id="@+id/type_dropdown"
-                    android:inputType="none"
-                    android:textColor="@color/onBackground"
-                    android:focusable="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:hint="Tipo"
+                    android:inputType="none"
+                    android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -103,32 +81,50 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
+            android:background="@color/secondaryDarkVariant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/back_img"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="5dp"
                 android:tint="@color/secondaryLightVariant"
-                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add_circle_outline_24px" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alta de bienes"
+                android:textColor="@color/onBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/forward_img"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="5dp"
                 android:tint="@color/secondaryLightVariant"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

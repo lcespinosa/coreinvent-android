@@ -37,8 +37,57 @@ public class ConfimationFragment extends Fragment {
     private AltaViewModel altaViewModel;
     private AssetPojo assetPojo;
     private ArrayList<FieldPojo> fieldPojoArrayList;
-    private LinearLayout layout;
-    private HashMap<Integer, String> selectedMap;
+    private HashMap<String, String> selectedMap;
+    private TextView tag_code;
+
+    private LinearLayout type_layout;
+    private TextView type;
+
+    private LinearLayout brand_layout;
+    private TextView brand;
+    private TextView model;
+
+    private LinearLayout location_layout;
+    private TextView center;
+    private TextView edifice;
+    private TextView level;
+    private TextView space;
+
+    private LinearLayout characteristics_layout;
+    private TextView characteristics;
+
+    private LinearLayout serie_layout;
+    private TextView serie;
+
+    private LinearLayout measures_layout;
+    private TextView measures;
+
+    private LinearLayout frameNumber_layout;
+    private TextView frameNumber;
+
+    private LinearLayout plate_layout;
+    private TextView plate;
+
+    private LinearLayout postalCode_layout;
+    private TextView postalCode;
+
+    private LinearLayout address_layout;
+    private TextView address;
+
+    private LinearLayout surface_layout;
+    private TextView surface;
+
+    private LinearLayout length_layout;
+    private TextView length;
+
+    private LinearLayout area_layout;
+    private TextView area;
+
+    private LinearLayout inUseDate_layout;
+    private TextView inUseDate;
+
+    private LinearLayout description_layout;
+    private TextView description;
 
     public ConfimationFragment() {
         // Required empty public constructor
@@ -59,22 +108,121 @@ public class ConfimationFragment extends Fragment {
 
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
-        selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
+        selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
-        layout = view.findViewById(R.id.layout);
 
+        tag_code = view.findViewById(R.id.tag_code);
+        type_layout = view.findViewById(R.id.type_layout);
+        type = view.findViewById(R.id.type);
+
+        brand_layout = view.findViewById(R.id.brand_layout);
+        brand = view.findViewById(R.id.brand);
+        model = view.findViewById(R.id.model);
+
+        location_layout = view.findViewById(R.id.location_layout);
+        center = view.findViewById(R.id.center);
+        edifice = view.findViewById(R.id.edifice);
+        level = view.findViewById(R.id.level);
+        space = view.findViewById(R.id.space);
+
+        characteristics_layout = view.findViewById(R.id.characteristics_layout);
+        characteristics = view.findViewById(R.id.characteristics);
+
+        serie_layout = view.findViewById(R.id.serie_layout);
+        serie = view.findViewById(R.id.serie);
+
+        measures_layout = view.findViewById(R.id.measures_layout);
+        measures = view.findViewById(R.id.measures);
+
+        frameNumber_layout = view.findViewById(R.id.frameNumber_layout);
+        frameNumber = view.findViewById(R.id.frameNumber);
+
+        plate_layout = view.findViewById(R.id.plate_layout);
+        plate = view.findViewById(R.id.plate);
+
+        postalCode_layout = view.findViewById(R.id.postalCode_layout);
+        postalCode = view.findViewById(R.id.postalCode);
+
+        address_layout = view.findViewById(R.id.address_layout);
+        address = view.findViewById(R.id.address);
+
+        surface_layout = view.findViewById(R.id.surface_layout);
+        surface = view.findViewById(R.id.surface);
+
+        length_layout = view.findViewById(R.id.length_layout);
+        length = view.findViewById(R.id.length);
+
+        area_layout = view.findViewById(R.id.area_layout);
+        area = view.findViewById(R.id.area);
+
+        inUseDate_layout = view.findViewById(R.id.inUseDate_layout);
+        inUseDate = view.findViewById(R.id.inUseDate);
+
+        description_layout = view.findViewById(R.id.description_layout);
+        description = view.findViewById(R.id.description);
 
         LayoutInflater inflater = this.getLayoutInflater();
-        for (Map.Entry<Integer, String> entry : selectedMap.entrySet()) {
+        for (Map.Entry<String, String> entry : selectedMap.entrySet()) {
             if (!entry.getValue().equals("")) {
-                View inflatedView = inflater.inflate(R.layout.properties_item, null);
-                TextView property_name = inflatedView.findViewById(R.id.property_name);
-                TextView property_value = inflatedView.findViewById(R.id.property_value);
-                property_name.setText(entry.getKey());
-                property_name.setText(property_name.getText().toString() + ":");
-                property_value.setText(entry.getValue());
-                layout.addView(inflatedView);
+                if (entry.getKey().equals("tag")) {
+                    tag_code.setText(entry.getValue());
+                } else if (entry.getKey().equals("type")) {
+                    type_layout.setVisibility(View.VISIBLE);
+                    type.setText(entry.getValue());
+                } else if (entry.getKey().equals("brand")) {
+                    brand_layout.setVisibility(View.VISIBLE);
+                    brand.setText(entry.getValue());
+                } else if (entry.getKey().equals("model")) {
+                    brand_layout.setVisibility(View.VISIBLE);
+                    model.setText(entry.getValue());
+                } else if (entry.getKey().equals("center")) {
+                    location_layout.setVisibility(View.VISIBLE);
+                    center.setText(entry.getValue());
+                    center.setAlpha(1);
+                } else if (entry.getKey().equals("edifice")) {
+                    location_layout.setVisibility(View.VISIBLE);
+                    edifice.setText(entry.getValue());
+                    edifice.setAlpha(1);
+                } else if (entry.getKey().equals("level")) {
+                    location_layout.setVisibility(View.VISIBLE);
+                    level.setText(entry.getValue());
+                    level.setAlpha(1);
+                } else if (entry.getKey().equals("space")) {
+                    location_layout.setVisibility(View.VISIBLE);
+                    space.setText(entry.getValue());
+                    space.setAlpha(1);
+                } else if (entry.getKey().equals("characteristics")) {
+                    characteristics_layout.setVisibility(View.VISIBLE);
+                    characteristics.setText(entry.getValue());
+                } else if (entry.getKey().equals("serie")) {
+                    serie_layout.setVisibility(View.VISIBLE);
+                    serie.setText(entry.getValue());
+                } else if (entry.getKey().equals("measures")) {
+                    measures_layout.setVisibility(View.VISIBLE);
+                    measures.setText(entry.getValue());
+                } else if (entry.getKey().equals("frame_number")) {
+                    frameNumber_layout.setVisibility(View.VISIBLE);
+                    frameNumber.setText(entry.getValue());
+                } else if (entry.getKey().equals("postal_code")) {
+                    postalCode_layout.setVisibility(View.VISIBLE);
+                    postalCode.setText(entry.getValue());
+                } else if (entry.getKey().equals("address")) {
+                    address_layout.setVisibility(View.VISIBLE);
+                    address.setText(entry.getValue());
+                } else if (entry.getKey().equals("surface")) {
+                    surface_layout.setVisibility(View.VISIBLE);
+                    surface.setText(entry.getValue());
+                } else if (entry.getKey().equals("length")) {
+                    length_layout.setVisibility(View.VISIBLE);
+                    length.setText(entry.getValue());
+                } else if (entry.getKey().equals("in_use_date")) {
+                    inUseDate_layout.setVisibility(View.VISIBLE);
+                    inUseDate.setText(entry.getValue());
+                } else if (entry.getKey().equals("description")) {
+                    description_layout.setVisibility(View.VISIBLE);
+                    description.setText(entry.getValue());
+                }
             }
         }
 

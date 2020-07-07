@@ -12,36 +12,8 @@
         tools:layout="@layout/fragment_classification">
 
         <action
-            android:id="@+id/action_nav_home_to_nav_scan"
-            app:destination="@id/nav_scan"
-            app:enterAnim="@anim/nav_default_enter_anim">
-        </action>
-    </fragment>
-    <fragment
-        android:id="@+id/nav_scan"
-        android:name="com.coresolutions.coreinvent.ui.alta.ScanFragment"
-        android:label="Scan"
-        tools:layout="@layout/fragment_scan">
-        <action
-            android:id="@+id/action_nav_scan_to_nav_location"
-            app:destination="@id/nav_location">
-        </action>
-        <action
-            android:id="@+id/action_nav_scan_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_location"
-        android:name="com.coresolutions.coreinvent.ui.alta.LocationFragment"
-        android:label="Location"
-        tools:layout="@layout/fragment_location">
-        <action
-            android:id="@+id/action_nav_location_to_nav_properties"
+            android:id="@+id/action_nav_home_to_nav_properties"
             app:destination="@id/nav_properties" />
-        <action
-            android:id="@+id/action_nav_location_to_nav_scan"
-            app:destination="@id/nav_scan" />
     </fragment>
 
     <fragment
@@ -53,8 +25,8 @@
             android:id="@+id/action_nav_properties_to_nav_description"
             app:destination="@id/nav_description" />
         <action
-            android:id="@+id/action_nav_properties_to_nav_location"
-            app:destination="@id/nav_location" />
+            android:id="@+id/action_nav_properties_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment

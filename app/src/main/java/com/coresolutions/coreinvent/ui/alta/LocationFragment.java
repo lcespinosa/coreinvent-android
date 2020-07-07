@@ -95,11 +95,11 @@ public class LocationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
+                HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
                 bundle.putInt("subfamily", getArguments().getInt("subfamily"));
                 bundle.putSerializable("assetPojo", assetPojo);
                 bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_location_to_nav_scan, bundle);
+//                Navigation.findNavController(v).navigate(R.id.action_nav_location_to_nav_scan, bundle);
             }
         });
 
@@ -107,16 +107,16 @@ public class LocationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                HashMap<Integer, String> selectedMap = (HashMap<Integer, String>) getArguments().getSerializable("selectedMap");
-                selectedMap.put(R.string.center, center_dropdown.getText().toString());
-                selectedMap.put(R.string.edifice, edifice_dropdown.getText().toString());
-                selectedMap.put(R.string.level, level_dropdown.getText().toString());
-                selectedMap.put(R.string.space, space_dropdown.getText().toString());
+                HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
+                selectedMap.put("center", center_dropdown.getText().toString());
+                selectedMap.put("edifice", edifice_dropdown.getText().toString());
+                selectedMap.put("level", level_dropdown.getText().toString());
+                selectedMap.put("space", space_dropdown.getText().toString());
                 bundle.putSerializable("fieldPojos", fieldPojoArrayList);
                 bundle.putInt("subfamily", getArguments().getInt("subfamily"));
                 bundle.putSerializable("assetPojo", assetPojo);
                 bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_location_to_nav_properties, bundle);
+//                Navigation.findNavController(v).navigate(R.id.action_nav_location_to_nav_properties, bundle);
             }
         });
 
