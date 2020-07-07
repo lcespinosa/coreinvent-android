@@ -76,8 +76,6 @@ public class DescriptionFragment extends Fragment {
 
     private Uri outPutfileUri;
 
-    private SharedViewModel model;
-
     public DescriptionFragment() {
         // Required empty public constructor
     }
@@ -93,25 +91,15 @@ public class DescriptionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        model = ViewModelProviders.of(this).get(SharedViewModel.class);
+        AltaActivity act = (AltaActivity) getActivity();
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
         observations = view.findViewById(R.id.observations);
         asset_img = view.findViewById(R.id.asset_img);
         camera = view.findViewById(R.id.camera);
         gallery = view.findViewById(R.id.gallery);
-        easyImage = new EasyImage.Builder(getActivity())
-                .setChooserTitle("Seleccione la imagen del bien")
-                .setCopyImagesToPublicGalleryFolder(false)
-//                .setChooserType(ChooserType.CAMERA_AND_DOCUMENTS)
-                .setChooserType(ChooserType.CAMERA_AND_GALLERY)
-                .setFolderName("coreinventImages")
-                .allowMultiple(false)
-                .build();
 
-        model.setEasy(easyImage);
-
-        checkGalleryAppAvailability();
+//        checkGalleryAppAvailability();
 
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
@@ -121,7 +109,7 @@ public class DescriptionFragment extends Fragment {
             public void onClick(View v) {
                 String[] necessaryPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                 if (arePermissionsGranted(necessaryPermissions)) {
-                    easyImage.openChooser(getParentFragment());
+                    ((AltaActivity) getActivity()).ChooseImage();
                 } else {
                     requestPermissionsCompat(necessaryPermissions, CHOOSER_PERMISSIONS_REQUEST_CODE);
                 }
@@ -140,7 +128,7 @@ public class DescriptionFragment extends Fragment {
             }
         });
 
-        model.getImage().observe(this, new Observer<Bitmap>() {
+        act.getModel().getImage().observe(this, new Observer<Bitmap>() {
             @Override
             public void onChanged(Bitmap bitmap) {
                 asset_img.setImageBitmap(bitmap);
@@ -215,10 +203,7 @@ public class DescriptionFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
+    public void ActivityResult(int requestCode, int resultCode, Intent data) {
         easyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new DefaultCallback() {
             @Override
             public void onMediaFilesPicked(MediaFile[] imageFiles, MediaSource source) {

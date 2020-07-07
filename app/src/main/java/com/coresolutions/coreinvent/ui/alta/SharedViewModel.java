@@ -1,30 +1,29 @@
 package com.coresolutions.coreinvent.ui.alta;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 
-import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import pl.aprilapps.easyphotopicker.EasyImage;
+import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 
-public class SharedViewModel extends ViewModel {
-    private final MutableLiveData<Bitmap> image = new MutableLiveData<Bitmap>();
-    private final MutableLiveData<EasyImage> easy = new MutableLiveData<EasyImage>();
+import java.util.List;
+
+public class SharedViewModel extends AndroidViewModel {
+    private MutableLiveData<Bitmap> image = new MutableLiveData<>();
+
+    public SharedViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public MutableLiveData<Bitmap> getImage() {
         return image;
-    }
-
-    public MutableLiveData<EasyImage> getEasy() {
-        return easy;
     }
 
     public void setImage(Bitmap bitmap) {
         image.setValue(bitmap);
     }
 
-    public void setEasy(EasyImage easyimage) {
-        easy.setValue(easyimage);
-    }
 }

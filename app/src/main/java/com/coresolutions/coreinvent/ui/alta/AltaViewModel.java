@@ -35,7 +35,6 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
     private MutableLiveData<List<FindAssetPojo>> findResult = new MutableLiveData<>();
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
 
     public AltaViewModel(@NonNull Application application) {
         super(application);
