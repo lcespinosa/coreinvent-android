@@ -21,6 +21,9 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -129,7 +132,14 @@ public class AltaViewModel extends AndroidViewModel {
         AltasApi altaApi = retrofit.create(AltasApi.class);
         Gson gson = new Gson();
         String json = gson.toJson(assetPojo);
-        Call<AssetPojo> family = altaApi.assetSubscription(token, assetPojo);
+
+        // Create a request body with file and image media type
+        RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), assetPojo.getImage());
+        // Create MultipartBody.Part using file request-body,file name and part name
+        MultipartBody.Part part = MultipartBody.Part.createFormData("images", assetPojo.getImage().getName(), fileReqBody);
+
+
+        Call<AssetPojo> family = altaApi.assetSubscription(token, assetPojo, part);
         family.enqueue(new Callback<AssetPojo>() {
             @Override
             public void onResponse(Call<AssetPojo> call, Response<AssetPojo> response) {

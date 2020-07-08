@@ -1,6 +1,8 @@
 package com.coresolutions.coreinvent.ui.alta;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,7 @@ public class ConfimationFragment extends Fragment {
 
     private ImageView back_img;
     private ImageView forward_img;
+    private ImageView asset_img;
     private SharedPreferences settings;
     private AltaViewModel altaViewModel;
     private AssetPojo assetPojo;
@@ -112,6 +115,7 @@ public class ConfimationFragment extends Fragment {
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
 
+
         tag_code = view.findViewById(R.id.tag_code);
         type_layout = view.findViewById(R.id.type_layout);
         type = view.findViewById(R.id.type);
@@ -161,6 +165,10 @@ public class ConfimationFragment extends Fragment {
 
         description_layout = view.findViewById(R.id.description_layout);
         description = view.findViewById(R.id.description);
+        asset_img = view.findViewById(R.id.asset_img);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
+        asset_img.setImageBitmap(bitmap);
 
         LayoutInflater inflater = this.getLayoutInflater();
         for (Map.Entry<String, String> entry : selectedMap.entrySet()) {
@@ -242,6 +250,7 @@ public class ConfimationFragment extends Fragment {
         });
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
+
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

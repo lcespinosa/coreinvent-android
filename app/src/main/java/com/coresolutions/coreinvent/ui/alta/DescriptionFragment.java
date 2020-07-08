@@ -56,25 +56,8 @@ public class DescriptionFragment extends Fragment {
     private TextInputEditText observations;
     private AssetPojo assetPojo;
     private ArrayList<FieldPojo> fieldPojoArrayList;
-    private EasyImage easyImage;
     private FloatingActionButton camera;
     private FloatingActionButton gallery;
-
-    private static final int PICK_FROM_CAMERA = 1;
-    private static final int PICK_FROM_GALLARY = 2;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-    private static final String PHOTOS_KEY = "easy_image_photos_list";
-    private static final int CHOOSER_PERMISSIONS_REQUEST_CODE = 7459;
-    private static final int CAMERA_REQUEST_CODE = 7500;
-    private static final int CAMERA_VIDEO_REQUEST_CODE = 7501;
-    private static final int GALLERY_REQUEST_CODE = 7502;
-    private static final int DOCUMENTS_REQUEST_CODE = 7503;
-
-
-    private Uri outPutfileUri;
 
     public DescriptionFragment() {
         // Required empty public constructor
@@ -100,39 +83,23 @@ public class DescriptionFragment extends Fragment {
         gallery = view.findViewById(R.id.gallery);
 
 //        checkGalleryAppAvailability();
-
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] necessaryPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                if (arePermissionsGranted(necessaryPermissions)) {
-                    ((AltaActivity) getActivity()).ChooseImage();
-                } else {
-                    requestPermissionsCompat(necessaryPermissions, CHOOSER_PERMISSIONS_REQUEST_CODE);
-                }
+                ((AltaActivity) getActivity()).ChooseImage();
             }
         });
 
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String[] necessaryPermissions = new String[]{Manifest.permission.CAMERA};
-                if (arePermissionsGranted(necessaryPermissions)) {
-                    easyImage.openCameraForImage(getParentFragment());
-                } else {
-                    requestPermissionsCompat(necessaryPermissions, CAMERA_REQUEST_CODE);
-                }
-            }
-        });
 
-        act.getModel().getImage().observe(this, new Observer<Bitmap>() {
+        act.getModel().getImage().observe(this, new Observer<File>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
+            public void onChanged(File file) {
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                 asset_img.setImageBitmap(bitmap);
-                assetPojo.setImage(bitmap);
+                assetPojo.setImage(file);
             }
         });
 
@@ -166,62 +133,5 @@ public class DescriptionFragment extends Fragment {
         });
     }
 
-    private void checkGalleryAppAvailability() {
-        if (!easyImage.canDeviceHandleGallery()) {
-            //Device has no app that handles gallery intent
-            gallery.setVisibility(View.GONE);
-        }
-    }
 
-    private boolean arePermissionsGranted(String[] permissions) {
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED)
-                return false;
-
-        }
-        return true;
-    }
-
-    private void requestPermissionsCompat(String[] permissions, int requestCode) {
-        ActivityCompat.requestPermissions(getActivity(), permissions, requestCode);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == CHOOSER_PERMISSIONS_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            easyImage.openChooser(getActivity());
-        } else if (requestCode == CAMERA_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            easyImage.openCameraForImage(getActivity());
-        } else if (requestCode == CAMERA_VIDEO_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            easyImage.openCameraForVideo(getActivity());
-        } else if (requestCode == GALLERY_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            easyImage.openGallery(getActivity());
-        } else if (requestCode == DOCUMENTS_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            easyImage.openDocuments(getActivity());
-        }
-    }
-
-    public void ActivityResult(int requestCode, int resultCode, Intent data) {
-        easyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new DefaultCallback() {
-            @Override
-            public void onMediaFilesPicked(MediaFile[] imageFiles, MediaSource source) {
-                Bitmap bitmap = BitmapFactory.decodeFile(imageFiles[0].getFile().getPath());
-                assetPojo.setImage(bitmap);
-                asset_img.setImageBitmap(bitmap);
-            }
-
-            @Override
-            public void onImagePickerError(@NonNull Throwable error, @NonNull MediaSource source) {
-                //Some error handling
-                error.printStackTrace();
-            }
-
-            @Override
-            public void onCanceled(@NonNull MediaSource source) {
-                //Not necessary to remove any files manually anymore
-            }
-        });
-    }
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.io.Serializable;
 
 import com.google.gson.annotations.Expose;
@@ -88,20 +89,19 @@ public class AssetPojo implements Serializable {
     @SerializedName("observations")
     @Expose
     private String observations;
-    @SerializedName("image")
-    @Expose
-    private Bitmap image;
+    @Expose(deserialize = false, serialize = false)
+    private File image;
     private final static long serialVersionUID = 6673953449430446904L;
 
     public AssetPojo() {
     }
 
 
-    public Bitmap getImage() {
+    public File getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(File image) {
         this.image = image;
     }
 

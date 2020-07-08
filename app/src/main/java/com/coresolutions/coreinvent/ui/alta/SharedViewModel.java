@@ -9,21 +9,22 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 
+import java.io.File;
 import java.util.List;
 
 public class SharedViewModel extends AndroidViewModel {
-    private MutableLiveData<Bitmap> image = new MutableLiveData<>();
+    private MutableLiveData<File> image = new MutableLiveData<>();
 
     public SharedViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public MutableLiveData<Bitmap> getImage() {
+    public MutableLiveData<File> getImage() {
         return image;
     }
 
-    public void setImage(Bitmap bitmap) {
-        image.setValue(bitmap);
+    public void setImage(File file) {
+        image.setValue(file);
     }
 
 }
