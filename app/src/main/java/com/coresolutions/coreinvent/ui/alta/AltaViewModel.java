@@ -2,6 +2,8 @@ package com.coresolutions.coreinvent.ui.alta;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.FileUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -19,7 +21,11 @@ import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -133,13 +139,24 @@ public class AltaViewModel extends AndroidViewModel {
         Gson gson = new Gson();
         String json = gson.toJson(assetPojo);
 
+        Map<String, String> map = gson.fromJson(json, Map.class);
+        map.remove("image");
+        HashMap<String, RequestBody> maps = new HashMap<>();
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue()));
+        }
+
         // Create a request body with file and image media type
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), assetPojo.getImage());
         // Create MultipartBody.Part using file request-body,file name and part name
-        MultipartBody.Part part = MultipartBody.Part.createFormData("images", assetPojo.getImage().getName(), fileReqBody);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("images[]", assetPojo.getImage().getName(), fileReqBody);
+
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        parts.add(part);
 
 
-        Call<AssetPojo> family = altaApi.assetSubscription(token, assetPojo, part);
+        Call<AssetPojo> family = altaApi.assetSubscription(token, maps, parts);
         family.enqueue(new Callback<AssetPojo>() {
             @Override
             public void onResponse(Call<AssetPojo> call, Response<AssetPojo> response) {
@@ -156,6 +173,23 @@ public class AltaViewModel extends AndroidViewModel {
         });
 
 
+    }
+
+
+    @NonNull
+    private MultipartBody.Part prepareFilePart(String partName, File file) {
+        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
+        // use the FileUtils to get the actual file by uri
+
+        // create RequestBody instance from file
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse("image/*"),
+                        file
+                );
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
     }
 
 

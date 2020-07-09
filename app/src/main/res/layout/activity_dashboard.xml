@@ -422,21 +422,6 @@
     </LinearLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:clickable="true"
-        app:backgroundTint="@color/blank_14"
-        app:elevation="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/newOperation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardviews"
-        app:pressedTranslationZ="0dp"
-        app:srcCompat="@drawable/ic_add_a_photo_24px"
-        app:tint="@color/primary" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

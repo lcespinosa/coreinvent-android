@@ -61,31 +61,6 @@ public class DashboardActivity extends AppCompatActivity {
         inflater = this.getLayoutInflater();
         View customView = inflater.inflate(R.layout.popup_logged_user, null);
 
-        findViewById(R.id.add_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                getIntent.setType("image/*");
-
-                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                pickIntent.setType("image/*");
-
-                Intent chooserIntent = Intent.createChooser(getIntent, "Seleccione la imagen");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-
-                startActivityForResult(chooserIntent, 1);
-
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    // Callback onRequestPermissionsResult interceptadona Activity MainActivity
-                    ActivityCompat.requestPermissions(DashboardActivity.this, new String[]{Manifest.permission.CAMERA}, 2);
-                } else {
-                    // permission has been granted, continue as usual
-                    Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(captureIntent, 2);
-                }
-            }
-        });
 
         LinearLayout close_seccion_layout = customView.findViewById(R.id.close_seccion_layout);
         close_seccion_layout.setOnClickListener(new View.OnClickListener() {
