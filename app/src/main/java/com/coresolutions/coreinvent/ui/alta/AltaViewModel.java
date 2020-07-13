@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
+import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
@@ -44,6 +45,7 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
     private MutableLiveData<List<FindAssetPojo>> findResult = new MutableLiveData<>();
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
+    private MutableLiveData<FindAssetPojo> assetResult = new MutableLiveData<>();
 
     public AltaViewModel(@NonNull Application application) {
         super(application);
@@ -56,6 +58,11 @@ public class AltaViewModel extends AndroidViewModel {
 
     LiveData<List<FieldPojo>> getRegisterResult() {
         return fieldResult;
+    }
+
+
+    public MutableLiveData<FindAssetPojo> getAssetResult() {
+        return assetResult;
     }
 
     public void getFamily(String token) {
@@ -146,15 +153,15 @@ public class AltaViewModel extends AndroidViewModel {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue()));
         }
-
-        // Create a request body with file and image media type
-        RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), assetPojo.getImage());
-        // Create MultipartBody.Part using file request-body,file name and part name
-        MultipartBody.Part part = MultipartBody.Part.createFormData("images[]", assetPojo.getImage().getName(), fileReqBody);
-
         List<MultipartBody.Part> parts = new ArrayList<>();
-        parts.add(part);
+        if (assetPojo.getImage() != null) {
+            // Create a request body with file and image media type
+            RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), assetPojo.getImage());
+            // Create MultipartBody.Part using file request-body,file name and part name
+            MultipartBody.Part part = MultipartBody.Part.createFormData("images[]", assetPojo.getImage().getName(), fileReqBody);
 
+            parts.add(part);
+        }
 
         Call<AssetPojo> family = altaApi.assetSubscription(token, maps, parts);
         family.enqueue(new Callback<AssetPojo>() {
@@ -173,23 +180,6 @@ public class AltaViewModel extends AndroidViewModel {
         });
 
 
-    }
-
-
-    @NonNull
-    private MultipartBody.Part prepareFilePart(String partName, File file) {
-        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
-        // use the FileUtils to get the actual file by uri
-
-        // create RequestBody instance from file
-        RequestBody requestFile =
-                RequestBody.create(
-                        MediaType.parse("image/*"),
-                        file
-                );
-
-        // MultipartBody.Part is used to send also the actual file name
-        return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
     }
 
 
@@ -217,6 +207,31 @@ public class AltaViewModel extends AndroidViewModel {
                 findResult.setValue(null);
             }
 
+        });
+    }
+
+
+    public void getAssetById(int assetid, String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altasApi = retrofit.create(AltasApi.class);
+        Call<FindAssetPojo> asset = altasApi.getAssetsById(assetid, token);
+        asset.enqueue(new Callback<FindAssetPojo>() {
+            @Override
+            public void onResponse(Call<FindAssetPojo> call, Response<FindAssetPojo> response) {
+                if (response.isSuccessful()) {
+                    FindAssetPojo asset = response.body();
+                    assetResult.setValue(asset);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FindAssetPojo> call, Throwable t) {
+                assetResult.setValue(null);
+            }
         });
     }
 

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.login.LoginActivity;
 import com.coresolutions.coreinvent.ui.login.LoginViewModel;
 import com.coresolutions.coreinvent.ui.login.LoginViewModelFactory;
@@ -48,6 +49,7 @@ public class DashboardActivity extends AppCompatActivity {
     private OperationFragment operationFragment;
     private RelativeLayout session;
     private LoginViewModel loginViewModel;
+    private DashboardViewModel dashboardViewModel;
     private SharedPreferences settings;
 
     @Override
@@ -55,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         session = findViewById(R.id.session);
         newOperation = findViewById(R.id.newOperation);

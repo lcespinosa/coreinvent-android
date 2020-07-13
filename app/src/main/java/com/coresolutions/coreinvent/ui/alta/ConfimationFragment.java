@@ -51,6 +51,7 @@ public class ConfimationFragment extends Fragment {
     private TextView model;
 
     private LinearLayout location_layout;
+    private LinearLayout location2_layout;
     private TextView center;
     private TextView edifice;
     private TextView level;
@@ -125,6 +126,7 @@ public class ConfimationFragment extends Fragment {
         model = view.findViewById(R.id.model);
 
         location_layout = view.findViewById(R.id.location_layout);
+        location2_layout = view.findViewById(R.id.location2_layout);
         center = view.findViewById(R.id.center);
         edifice = view.findViewById(R.id.edifice);
         level = view.findViewById(R.id.level);
@@ -167,8 +169,10 @@ public class ConfimationFragment extends Fragment {
         description = view.findViewById(R.id.description);
         asset_img = view.findViewById(R.id.asset_img);
 
-        Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
-        asset_img.setImageBitmap(bitmap);
+        if (assetPojo.getImage() != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
+            asset_img.setImageBitmap(bitmap);
+        }
 
         LayoutInflater inflater = this.getLayoutInflater();
         for (Map.Entry<String, String> entry : selectedMap.entrySet()) {
@@ -186,18 +190,22 @@ public class ConfimationFragment extends Fragment {
                     model.setText(entry.getValue());
                 } else if (entry.getKey().equals("center")) {
                     location_layout.setVisibility(View.VISIBLE);
+                    location2_layout.setVisibility(View.VISIBLE);
                     center.setText(entry.getValue());
                     center.setAlpha(1);
                 } else if (entry.getKey().equals("edifice")) {
                     location_layout.setVisibility(View.VISIBLE);
+                    location2_layout.setVisibility(View.VISIBLE);
                     edifice.setText(entry.getValue());
                     edifice.setAlpha(1);
                 } else if (entry.getKey().equals("level")) {
                     location_layout.setVisibility(View.VISIBLE);
+                    location2_layout.setVisibility(View.VISIBLE);
                     level.setText(entry.getValue());
                     level.setAlpha(1);
                 } else if (entry.getKey().equals("space")) {
                     location_layout.setVisibility(View.VISIBLE);
+                    location2_layout.setVisibility(View.VISIBLE);
                     space.setText(entry.getValue());
                     space.setAlpha(1);
                 } else if (entry.getKey().equals("characteristics")) {
@@ -254,13 +262,7 @@ public class ConfimationFragment extends Fragment {
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
-                bundle.putString("from", "properties");
-                bundle.putSerializable("fieldPojos", fieldPojoArrayList);
-                bundle.putSerializable("assetPojo", assetPojo);
-                bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_confimation_to_nav_description, bundle);
+                getActivity().onBackPressed();
             }
         });
 

@@ -39,6 +39,9 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
     private ConstraintLayout search_layout;
     private boolean searching;
     private ProgressDialog progressDialog;
+    private String token;
+
+    private DetailFragment detailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,8 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         setContentView(R.layout.activity_search);
         searching = false;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
-        altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
-
+        altaViewModel =ViewModelProviders.of(this).get(AltaViewModel.class);
+        token = settings.getString("access_token", "");
         assetListAdapter = new AssetListAdapter(this, this);
         search_img = findViewById(R.id.search_img);
         logo_img = findViewById(R.id.logo_img);
@@ -83,7 +86,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         });
 
 
-        altaViewModel.findAsset(settings.getString("access_token", ""), new Search(""));
+        altaViewModel.findAsset(token, new Search(""));
         search_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +129,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
 
     @Override
     public void OnClickListener(FindAssetPojo assets, int post) {
-
+        detailFragment = DetailFragment.newInstance(assets.getId(), token);
+        detailFragment.show(getSupportFragmentManager(), "details");
     }
 }

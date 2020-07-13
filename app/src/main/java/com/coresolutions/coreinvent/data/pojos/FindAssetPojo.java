@@ -118,6 +118,9 @@ public class FindAssetPojo implements Serializable {
     @SerializedName("space")
     @Expose
     private Space space;
+    @SerializedName("url_photo")
+    @Expose
+    private String url_photo;
     private final static long serialVersionUID = -8946538409396176729L;
 
     public Integer getId() {
@@ -134,6 +137,14 @@ public class FindAssetPojo implements Serializable {
 
     public void setSubscriptionDate(String subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
+    }
+
+    public String getUrl_photo() {
+        return url_photo;
+    }
+
+    public void setUrl_photo(String url_photo) {
+        this.url_photo = url_photo;
     }
 
     public Object getUnsubscriptionDate() {

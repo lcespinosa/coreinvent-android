@@ -57,7 +57,6 @@ public class DescriptionFragment extends Fragment {
     private AssetPojo assetPojo;
     private ArrayList<FieldPojo> fieldPojoArrayList;
     private FloatingActionButton camera;
-    private FloatingActionButton gallery;
 
     public DescriptionFragment() {
         // Required empty public constructor
@@ -80,7 +79,6 @@ public class DescriptionFragment extends Fragment {
         observations = view.findViewById(R.id.observations);
         asset_img = view.findViewById(R.id.asset_img);
         camera = view.findViewById(R.id.camera);
-        gallery = view.findViewById(R.id.gallery);
 
 //        checkGalleryAppAvailability();
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
@@ -99,6 +97,7 @@ public class DescriptionFragment extends Fragment {
             public void onChanged(File file) {
                 Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                 asset_img.setImageBitmap(bitmap);
+                asset_img.setVisibility(View.VISIBLE);
                 assetPojo.setImage(file);
             }
         });
@@ -107,13 +106,7 @@ public class DescriptionFragment extends Fragment {
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
-                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
-                bundle.putSerializable("fieldPojos", fieldPojoArrayList);
-                bundle.putSerializable("assetPojo", assetPojo);
-                bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_description_to_nav_properties, bundle);
+                getActivity().onBackPressed();
             }
         });
 

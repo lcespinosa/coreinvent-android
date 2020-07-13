@@ -328,14 +328,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("subfamily", getArguments().getInt("subfamily"));
-                HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
-                bundle.putString("from", "properties");
-                bundle.putSerializable("fieldPojos", fieldPojoArrayList);
-                bundle.putSerializable("assetPojo", assetPojo);
-                bundle.putSerializable("selectedMap", selectedMap);
-//                Navigation.findNavController(v).navigate(R.id.action_nav_properties_to_nav_location, bundle);
+                getActivity().onBackPressed();
             }
         });
 

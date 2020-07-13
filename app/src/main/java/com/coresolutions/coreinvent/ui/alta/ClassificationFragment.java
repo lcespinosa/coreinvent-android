@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.alta;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -43,6 +44,7 @@ public class ClassificationFragment extends Fragment {
     private SharedPreferences settings;
     private SubFamilyPojo subFamilyPojo;
     private Type type;
+    private ProgressDialog progressDialog;
 
 
     public ClassificationFragment() {
@@ -62,6 +64,13 @@ public class ClassificationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Cargando datos...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         family_dropdown = view.findViewById(R.id.family_dropdown);
         sub_family_dropdown = view.findViewById(R.id.sub_family_dropdown);
         type_dropdown = view.findViewById(R.id.type_dropdown);
@@ -74,6 +83,8 @@ public class ClassificationFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
                 }
+
+                progressDialog.dismiss();
             }
         });
 
@@ -110,6 +121,12 @@ public class ClassificationFragment extends Fragment {
 
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
+        back_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override

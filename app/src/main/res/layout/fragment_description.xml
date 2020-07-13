@@ -104,17 +104,6 @@
                 app:srcCompat="@drawable/ic_add_a_photo_24px"
                 app:tint="@color/primary" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:clickable="true"
-                app:backgroundTint="@color/blank_14"
-                app:elevation="0dp"
-                app:pressedTranslationZ="0dp"
-                app:srcCompat="@drawable/ic_baseline_image_24"
-                app:tint="@color/primary" />
 
         </LinearLayout>
 
@@ -124,6 +113,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:visibility="gone"
             android:src="@drawable/imagen"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"

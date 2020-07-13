@@ -36,4 +36,7 @@ public interface AltasApi {
     @POST("assets/search")
     Call<List<FindAssetPojo>> findAsset(@Header("authorization") String token, @Body Search search);
 
+    @GET("assets/{asset}")
+    Call<FindAssetPojo> getAssetsById(@Path("asset") int assetid, @Header("authorization") String token);
+
 }

@@ -1,62 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewAltas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1B1B1B"
-    tools:context=".ui.alta.ConfimationFragment">
+    android:layout_weight="1"
+    android:elevation="100dp"
+    app:cardBackgroundColor="@color/overBackground"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="300dp"
+        android:layout_height="500dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cargando Datos..."
+                android:textColor="@color/onBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Etiqueta:"
+            android:textColor="@color/onBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tag_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="9025321"
+            android:textColor="@color/onBackground"
+
+            app:layout_constraintStart_toEndOf="@+id/tag"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/close_img"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="5dp"
+            android:tint="@color/secondaryLightVariant"
+
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_add_circle_outline_24px" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.4"
+            android:background="@color/onBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tag" />
 
         <ScrollView
-            android:layout_width="0dp"
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/divider">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Etiqueta:"
-                    android:textColor="@color/onBackground"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tag_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="9025321"
-                    android:textColor="@color/onBackground"
-
-                    app:layout_constraintStart_toEndOf="@+id/tag"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.1dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:alpha="0.4"
-                    android:background="@color/onBackground"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tag" />
 
                 <ImageView
                     android:id="@+id/asset_img"
@@ -64,11 +115,11 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/default_img"
+                    android:src="@drawable/imagen"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <LinearLayout
@@ -82,10 +133,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -117,10 +168,10 @@
                         android:id="@+id/brand_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -170,10 +221,10 @@
                         android:id="@+id/location_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -194,7 +245,8 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_marginTop="2dp"
                                 android:text="/"
-                                android:textColor="@color/onBackground" />
+                                android:textColor="@color/onBackground"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/edifice"
@@ -202,8 +254,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:text="Pallars"
-                                android:textColor="@color/onBackground" />
-
+                                android:textColor="@color/onBackground"
+                                android:visibility="gone" />
 
 
                         </LinearLayout>
@@ -217,14 +269,15 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/brand" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/location2_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -272,10 +325,10 @@
                         android:id="@+id/characteristics_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -307,10 +360,10 @@
                         android:id="@+id/serie_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -342,10 +395,10 @@
                         android:id="@+id/measures_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -377,10 +430,10 @@
                         android:id="@+id/frameNumber_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -412,10 +465,10 @@
                         android:id="@+id/plate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -447,10 +500,10 @@
                         android:id="@+id/postalCode_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -482,10 +535,10 @@
                         android:id="@+id/address_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -517,10 +570,10 @@
                         android:id="@+id/surface_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -552,10 +605,10 @@
                         android:id="@+id/length_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -587,10 +640,10 @@
                         android:id="@+id/area_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -622,10 +675,10 @@
                         android:id="@+id/inUseDate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -657,10 +710,10 @@
                         android:id="@+id/description_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -693,49 +746,100 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/secondaryDarkVariant"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/back_img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_margin="5dp"
-                android:tint="@color/secondaryLightVariant"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_add_circle_outline_24px" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Alta de bienes"
-                android:textColor="@color/onBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@color/secondaryDarkVariant"
 
-            <ImageView
-                android:id="@+id/forward_img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_margin="5dp"
-                android:tint="@color/secondaryLightVariant"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/baja_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+
+                        android:src="@drawable/ic_delete_black_24dp"
+                        android:tint="@color/secondaryLightVariant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Baja"
+                        android:textColor="@color/onBackground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/movement_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_edit_location_black_24dp"
+                        android:tint="@color/secondaryLightVariant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Traslado"
+                        android:textColor="@color/onBackground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+
+                        android:src="@drawable/ic_upload_black_24dp"
+                        android:tint="@color/secondaryLightVariant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Salida Temporal"
+                        android:textColor="@color/onBackground" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
