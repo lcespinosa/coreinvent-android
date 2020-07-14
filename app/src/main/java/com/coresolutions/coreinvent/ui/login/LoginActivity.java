@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.coresolutions.coreinvent.ui.main.DashboardActivity;
 import com.coresolutions.coreinvent.R;
+import com.google.android.material.button.MaterialButton;
 
 import pl.aprilapps.easyphotopicker.EasyImage;
 
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
-        final ImageButton loginButton = findViewById(R.id.login);
+        final MaterialButton loginButton = findViewById(R.id.login);
 
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -59,9 +60,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.isDataValid()) {
-                    loginButton.setColorFilter(ContextCompat.getColor(LoginActivity.this, R.color.secondaryLightVariant));
+                    loginButton.setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.secondaryLightVariant));
                 } else {
-                    loginButton.setColorFilter(ContextCompat.getColor(LoginActivity.this, R.color.colorStroke));
+                    loginButton.setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.colorStroke));
                 }
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));

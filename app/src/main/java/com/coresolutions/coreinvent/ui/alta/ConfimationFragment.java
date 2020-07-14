@@ -174,20 +174,23 @@ public class ConfimationFragment extends Fragment {
             asset_img.setImageBitmap(bitmap);
         }
 
-        LayoutInflater inflater = this.getLayoutInflater();
         for (Map.Entry<String, String> entry : selectedMap.entrySet()) {
             if (!entry.getValue().equals("")) {
                 if (entry.getKey().equals("tag")) {
                     tag_code.setText(entry.getValue());
+                    tag_code.setAlpha(1);
                 } else if (entry.getKey().equals("type")) {
                     type_layout.setVisibility(View.VISIBLE);
                     type.setText(entry.getValue());
+                    type.setAlpha(1);
                 } else if (entry.getKey().equals("brand")) {
                     brand_layout.setVisibility(View.VISIBLE);
                     brand.setText(entry.getValue());
+                    brand.setAlpha(1);
                 } else if (entry.getKey().equals("model")) {
                     brand_layout.setVisibility(View.VISIBLE);
                     model.setText(entry.getValue());
+                    model.setAlpha(1);
                 } else if (entry.getKey().equals("center")) {
                     location_layout.setVisibility(View.VISIBLE);
                     location2_layout.setVisibility(View.VISIBLE);
@@ -214,30 +217,39 @@ public class ConfimationFragment extends Fragment {
                 } else if (entry.getKey().equals("serie")) {
                     serie_layout.setVisibility(View.VISIBLE);
                     serie.setText(entry.getValue());
+                    serie.setAlpha(1);
                 } else if (entry.getKey().equals("measures")) {
                     measures_layout.setVisibility(View.VISIBLE);
                     measures.setText(entry.getValue());
+                    measures.setAlpha(1);
                 } else if (entry.getKey().equals("frame_number")) {
                     frameNumber_layout.setVisibility(View.VISIBLE);
                     frameNumber.setText(entry.getValue());
+                    frameNumber.setAlpha(1);
                 } else if (entry.getKey().equals("postal_code")) {
                     postalCode_layout.setVisibility(View.VISIBLE);
                     postalCode.setText(entry.getValue());
+                    postalCode.setAlpha(1);
                 } else if (entry.getKey().equals("address")) {
                     address_layout.setVisibility(View.VISIBLE);
                     address.setText(entry.getValue());
+                    address.setAlpha(1);
                 } else if (entry.getKey().equals("surface")) {
                     surface_layout.setVisibility(View.VISIBLE);
                     surface.setText(entry.getValue());
+                    surface.setAlpha(1);
                 } else if (entry.getKey().equals("length")) {
                     length_layout.setVisibility(View.VISIBLE);
                     length.setText(entry.getValue());
+                    length.setAlpha(1);
                 } else if (entry.getKey().equals("in_use_date")) {
                     inUseDate_layout.setVisibility(View.VISIBLE);
                     inUseDate.setText(entry.getValue());
+                    inUseDate.setAlpha(1);
                 } else if (entry.getKey().equals("description")) {
                     description_layout.setVisibility(View.VISIBLE);
                     description.setText(entry.getValue());
+                    description.setAlpha(1);
                 }
             }
         }

@@ -232,10 +232,12 @@ public class DetailFragment extends DialogFragment {
                         .execute(Constants.SERVER_URL + asset.getUrl_photo());
                 if (asset.getTag() != null) {
                     tag_code.setText(asset.getTag().getCode());
+                    tag_code.setAlpha(1);
                 }
                 if (!asset.getType().getName().equals("")) {
                     type_layout.setVisibility(View.VISIBLE);
                     type.setText(asset.getType().getName());
+                    type.setAlpha(1);
                 }
                 if (asset.getAssetModel() != null) {
                     if (asset.getAssetModel().getBrand() != null) {
@@ -276,10 +278,12 @@ public class DetailFragment extends DialogFragment {
                 if (asset.getCharacteristics() != null) {
                     characteristics_layout.setVisibility(View.VISIBLE);
                     characteristics.setText(asset.getCharacteristics().getImportado());
+                    characteristics.setAlpha(1);
                 }
                 if (asset.getSerialNumber() != null) {
                     serie_layout.setVisibility(View.VISIBLE);
                     serie.setText(asset.getSerialNumber());
+                    serie.setAlpha(1);
                 }
 
 
@@ -287,34 +291,42 @@ public class DetailFragment extends DialogFragment {
                     String measures1 = (!asset.getWidth().toString().equals("") && !asset.getHeight().toString().equals("") && !asset.getDepth().toString().equals("")) ? asset.getWidth().toString() + "x" + asset.getHeight().toString() + "x" + asset.getDepth().toString() : "";
                     measures_layout.setVisibility(View.VISIBLE);
                     measures.setText(measures1);
+                    measures.setAlpha(1);
                 }
                 if (asset.getFrameNumber() != null) {
                     frameNumber_layout.setVisibility(View.VISIBLE);
                     frameNumber.setText(asset.getFrameNumber().toString());
+                    frameNumber.setAlpha(1);
                 }
                 if (asset.getPostalCode() != null) {
                     postalCode_layout.setVisibility(View.VISIBLE);
                     postalCode.setText(asset.getPostalCode().toString());
+                    postalCode.setAlpha(1);
                 }
                 if (asset.getAddress() != null) {
                     address_layout.setVisibility(View.VISIBLE);
                     address.setText(asset.getAddress().toString());
+                    address.setAlpha(1);
                 }
                 if (asset.getSurface() != null) {
                     surface_layout.setVisibility(View.VISIBLE);
                     surface.setText(asset.getSurface().toString());
+                    surface.setAlpha(1);
                 }
                 if (asset.getLength() != null) {
                     length_layout.setVisibility(View.VISIBLE);
                     length.setText(asset.getLength().toString());
+                    length.setAlpha(1);
                 }
                 if (asset.getEconomicAspect() != null) {
                     inUseDate_layout.setVisibility(View.VISIBLE);
                     inUseDate.setText(asset.getEconomicAspect().getInUseDate().toString());
+                    inUseDate.setAlpha(1);
                 }
                 if (asset.getObservations() != null) {
                     description_layout.setVisibility(View.VISIBLE);
                     description.setText(asset.getObservations());
+                    description.setAlpha(1);
                 }
             }
 

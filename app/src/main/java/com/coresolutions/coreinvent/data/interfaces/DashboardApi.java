@@ -1,7 +1,9 @@
 package com.coresolutions.coreinvent.data.interfaces;
 
+import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Year;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import retrofit2.http.Path;
 
 public interface DashboardApi {
 
-
+    @GET("dashboard/years")
+    Call<List<Year>> getYears(@Header("authorization") String token);
 
 }

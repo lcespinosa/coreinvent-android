@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:editable="false"
+
                     android:hint="Etiqueta física"
                     app:boxBackgroundColor="@color/overBackground"
                     app:endIconDrawable="@drawable/ic_codigo_qr_24"
@@ -89,7 +89,7 @@
                         android:id="@+id/center_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +108,7 @@
                         android:id="@+id/edifice_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +127,7 @@
                         android:id="@+id/level_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -149,7 +149,7 @@
                         android:id="@+id/space_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -170,7 +170,7 @@
                         android:id="@+id/brand_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -189,7 +189,7 @@
                         android:id="@+id/model_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>

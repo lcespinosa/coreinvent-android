@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,14 +26,44 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/observations"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:maxLength="120"
-                android:layout_marginTop="28dp"
+                android:layout_height="80dp"
                 android:inputType="textMultiLine"
+                android:maxLength="120"
                 android:selectAllOnFocus="true"
                 android:textColor="@color/colorText" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                app:backgroundTint="@color/blank_14"
+                app:elevation="0dp"
+                app:pressedTranslationZ="0dp"
+                app:srcCompat="@drawable/ic_add_a_photo_24px"
+                app:tint="@color/primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"/>
+
+
+
+        <ImageView
+            android:id="@+id/asset_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:src="@drawable/imagen"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/camera" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"
@@ -80,46 +109,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:clickable="true"
-                app:backgroundTint="@color/blank_14"
-                app:elevation="0dp"
-                app:pressedTranslationZ="0dp"
-                app:srcCompat="@drawable/ic_add_a_photo_24px"
-                app:tint="@color/primary" />
-
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/asset_img"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            android:src="@drawable/imagen"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

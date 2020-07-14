@@ -36,7 +36,6 @@
                     android:id="@+id/family_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
                     android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +53,6 @@
                     android:id="@+id/sub_family_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
                     android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +70,6 @@
                     android:id="@+id/type_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
                     android:textColor="@color/onBackground" />
 
             </com.google.android.material.textfield.TextInputLayout>

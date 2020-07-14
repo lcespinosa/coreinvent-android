@@ -82,7 +82,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -97,6 +97,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Servidor"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -117,7 +118,7 @@
                         android:id="@+id/brand_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -132,6 +133,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:alpha="0.4"
                                 android:text="Cisco"
                                 android:textColor="@color/onBackground" />
 
@@ -170,7 +172,7 @@
                         android:id="@+id/location_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -185,6 +187,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:alpha="0.4"
                                 android:text="Pallars"
                                 android:textColor="@color/onBackground" />
 
@@ -201,6 +204,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:alpha="0.4"
                                 android:text="Pallars"
                                 android:textColor="@color/onBackground" />
 
@@ -221,7 +225,7 @@
                         android:id="@+id/location2_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -236,6 +240,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:alpha="0.4"
                                 android:text="Planta 5"
                                 android:textColor="@color/onBackground" />
 
@@ -272,7 +277,7 @@
                         android:id="@+id/characteristics_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -287,6 +292,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Características"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -307,7 +313,7 @@
                         android:id="@+id/serie_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -322,6 +328,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Número de serie"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -342,7 +349,7 @@
                         android:id="@+id/measures_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -357,6 +364,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Dimensiones"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -377,7 +385,7 @@
                         android:id="@+id/frameNumber_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -392,6 +400,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Número factura proveedor"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -412,7 +421,7 @@
                         android:id="@+id/plate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -427,6 +436,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Matrícula"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -447,7 +457,7 @@
                         android:id="@+id/postalCode_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -462,6 +472,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Código postal"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -482,7 +493,7 @@
                         android:id="@+id/address_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -497,6 +508,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/address"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -517,7 +529,7 @@
                         android:id="@+id/surface_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -532,6 +544,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Superficie"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -552,7 +565,7 @@
                         android:id="@+id/length_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -567,6 +580,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Longitud"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -587,7 +601,7 @@
                         android:id="@+id/area_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -602,6 +616,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Área"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -622,7 +637,7 @@
                         android:id="@+id/inUseDate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -637,6 +652,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/in_use_date"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -657,7 +673,7 @@
                         android:id="@+id/description_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:orientation="vertical">
@@ -672,6 +688,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/description"
+                                android:alpha="0.4"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -735,7 +752,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+                app:srcCompat="@drawable/ic_baseline_save_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

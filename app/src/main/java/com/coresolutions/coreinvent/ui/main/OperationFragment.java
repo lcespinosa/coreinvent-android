@@ -67,6 +67,7 @@ public class OperationFragment extends DialogFragment {
         alta_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 Intent i = new Intent(getContext(), AltaActivity.class);
                 startActivity(i);
             }

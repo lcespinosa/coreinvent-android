@@ -344,7 +344,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                     bundle.putInt("subfamily", subfamily);
                     selectedMap.put("tag", tagcode);
                     assetPojo.setTag(String.valueOf(tagId));
-                    assetPojo.setTagType(typeTag.equals("madeup") ? "3" : "2");
+                    assetPojo.setTagType(typeTag.equals("madeup") ? "2" : "3");
                     assetPojo.setAddress(address_dropdown.getText().toString());
                     selectedMap.put("address", address_dropdown.getText().toString());
                     assetPojo.setSubfamily(String.valueOf(subfamily));
