@@ -1,12 +1,13 @@
 package com.coresolutions.coreinvent.data.pojos;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Tag implements Serializable
-{
+public class Tag implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -98,4 +99,9 @@ public class Tag implements Serializable
         this.tagType = tagType;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return getCode();
+    }
 }

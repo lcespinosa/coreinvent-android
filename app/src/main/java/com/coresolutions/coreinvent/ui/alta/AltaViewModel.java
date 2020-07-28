@@ -20,6 +20,7 @@ import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
+import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -46,6 +47,7 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<List<FindAssetPojo>> findResult = new MutableLiveData<>();
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
     private MutableLiveData<FindAssetPojo> assetResult = new MutableLiveData<>();
+    private MutableLiveData<Unsubscription> unsubscriptionResult = new MutableLiveData<>();
 
     public AltaViewModel(@NonNull Application application) {
         super(application);
@@ -54,6 +56,10 @@ public class AltaViewModel extends AndroidViewModel {
 
     LiveData<List<FamilyPojo>> getFamilyResult() {
         return familyResult;
+    }
+
+    public LiveData<Unsubscription> getUnsubscriptionResult() {
+        return unsubscriptionResult;
     }
 
     LiveData<List<FieldPojo>> getRegisterResult() {
@@ -233,6 +239,33 @@ public class AltaViewModel extends AndroidViewModel {
                 assetResult.setValue(null);
             }
         });
+    }
+
+
+    public void getUnsubscriptionData(String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+        Call<Unsubscription> family = altaApi.getUnsubscriptionData(token);
+        family.enqueue(new Callback<Unsubscription>() {
+            @Override
+            public void onResponse(Call<Unsubscription> call, Response<Unsubscription> response) {
+                if (response.isSuccessful()) {
+                    Unsubscription unsubscriptionData = response.body();
+                    unsubscriptionResult.setValue(unsubscriptionData);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Unsubscription> call, Throwable t) {
+                familyResult.setValue(null);
+            }
+        });
+
     }
 
 

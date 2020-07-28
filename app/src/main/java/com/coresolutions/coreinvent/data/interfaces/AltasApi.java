@@ -5,6 +5,7 @@ import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
+import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 
 import java.util.List;
 import java.util.Map;
@@ -38,5 +39,8 @@ public interface AltasApi {
 
     @GET("assets/{asset}")
     Call<FindAssetPojo> getAssetsById(@Path("asset") int assetid, @Header("authorization") String token);
+
+    @GET("operations/unsubscription/open")
+    Call<Unsubscription> getUnsubscriptionData(@Header("authorization") String token);
 
 }

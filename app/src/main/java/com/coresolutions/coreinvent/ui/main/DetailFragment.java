@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.main;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,8 @@ import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
+import com.coresolutions.coreinvent.ui.baja.BajaActivity;
+import com.coresolutions.coreinvent.ui.login.LoginActivity;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -102,6 +105,9 @@ public class DetailFragment extends DialogFragment {
 
     private LinearLayout description_layout;
     private TextView description;
+
+
+    private LinearLayout baja_layout;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -221,6 +227,9 @@ public class DetailFragment extends DialogFragment {
         asset_img = view.findViewById(R.id.asset_img);
         close = view.findViewById(R.id.close_img);
 
+
+        baja_layout = view.findViewById(R.id.baja_layout);
+
 //        Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
 //        asset_img.setImageBitmap(bitmap);
 
@@ -339,6 +348,16 @@ public class DetailFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+            }
+        });
+
+
+        baja_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), BajaActivity.class);
+                i.putExtra("asset", asset);
+                startActivity(i);
             }
         });
 

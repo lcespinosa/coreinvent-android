@@ -69,5 +69,30 @@ public class DashboardViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void getUnsubscriptionData(String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        DashboardApi dashboardApi = retrofit.create(DashboardApi.class);
+        Call<List<Year>> years = dashboardApi.getYears(token);
+        years.enqueue(new Callback<List<Year>>() {
+            @Override
+            public void onResponse(Call<List<Year>> call, Response<List<Year>> response) {
+                if (response.isSuccessful()) {
+                    List<Year> yearList = response.body();
+                    yearsResult.setValue(yearList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Year>> call, Throwable t) {
+                yearsResult.setValue(null);
+            }
+        });
+    }
 }
 
