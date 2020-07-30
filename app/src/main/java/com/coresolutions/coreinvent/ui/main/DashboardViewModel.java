@@ -11,6 +11,7 @@ import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
 import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Dashboard;
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
@@ -36,13 +37,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DashboardViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Year>> yearsResult = new MutableLiveData<>();
+    private MutableLiveData<Dashboard> dashResult = new MutableLiveData<>();
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public MutableLiveData<List<Year>> getYearsResult() {
+    public LiveData<List<Year>> getYearsResult() {
         return yearsResult;
+    }
+
+    public LiveData<Dashboard> getDashResult() {
+        return dashResult;
     }
 
     public void getYears(String token) {
@@ -70,7 +76,7 @@ public class DashboardViewModel extends AndroidViewModel {
         });
     }
 
-    public void getUnsubscriptionData(String token) {
+    public void getDashboardInfo(String token, int year) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -78,19 +84,19 @@ public class DashboardViewModel extends AndroidViewModel {
 
 
         DashboardApi dashboardApi = retrofit.create(DashboardApi.class);
-        Call<List<Year>> years = dashboardApi.getYears(token);
-        years.enqueue(new Callback<List<Year>>() {
+        Call<Dashboard> dashboard = dashboardApi.getDashboardInfo(token, year);
+        dashboard.enqueue(new Callback<Dashboard>() {
             @Override
-            public void onResponse(Call<List<Year>> call, Response<List<Year>> response) {
+            public void onResponse(Call<Dashboard> call, Response<Dashboard> response) {
                 if (response.isSuccessful()) {
-                    List<Year> yearList = response.body();
-                    yearsResult.setValue(yearList);
+                    Dashboard dash = response.body();
+                    dashResult.setValue(dash);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Year>> call, Throwable t) {
-                yearsResult.setValue(null);
+            public void onFailure(Call<Dashboard> call, Throwable t) {
+                dashResult.setValue(null);
             }
         });
     }

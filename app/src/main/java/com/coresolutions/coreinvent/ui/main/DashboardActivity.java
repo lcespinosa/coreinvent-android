@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.data.pojos.Dashboard;
 import com.coresolutions.coreinvent.data.pojos.Year;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.login.LoginActivity;
@@ -65,17 +67,65 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
     private String token;
     private TextView selected_year;
 
+    private TextView sub_asset_count;
+    private TextView sub_asset_value;
+    private TextView sub_last_record;
+
+    private TextView unsub_asset_count;
+    private TextView unsub_asset_value;
+    private TextView unsub_last_record;
+
+    private TextView investment_value;
+
+    private TextView cant_notific;
+
+    private TextView critical;
+    private TextView high;
+    private TextView medium;
+    private TextView low;
+    private TextView none;
+    private TextView risk_level;
+
+    private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+
+        sub_asset_count = findViewById(R.id.sub_asset_count);
+        sub_asset_value = findViewById(R.id.sub_asset_value);
+        sub_last_record = findViewById(R.id.sub_last_record);
+
+        unsub_asset_count = findViewById(R.id.unsub_asset_count);
+        unsub_asset_value = findViewById(R.id.unsub_asset_value);
+        unsub_last_record = findViewById(R.id.unsub_last_record);
+
+        investment_value = findViewById(R.id.investment_value);
+
+        cant_notific = findViewById(R.id.cant_notific);
+
+        critical = findViewById(R.id.critical);
+        high = findViewById(R.id.high);
+        medium = findViewById(R.id.medium);
+        low = findViewById(R.id.low);
+        none = findViewById(R.id.none);
+        risk_level = findViewById(R.id.risk_level);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Cargando datos...");
+        progressDialog.setCancelable(false);
+
 
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory()).get(LoginViewModel.class);
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         token = settings.getString("access_token", "");
         selected_year = findViewById(R.id.selected_year);
-        selected_year.setText(settings.getString("exercise_year", "Seleccione el año"));
+        selected_year.setText(settings.getString("exercise_year_name", "Seleccione el año"));
         session = findViewById(R.id.session);
         dropdown_year = findViewById(R.id.dropdown_year);
         newOperation = findViewById(R.id.newOperation);
@@ -90,6 +140,39 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
             @Override
             public void onChanged(List<Year> years) {
                 yearListAdapter.setYears(years);
+                if (settings.getInt("exercise_year_id", 0) == 0 && years != null) {
+                    dashboardViewModel.getDashboardInfo(token, years.get(0).getId());
+                }
+                progressDialog.dismiss();
+            }
+        });
+
+
+        dashboardViewModel.getDashResult().observe(this, new Observer<Dashboard>() {
+            @Override
+            public void onChanged(Dashboard dashboard) {
+                if (dashboard != null) {
+                    sub_asset_count.setText(String.valueOf(dashboard.getSubscription().getAssetCount()));
+                    sub_asset_value.setText(String.valueOf(dashboard.getSubscription().getAssetValue()));
+                    sub_last_record.setText(dashboard.getSubscription().getLastRecord() != null ? dashboard.getSubscription().getLastRecord().getCode() : "---");
+
+                    unsub_asset_count.setText(String.valueOf(dashboard.getUnsubscriptionInfo().getAssetCount()));
+                    unsub_asset_value.setText(String.valueOf(dashboard.getUnsubscriptionInfo().getAssetValue()));
+                    unsub_last_record.setText(dashboard.getUnsubscriptionInfo().getLastRecord() != null ? dashboard.getUnsubscriptionInfo().getLastRecord().getCode() : "---");
+
+                    investment_value.setText(String.valueOf(dashboard.getInvestments().getInvestmentValue()));
+                    cant_notific.setText(String.valueOf(dashboard.getNotifications().size()));
+
+                    critical.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getCritical()));
+                    high.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getHigh()));
+                    medium.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getMedium()));
+                    low.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getLow()));
+                    none.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getNone()));
+                    risk_level.setText(dashboard.getRisks().getRiskLevel());
+
+                }
+
+                progressDialog.dismiss();
             }
         });
 
@@ -226,14 +309,21 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
     @Override
     public void OnClickListener(Year years, int post) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString("exercise_year", years.getCode());
+        editor.putString("exercise_year_name", years.getName());
+        editor.putInt("exercise_year_id", years.getId());
         editor.commit();
         selected_year.setText(years.getName());
         popUpYear.dismiss();
+        progressDialog.show();
+        dashboardViewModel.getDashboardInfo(token, years.getId());
     }
 
 
     private void update_dashboard() {
+        progressDialog.show();
         dashboardViewModel.getYears(token);
+        if (settings.getInt("exercise_year_id", 0) != 0) {
+            dashboardViewModel.getDashboardInfo(token, settings.getInt("exercise_year_id", 0));
+        }
     }
 }
