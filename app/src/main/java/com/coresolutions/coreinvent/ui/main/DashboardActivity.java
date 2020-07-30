@@ -168,7 +168,24 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
                     medium.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getMedium()));
                     low.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getLow()));
                     none.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getNone()));
-                    risk_level.setText(dashboard.getRisks().getRiskLevel());
+
+                    switch (dashboard.getRisks().getRiskLevel()) {
+                        case "none":
+                            risk_level.setText(R.string.none);
+                            break;
+                        case "low":
+                            risk_level.setText(R.string.low);
+                            break;
+                        case "medium":
+                            risk_level.setText(R.string.medium);
+                            break;
+                        case "high":
+                            risk_level.setText(R.string.high);
+                            break;
+                        case "critical":
+                            risk_level.setText(R.string.critical);
+                            break;
+                    }
 
                 }
 

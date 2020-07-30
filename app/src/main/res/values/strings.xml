@@ -55,4 +55,11 @@
     <string name="tag">Etiqueta</string>
     <string name="virtual_tag">Asignar etiqueta virtual</string>
     <string name="search">Buscar</string>
+
+    <!-- Strings related to risk level -->
+    <string name="none">Ninguno</string>
+    <string name="low">Bajo</string>
+    <string name="medium">Medio</string>
+    <string name="high">Alto</string>
+    <string name="critical">Critico</string>
 </resources>

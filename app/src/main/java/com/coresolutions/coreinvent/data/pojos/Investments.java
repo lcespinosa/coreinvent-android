@@ -9,36 +9,36 @@ public class Investments implements Serializable {
 
     @SerializedName("investment_items")
     @Expose
-    private Integer investmentItems;
+    private Double investmentItems;
     @SerializedName("investment_value")
     @Expose
-    private Integer investmentValue;
+    private Double investmentValue;
     @SerializedName("budget_percent")
     @Expose
-    private Integer budgetPercent;
+    private Double budgetPercent;
     private final static long serialVersionUID = 806661589900496642L;
 
-    public Integer getInvestmentItems() {
+    public Double getInvestmentItems() {
         return investmentItems;
     }
 
-    public void setInvestmentItems(Integer investmentItems) {
+    public void setInvestmentItems(Double investmentItems) {
         this.investmentItems = investmentItems;
     }
 
-    public Integer getInvestmentValue() {
+    public Double getInvestmentValue() {
         return investmentValue;
     }
 
-    public void setInvestmentValue(Integer investmentValue) {
+    public void setInvestmentValue(Double investmentValue) {
         this.investmentValue = investmentValue;
     }
 
-    public Integer getBudgetPercent() {
+    public Double getBudgetPercent() {
         return budgetPercent;
     }
 
-    public void setBudgetPercent(Integer budgetPercent) {
+    public void setBudgetPercent(Double budgetPercent) {
         this.budgetPercent = budgetPercent;
     }
 

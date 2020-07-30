@@ -12,7 +12,7 @@ public class Subscription implements Serializable {
     private Integer assetCount;
     @SerializedName("asset_value")
     @Expose
-    private Integer assetValue;
+    private Double assetValue;
     @SerializedName("last_record")
     @Expose
     private SubscribedAsset lastRecord;
@@ -26,11 +26,11 @@ public class Subscription implements Serializable {
         this.assetCount = assetCount;
     }
 
-    public Integer getAssetValue() {
+    public Double getAssetValue() {
         return assetValue;
     }
 
-    public void setAssetValue(Integer assetValue) {
+    public void setAssetValue(Double assetValue) {
         this.assetValue = assetValue;
     }
 
