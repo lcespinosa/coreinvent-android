@@ -19,7 +19,19 @@
         android:id="@+id/reason_fragment"
         android:name="com.coresolutions.coreinvent.ui.baja.BajaReasonFragment"
         android:label="BajaReason"
-        tools:layout="@layout/fragment_baja_reason" />
+        tools:layout="@layout/fragment_baja_reason" >
+        <action
+            android:id="@+id/action_reason_fragment_to_bajaResultFragment"
+            app:destination="@id/bajaResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bajaResultFragment"
+        android:name="com.coresolutions.coreinvent.ui.baja.BajaResultFragment"
+        android:label="BajaResultFragment">
+        <action
+            android:id="@+id/action_bajaResultFragment_to_tag_fragment"
+            app:destination="@id/tag_fragment" />
+    </fragment>
 
 
 </navigation>

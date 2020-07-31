@@ -34,6 +34,7 @@ import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.baja.BajaActivity;
 import com.coresolutions.coreinvent.ui.login.LoginActivity;
+import com.coresolutions.coreinvent.ui.movement.MovementActivity;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -108,6 +109,7 @@ public class DetailFragment extends DialogFragment {
 
 
     private LinearLayout baja_layout;
+    private LinearLayout movement_layout;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -229,6 +231,7 @@ public class DetailFragment extends DialogFragment {
 
 
         baja_layout = view.findViewById(R.id.baja_layout);
+        movement_layout = view.findViewById(R.id.movement_layout);
 
 //        Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
 //        asset_img.setImageBitmap(bitmap);
@@ -356,6 +359,15 @@ public class DetailFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), BajaActivity.class);
+                i.putExtra("asset", asset);
+                startActivity(i);
+            }
+        });
+
+        movement_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), MovementActivity.class);
                 i.putExtra("asset", asset);
                 startActivity(i);
             }

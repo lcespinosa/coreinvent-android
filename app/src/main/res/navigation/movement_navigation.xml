@@ -20,7 +20,20 @@
         android:id="@+id/movement_location_fragment"
         android:name="com.coresolutions.coreinvent.ui.movement.MovementLocationFragment"
         android:label="MovementLocation"
-        tools:layout="@layout/fragment_movement_location" />
+        tools:layout="@layout/fragment_movement_location" >
+        <action
+            android:id="@+id/action_movement_location_fragment_to_movementResultFragment"
+            app:destination="@id/movementResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movementResultFragment"
+        android:name="com.coresolutions.coreinvent.ui.movement.MovementResultFragment"
+        android:label="MovementResultFragment"
+        tools:layout="@layout/fragment_result">
+        <action
+            android:id="@+id/action_movementResultFragment_to_movement_tag_fragment"
+            app:destination="@id/movement_tag_fragment" />
+    </fragment>
 
 
 </navigation>

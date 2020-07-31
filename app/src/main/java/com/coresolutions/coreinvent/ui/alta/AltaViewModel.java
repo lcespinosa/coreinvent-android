@@ -16,6 +16,7 @@ import com.coresolutions.coreinvent.data.LoginRepository;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
 import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Center;
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
@@ -49,6 +50,7 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<FindAssetPojo> assetResult = new MutableLiveData<>();
     private MutableLiveData<Unsubscription> unsubscriptionResult = new MutableLiveData<>();
     private MutableLiveData<HashMap<String, String>> responseBodyUnsubscription = new MutableLiveData<>();
+    private MutableLiveData<List<Center>> centerResult = new MutableLiveData<>();
 
     public AltaViewModel(@NonNull Application application) {
         super(application);
@@ -65,6 +67,10 @@ public class AltaViewModel extends AndroidViewModel {
 
     public MutableLiveData<HashMap<String, String>> getResponseBodyUnsubscription() {
         return responseBodyUnsubscription;
+    }
+
+    public LiveData<List<Center>> getCenterResult() {
+        return centerResult;
     }
 
     LiveData<List<FieldPojo>> getRegisterResult() {
@@ -246,20 +252,24 @@ public class AltaViewModel extends AndroidViewModel {
         });
     }
 
-    public void getAssetByTag( String token, String tag) {
+    public void getAssetByTag(String token, String tag) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         AltasApi altasApi = retrofit.create(AltasApi.class);
-        Call<FindAssetPojo> asset = altasApi.getAssetsByTag(token, tag );
+        Call<FindAssetPojo> asset = altasApi.getAssetsByTag(token, tag);
         asset.enqueue(new Callback<FindAssetPojo>() {
             @Override
             public void onResponse(Call<FindAssetPojo> call, Response<FindAssetPojo> response) {
                 if (response.isSuccessful()) {
                     FindAssetPojo asset = response.body();
-                    assetResult.setValue(asset);
+                    if (asset.getId() != null) {
+                        assetResult.setValue(asset);
+                    } else {
+                        assetResult.setValue(null);
+                    }
                 }
             }
 
@@ -269,7 +279,6 @@ public class AltaViewModel extends AndroidViewModel {
             }
         });
     }
-
 
 
     public void getUnsubscriptionData(String token) {
@@ -305,6 +314,9 @@ public class AltaViewModel extends AndroidViewModel {
                 .build();
 
 
+//        Gson gson = new Gson();
+//        String json = gson.toJson(unsubscriptionRequestBody);
+
         AltasApi altaApi = retrofit.create(AltasApi.class);
         Call<HashMap<String, String>> family = altaApi.assetUnSubscription(token, unsubscriptionRequestBody);
         family.enqueue(new Callback<HashMap<String, String>>() {
@@ -322,6 +334,31 @@ public class AltaViewModel extends AndroidViewModel {
             }
         });
 
+    }
+
+
+    public void getCenters(String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altasApi = retrofit.create(AltasApi.class);
+        Call<List<Center>> centers = altasApi.getCenters(token);
+        centers.enqueue(new Callback<List<Center>>() {
+            @Override
+            public void onResponse(Call<List<Center>> call, Response<List<Center>> response) {
+                if (response.isSuccessful()) {
+                    List<Center> centerList = response.body();
+                    centerResult.setValue(centerList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Center>> call, Throwable t) {
+                centerResult.setValue(null);
+            }
+        });
     }
 
 

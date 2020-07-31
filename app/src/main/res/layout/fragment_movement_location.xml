@@ -11,69 +11,15 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Ordenador personal / Lenovo / P1432"
-            android:textColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/asset_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:src="@drawable/imagen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_name" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idBienLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Ubicación actual"
-            android:textColorHint="@color/colorText"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            app:boxStrokeColor="@color/secondaryLightVariant"
-            app:endIconTint="@color/colorText"
-            app:hintTextColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/asset_img">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idBien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:inputType="text"
-
-                android:text="Pallars/Planta 5/P180"
-                android:textColor="@color/colorText" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_margin="5dp"
             android:scrollbars="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/checkBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idBienLayout">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <LinearLayout
@@ -83,75 +29,94 @@
 
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <TextView
+                    android:id="@+id/asset_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="Ordenador personal / Lenovo / P1432"
+                    android:textColor="@color/onBackground" />
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                <ImageView
+                    android:id="@+id/asset_img"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/imagen" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/centerLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:hint="Centro"
-                    android:textColorHint="@color/colorText"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground">
+                    android:layout_margin="5dp"
+                    android:hint="@string/center"
+                    app:boxBackgroundColor="@color/overBackground">
 
                     <AutoCompleteTextView
                         android:id="@+id/center_dropdown"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:id="@+id/edificeLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:hint="Nivel"
-                    android:textColorHint="@color/colorText"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground">
+                    android:layout_margin="5dp"
+                    android:hint="@string/edifice"
+                    app:boxBackgroundColor="@color/overBackground">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edifice_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/onBackground" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/levelLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/level"
+                    app:boxBackgroundColor="@color/overBackground">
 
                     <AutoCompleteTextView
                         android:id="@+id/level_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:id="@+id/spaceLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:hint="Espacio"
-                    android:textColorHint="@color/colorText"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxStrokeColor="@color/secondaryLightVariant"
-                    app:endIconTint="@color/colorText"
-                    app:hintTextColor="@color/onBackground"
+                    android:layout_margin="5dp"
+                    android:hint="@string/space"
+                    app:boxBackgroundColor="@color/overBackground"
                     app:startIconDrawable="@drawable/ic_codigo_qr_24"
-                    app:startIconTintMode="screen">
+                    app:startIconTint="@color/secondaryLightVariant">
 
                     <AutoCompleteTextView
                         android:id="@+id/space_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:textColor="@color/onBackground" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -165,27 +130,58 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notificar incidencia"
             android:buttonTint="@color/secondaryLightVariant"
+            android:text="Notificar incidencia"
             android:textColor="@color/onBackground"
-            app:useMaterialThemeColors="false"
-            app:layout_constraintBottom_toTopOf="@+id/materialButton"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:useMaterialThemeColors="false" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/primary_20"
-            android:text="Registrar operación"
-            android:textColor="@color/onBackground"
-            app:cornerRadius="20dp"
+            android:background="@color/secondaryDarkVariant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/back_img"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="5dp"
+                android:tint="@color/secondaryLightVariant"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add_circle_outline_24px" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Traslado de bienes"
+                android:textColor="@color/onBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/forward_img"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="5dp"
+                android:tint="@color/secondaryLightVariant"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_edit_location_black_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,7 @@ import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.login.LoginActivity;
 import com.coresolutions.coreinvent.ui.login.LoginViewModel;
 import com.coresolutions.coreinvent.ui.login.LoginViewModelFactory;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -88,12 +89,16 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
 
     private ProgressDialog progressDialog;
 
+    private MaterialCardView cardViewInventory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
+        cardViewInventory = findViewById(R.id.cardViewInventory);
 
         sub_asset_count = findViewById(R.id.sub_asset_count);
         sub_asset_value = findViewById(R.id.sub_asset_value);
@@ -147,6 +152,13 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
             }
         });
 
+        cardViewInventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DashboardActivity.this, SearchActivity.class);
+                startActivity(i);
+            }
+        });
 
         dashboardViewModel.getDashResult().observe(this, new Observer<Dashboard>() {
             @Override
@@ -320,7 +332,7 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
         });
 
 
-        update_dashboard();
+//        update_dashboard();
     }
 
     @Override
@@ -342,5 +354,11 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
         if (settings.getInt("exercise_year_id", 0) != 0) {
             dashboardViewModel.getDashboardInfo(token, settings.getInt("exercise_year_id", 0));
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        update_dashboard();
     }
 }

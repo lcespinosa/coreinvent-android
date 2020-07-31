@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,6 +34,8 @@ public class TagFragment extends Fragment {
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
     private ProgressDialog progressDialog;
+    private TextInputLayout realTag;
+    private String token;
 
     public TagFragment() {
         // Required empty public constructor
@@ -47,16 +51,15 @@ public class TagFragment extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
-
+        token = settings.getString("access_token", "");
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Cargando datos...");
         progressDialog.setCancelable(false);
-
 
 
         altaViewModel.getUnsubscriptionResult().observe(this, new Observer<Unsubscription>() {
@@ -68,6 +71,7 @@ public class TagFragment extends Fragment {
 
         back_img = view.findViewById(R.id.back_img);
         forward_img = view.findViewById(R.id.forward_img);
+        realTag = view.findViewById(R.id.realTag);
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +83,26 @@ public class TagFragment extends Fragment {
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_tag_fragment_to_reason_fragment);
+                String tag = realTag.getEditText().getText().toString();
+                if (!tag.equals("")) {
+                    altaViewModel.getAssetByTag(token, tag);
+                } else {
+                    Toast.makeText(getContext(), "Debe introducir una etiqueta para continuar.", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        altaViewModel.getAssetResult().observe(this, new Observer<FindAssetPojo>() {
+            @Override
+            public void onChanged(FindAssetPojo findAssetPojo) {
+                if (findAssetPojo != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("asset", findAssetPojo);
+                    Navigation.findNavController(view).navigate(R.id.action_tag_fragment_to_reason_fragment, bundle);
+                } else {
+                    Toast.makeText(getContext(), "No existe ningún bien en inventario con esa etiqueta", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

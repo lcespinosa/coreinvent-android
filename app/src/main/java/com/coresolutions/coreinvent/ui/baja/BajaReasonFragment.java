@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,7 +76,7 @@ public class BajaReasonFragment extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -101,7 +102,6 @@ public class BajaReasonFragment extends Fragment {
             @Override
             public void onChanged(Unsubscription unsubscription) {
                 baja_reason.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, unsubscription.getUnsubscriptionVars()));
-                progressDialog.dismiss();
             }
         });
 
@@ -147,8 +147,17 @@ public class BajaReasonFragment extends Fragment {
         altaViewModel.getResponseBodyUnsubscription().observe(this, new Observer<HashMap<String, String>>() {
             @Override
             public void onChanged(HashMap<String, String> hashMap) {
-                if(hashMap!= null){
-                    getActivity().onBackPressed();
+                if (hashMap != null) {
+                    Bundle bundle = new Bundle();
+                    if (hashMap.containsKey("errors")) {
+                        Toast.makeText(getContext(), hashMap.get("errors"), Toast.LENGTH_LONG).show();
+                    } else {
+                        bundle.putString("result", "Operación realizada correctamente");
+                        progressDialog.dismiss();
+                        Navigation.findNavController(view).navigate(R.id.action_reason_fragment_to_bajaResultFragment, bundle);
+                    }
+
+
                 }
             }
         });

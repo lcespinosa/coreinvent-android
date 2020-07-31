@@ -1,6 +1,7 @@
 package com.coresolutions.coreinvent.data.interfaces;
 
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Center;
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
@@ -51,5 +52,8 @@ public interface AltasApi {
 
     @GET("assets/find/tag/{tag}")
     Call<FindAssetPojo> getAssetsByTag(@Header("authorization") String token, @Path("tag") String tag);
+
+    @GET("nomenclature/centers")
+    Call<List<Center>> getCenters(@Header("authorization") String token);
 
 }
