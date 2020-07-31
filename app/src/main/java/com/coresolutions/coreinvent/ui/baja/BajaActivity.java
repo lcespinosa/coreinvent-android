@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.baja;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import androidx.navigation.Navigation;
 
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.ui.alta.AltaActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class BajaActivity extends AppCompatActivity {
 
@@ -28,5 +31,23 @@ public class BajaActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        new MaterialAlertDialogBuilder(BajaActivity.this)
+                .setTitle("Confirmación")
+                .setMessage("¿Realmente desea descartar los cambios?")
+                .setBackground(getDrawable(R.color.overBackground))
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Descartar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        BajaActivity.super.onBackPressed();
+                    }
+                }).show();
+    }
 }

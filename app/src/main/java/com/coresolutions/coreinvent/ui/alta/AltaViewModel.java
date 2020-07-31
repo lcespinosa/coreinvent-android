@@ -21,6 +21,7 @@ import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
+import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -38,7 +39,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.os.Debug.waitForDebugger;
 
 public class AltaViewModel extends AndroidViewModel {
 
@@ -48,6 +48,7 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
     private MutableLiveData<FindAssetPojo> assetResult = new MutableLiveData<>();
     private MutableLiveData<Unsubscription> unsubscriptionResult = new MutableLiveData<>();
+    private MutableLiveData<HashMap<String, String>> responseBodyUnsubscription = new MutableLiveData<>();
 
     public AltaViewModel(@NonNull Application application) {
         super(application);
@@ -60,6 +61,10 @@ public class AltaViewModel extends AndroidViewModel {
 
     public LiveData<Unsubscription> getUnsubscriptionResult() {
         return unsubscriptionResult;
+    }
+
+    public MutableLiveData<HashMap<String, String>> getResponseBodyUnsubscription() {
+        return responseBodyUnsubscription;
     }
 
     LiveData<List<FieldPojo>> getRegisterResult() {
@@ -241,6 +246,31 @@ public class AltaViewModel extends AndroidViewModel {
         });
     }
 
+    public void getAssetByTag( String token, String tag) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AltasApi altasApi = retrofit.create(AltasApi.class);
+        Call<FindAssetPojo> asset = altasApi.getAssetsByTag(token, tag );
+        asset.enqueue(new Callback<FindAssetPojo>() {
+            @Override
+            public void onResponse(Call<FindAssetPojo> call, Response<FindAssetPojo> response) {
+                if (response.isSuccessful()) {
+                    FindAssetPojo asset = response.body();
+                    assetResult.setValue(asset);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FindAssetPojo> call, Throwable t) {
+                assetResult.setValue(null);
+            }
+        });
+    }
+
+
 
     public void getUnsubscriptionData(String token) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -262,7 +292,33 @@ public class AltaViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<Unsubscription> call, Throwable t) {
-                familyResult.setValue(null);
+                unsubscriptionResult.setValue(null);
+            }
+        });
+
+    }
+
+    public void assetUnSubscription(String token, UnsubscriptionRequestBody unsubscriptionRequestBody) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+        Call<HashMap<String, String>> family = altaApi.assetUnSubscription(token, unsubscriptionRequestBody);
+        family.enqueue(new Callback<HashMap<String, String>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                if (response.isSuccessful()) {
+                    HashMap<String, String> responseBody = response.body();
+                    responseBodyUnsubscription.setValue(responseBody);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                responseBodyUnsubscription.setValue(null);
             }
         });
 

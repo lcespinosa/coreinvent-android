@@ -29,7 +29,6 @@ import com.google.android.material.textfield.TextInputLayout;
 public class TagFragment extends Fragment {
     private ImageView back_img;
     private ImageView forward_img;
-    private AutoCompleteTextView madeupTag;
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
     private ProgressDialog progressDialog;
@@ -57,16 +56,13 @@ public class TagFragment extends Fragment {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Cargando datos...");
         progressDialog.setCancelable(false);
-        progressDialog.show();
 
-        madeupTag = view.findViewById(R.id.madeupTag);
 
 
         altaViewModel.getUnsubscriptionResult().observe(this, new Observer<Unsubscription>() {
             @Override
             public void onChanged(Unsubscription unsubscription) {
-                madeupTag.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, unsubscription.getMadeupTags()));
-                progressDialog.dismiss();
+
             }
         });
 

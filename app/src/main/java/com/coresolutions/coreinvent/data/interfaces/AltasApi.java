@@ -6,12 +6,15 @@ import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
+import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -42,5 +45,11 @@ public interface AltasApi {
 
     @GET("operations/unsubscription/open")
     Call<Unsubscription> getUnsubscriptionData(@Header("authorization") String token);
+
+    @POST("operations/unsubscription/close")
+    Call<HashMap<String, String>> assetUnSubscription(@Header("authorization") String token, @Body UnsubscriptionRequestBody unsubscriptionRequestBody);
+
+    @GET("assets/find/tag/{tag}")
+    Call<FindAssetPojo> getAssetsByTag(@Header("authorization") String token, @Path("tag") String tag);
 
 }

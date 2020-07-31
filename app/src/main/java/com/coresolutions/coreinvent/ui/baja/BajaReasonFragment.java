@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -27,12 +28,19 @@ import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.data.pojos.Type;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
+import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
 import com.coresolutions.coreinvent.data.pojos.UnsubscriptionVar;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.main.DetailFragment;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.ResponseBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,11 +50,16 @@ public class BajaReasonFragment extends Fragment {
     private FindAssetPojo asset;
     private UnsubscriptionVar unsubscriptionVar;
     private ImageView asset_img;
+    private ImageView baja_buttom;
+    private ImageView back_img;
     private TextView asset_text;
     private AutoCompleteTextView baja_reason;
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
     private ProgressDialog progressDialog;
+    private List<Integer> notifyUsers;
+    private String notifyText;
+    private String token;
 
     public BajaReasonFragment() {
         // Required empty public constructor
@@ -68,15 +81,21 @@ public class BajaReasonFragment extends Fragment {
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
 
+        token = settings.getString("access_token", "");
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Cargando datos...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        notifyUsers = new ArrayList<>();
+        notifyText = "";
         asset_img = view.findViewById(R.id.asset_img);
         asset_text = view.findViewById(R.id.asset_text);
         baja_reason = view.findViewById(R.id.baja_reason);
+        baja_buttom = view.findViewById(R.id.baja_buttom);
+        back_img = view.findViewById(R.id.back_img);
 
         altaViewModel.getUnsubscriptionResult().observe(this, new Observer<Unsubscription>() {
             @Override
@@ -102,6 +121,37 @@ public class BajaReasonFragment extends Fragment {
             asset_text.setText(asset.getType().getName());
 
         }
+        baja_reason.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                unsubscriptionVar = (UnsubscriptionVar) baja_reason.getAdapter().getItem(position);
+            }
+        });
+
+        back_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        baja_buttom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.show();
+                UnsubscriptionRequestBody unsubscriptionRequestBody = new UnsubscriptionRequestBody(String.valueOf(asset.getId()), String.valueOf(unsubscriptionVar.getId()), notifyUsers, notifyText);
+                altaViewModel.assetUnSubscription(token, unsubscriptionRequestBody);
+            }
+        });
+
+        altaViewModel.getResponseBodyUnsubscription().observe(this, new Observer<HashMap<String, String>>() {
+            @Override
+            public void onChanged(HashMap<String, String> hashMap) {
+                if(hashMap!= null){
+                    getActivity().onBackPressed();
+                }
+            }
+        });
 
 
     }

@@ -29,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-
                 android:hint="Etiqueta física"
                 app:boxBackgroundColor="@color/overBackground"
                 app:endIconDrawable="@drawable/ic_codigo_qr_24"
@@ -53,23 +52,7 @@
                 android:text="O"
                 android:textColor="@color/onBackground" />
 
-            <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Etiqueta virtual"
-                app:boxBackgroundColor="@color/overBackground"
-                app:endIconTint="@color/colorText">
-
-                <AutoCompleteTextView
-                    android:id="@+id/madeupTag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/onBackground" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>

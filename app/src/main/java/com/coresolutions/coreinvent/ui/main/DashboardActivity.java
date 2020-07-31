@@ -198,7 +198,7 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
         close_seccion_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String token = settings.getString("token", "");
+                String token = settings.getString("access_token", "");
                 loginViewModel.logout(token).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
