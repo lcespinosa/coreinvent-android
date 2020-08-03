@@ -16,6 +16,8 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import android.widget.TextView;
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.ui.movement.MovementLocationFragment;
+import com.coresolutions.coreinvent.ui.movement.NotificationFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +35,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConfimationFragment extends Fragment {
+public class ConfimationFragment extends Fragment implements NotificationFragment.OnClickListener, NotificationFragment.OnCloseListener {
 
     private ImageView back_img;
     private ImageView forward_img;
@@ -93,6 +97,9 @@ public class ConfimationFragment extends Fragment {
     private LinearLayout description_layout;
     private TextView description;
 
+    private CheckBox notificationCheckBox;
+    private String token;
+
     public ConfimationFragment() {
         // Required empty public constructor
     }
@@ -115,6 +122,9 @@ public class ConfimationFragment extends Fragment {
         selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
         fieldPojoArrayList = (ArrayList<FieldPojo>) getArguments().getSerializable("fieldPojos");
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
+        token = settings.getString("access_token", "");
+
+        notificationCheckBox = view.findViewById(R.id.notificationCheckBox);
 
 
         tag_code = view.findViewById(R.id.tag_code);
@@ -168,6 +178,20 @@ public class ConfimationFragment extends Fragment {
         description_layout = view.findViewById(R.id.description_layout);
         description = view.findViewById(R.id.description);
         asset_img = view.findViewById(R.id.asset_img);
+
+
+        notificationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NotificationFragment notificationFragment = new NotificationFragment(token, ConfimationFragment.this, ConfimationFragment.this);
+                    notificationFragment.show(getFragmentManager(), "notification");
+                } else {
+                    assetPojo.clearNotification();
+                }
+            }
+        });
+
 
         if (assetPojo.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(assetPojo.getImage().getAbsolutePath());
@@ -286,4 +310,15 @@ public class ConfimationFragment extends Fragment {
         });
     }
 
+    @Override
+    public void OnClickListener(int user_id, String description) {
+        assetPojo.addNotifyUser(user_id);
+        assetPojo.setNotifyText(description);
+
+    }
+
+    @Override
+    public void OnCloseListener() {
+        notificationCheckBox.setChecked(false);
+    }
 }

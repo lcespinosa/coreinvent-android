@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,8 @@ import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
 import com.coresolutions.coreinvent.data.pojos.UnsubscriptionVar;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.main.DetailFragment;
+import com.coresolutions.coreinvent.ui.movement.MovementLocationFragment;
+import com.coresolutions.coreinvent.ui.movement.NotificationFragment;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -46,7 +50,7 @@ import okhttp3.ResponseBody;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BajaReasonFragment extends Fragment {
+public class BajaReasonFragment extends Fragment implements NotificationFragment.OnClickListener, NotificationFragment.OnCloseListener {
 
     private FindAssetPojo asset;
     private UnsubscriptionVar unsubscriptionVar;
@@ -61,6 +65,7 @@ public class BajaReasonFragment extends Fragment {
     private List<Integer> notifyUsers;
     private String notifyText;
     private String token;
+    private CheckBox notificationCheckBox;
 
     public BajaReasonFragment() {
         // Required empty public constructor
@@ -90,6 +95,8 @@ public class BajaReasonFragment extends Fragment {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        notificationCheckBox = view.findViewById(R.id.notificationCheckBox);
+
         notifyUsers = new ArrayList<>();
         notifyText = "";
         asset_img = view.findViewById(R.id.asset_img);
@@ -102,6 +109,20 @@ public class BajaReasonFragment extends Fragment {
             @Override
             public void onChanged(Unsubscription unsubscription) {
                 baja_reason.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, unsubscription.getUnsubscriptionVars()));
+            }
+        });
+
+
+        notificationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NotificationFragment notificationFragment = new NotificationFragment(token, BajaReasonFragment.this, BajaReasonFragment.this);
+                    notificationFragment.show(getFragmentManager(), "notification");
+                } else {
+                    notifyUsers.clear();
+                    notifyText = "";
+                }
             }
         });
 
@@ -163,6 +184,18 @@ public class BajaReasonFragment extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void OnClickListener(int user_id, String description) {
+        notifyUsers.add(user_id);
+        notifyText = description;
+
+    }
+
+    @Override
+    public void OnCloseListener() {
+        notificationCheckBox.setChecked(false);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

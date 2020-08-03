@@ -61,5 +61,7 @@
     <string name="low">Bajo</string>
     <string name="medium">Medio</string>
     <string name="high">Alto</string>
-    <string name="critical">Critico</string>
+    <string name="critical">Crítico</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

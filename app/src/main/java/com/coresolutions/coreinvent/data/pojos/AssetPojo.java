@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -91,11 +93,43 @@ public class AssetPojo implements Serializable {
     private String observations;
     @Expose(deserialize = false, serialize = false)
     private File image;
+    @SerializedName("notify_users")
+    @Expose
+    private List<Integer> notifyUsers = null;
+    @SerializedName("notify_text")
+    @Expose
+    private String notifyText;
     private final static long serialVersionUID = 6673953449430446904L;
 
     public AssetPojo() {
+        notifyUsers = new ArrayList<>();
     }
 
+
+    public List<Integer> getNotifyUsers() {
+        return notifyUsers;
+    }
+
+    public void setNotifyUsers(List<Integer> notifyUsers) {
+        this.notifyUsers = notifyUsers;
+    }
+
+    public String getNotifyText() {
+        return notifyText;
+    }
+
+    public void addNotifyUser(int userId) {
+        this.notifyUsers.add(userId);
+    }
+
+    public void clearNotification() {
+        this.notifyUsers.clear();
+        this.notifyText = "";
+    }
+
+    public void setNotifyText(String notifyText) {
+        this.notifyText = notifyText;
+    }
 
     public File getImage() {
         return image;

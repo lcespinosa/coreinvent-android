@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.github.jkwiecien:EasyImage:3.0.4'
     implementation 'io.alterac.blurkit:blurkit:1.0.0'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61'
+    implementation 'android.arch.paging:runtime:1.0.1'
 
 
 }

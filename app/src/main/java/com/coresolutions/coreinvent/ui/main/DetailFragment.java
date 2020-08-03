@@ -358,6 +358,7 @@ public class DetailFragment extends DialogFragment {
         baja_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 Intent i = new Intent(getContext(), BajaActivity.class);
                 i.putExtra("asset", asset);
                 startActivity(i);
@@ -367,6 +368,7 @@ public class DetailFragment extends DialogFragment {
         movement_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 Intent i = new Intent(getContext(), MovementActivity.class);
                 i.putExtra("asset", asset);
                 startActivity(i);

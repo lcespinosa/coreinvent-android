@@ -23,6 +23,7 @@ import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
+import com.coresolutions.coreinvent.ui.movement.MovementLocationFragment;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -165,31 +166,37 @@ public class AltaViewModel extends AndroidViewModel {
 
         Map<String, String> map = gson.fromJson(json, Map.class);
         map.remove("image");
+        map.remove("notify_users");
         HashMap<String, RequestBody> maps = new HashMap<>();
 
         for (Map.Entry<String, String> entry : map.entrySet()) {
             maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue()));
         }
+//        maps.put("notify_users", RequestBody.create(MediaType.parse("multipart/form-data"), gson.toJson(assetPojo.getNotifyUsers())));
         List<MultipartBody.Part> parts = new ArrayList<>();
         if (assetPojo.getImage() != null) {
             // Create a request body with file and image media type
             RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), assetPojo.getImage());
             // Create MultipartBody.Part using file request-body,file name and part name
             MultipartBody.Part part = MultipartBody.Part.createFormData("images[]", assetPojo.getImage().getName(), fileReqBody);
+//            MultipartBody.Part part1 = MultipartBody.Part.createFormData("notify_users", gson.toJson(assetPojo.getNotifyUsers()));
 
             parts.add(part);
+//            parts.add(part1);
         }
-
-        Call<AssetPojo> family = altaApi.assetSubscription(token, maps, parts);
-        family.enqueue(new Callback<AssetPojo>() {
+        //  Integer[] myArray = new Integer[assetPojo.getNotifyUsers().size()];
+        //, assetPojo.getNotifyUsers().toArray(myArray)
+        Call<HashMap<String, String>> family = altaApi.assetSubscription(token, maps, parts);
+        family.enqueue(new Callback<HashMap<String, String>>() {
             @Override
-            public void onResponse(Call<AssetPojo> call, Response<AssetPojo> response) {
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
 //                waitForDebugger();
+                HashMap<String, String> hashMap = response.body();
                 subscriptionResult.setValue(response.code());
             }
 
             @Override
-            public void onFailure(Call<AssetPojo> call, Throwable t) {
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
 //                waitForDebugger();
                 subscriptionResult.setValue(null);
             }
@@ -359,6 +366,35 @@ public class AltaViewModel extends AndroidViewModel {
                 centerResult.setValue(null);
             }
         });
+    }
+
+    public void assetMovement(String token, MovementLocationFragment.MovementRequestBody movementRequestBody) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+//        Gson gson = new Gson();
+//        String json = gson.toJson(unsubscriptionRequestBody);
+
+        AltasApi altaApi = retrofit.create(AltasApi.class);
+        Call<HashMap<String, String>> movementResponse = altaApi.assetMovement(token, movementRequestBody);
+        movementResponse.enqueue(new Callback<HashMap<String, String>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                if (response.isSuccessful()) {
+                    HashMap<String, String> responseBody = response.body();
+                    responseBodyUnsubscription.setValue(responseBody);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                responseBodyUnsubscription.setValue(null);
+            }
+        });
+
     }
 
 

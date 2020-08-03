@@ -8,7 +8,9 @@ import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
+import com.coresolutions.coreinvent.ui.movement.MovementLocationFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface AltasApi {
 
@@ -34,9 +37,12 @@ public interface AltasApi {
     @GET("operations/subscription/open/{subfamily}")
     Call<List<FieldPojo>> getFields(@Path("subfamily") int subfamilyid, @Header("authorization") String token);
 
+
+    //, @Part("notify_users") Integer[] notify_users
+
     @Multipart
     @POST("operations/subscription/close")
-    Call<AssetPojo> assetSubscription(@Header("authorization") String token, @PartMap() Map<String, RequestBody> partMap, @Part List<MultipartBody.Part> images);
+    Call<HashMap<String, String>> assetSubscription(@Header("authorization") String token, @PartMap() Map<String, RequestBody> partMap, @Part List<MultipartBody.Part> images);
 
     @POST("assets/search")
     Call<List<FindAssetPojo>> findAsset(@Header("authorization") String token, @Body Search search);
@@ -55,5 +61,8 @@ public interface AltasApi {
 
     @GET("nomenclature/centers")
     Call<List<Center>> getCenters(@Header("authorization") String token);
+
+    @POST("operations/location/close")
+    Call<HashMap<String, String>> assetMovement(@Header("authorization") String token, @Body MovementLocationFragment.MovementRequestBody movementRequestBody);
 
 }

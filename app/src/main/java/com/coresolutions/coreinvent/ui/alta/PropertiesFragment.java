@@ -13,12 +13,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 
@@ -31,6 +33,7 @@ import com.coresolutions.coreinvent.data.pojos.Level;
 import com.coresolutions.coreinvent.data.pojos.OptionPojo;
 import com.coresolutions.coreinvent.data.pojos.Space;
 import com.coresolutions.coreinvent.data.pojos.Tag;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -88,8 +91,9 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
     private TextInputLayout spaceLayout;
     private AutoCompleteTextView space_dropdown;
 
+    private SwitchMaterial virtualTagSwitch;
+
     private TextInputLayout realTagLayout;
-    private TextInputLayout virtualTagLayout;
     private String typeTag;
     private AltaViewModel altaViewModel;
     private ProgressDialog progressDialog;
@@ -179,6 +183,8 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
         altaViewModel.getFields(subfamily, settings.getString("access_token", ""));
 
+        virtualTagSwitch = view.findViewById(R.id.virtualTagSwitch);
+
         brandLayout = view.findViewById(R.id.brandLayout);
         modelLayout = view.findViewById(R.id.modelLayout);
         serieLayout = view.findViewById(R.id.serieLayout);
@@ -218,30 +224,23 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         space_dropdown = view.findViewById(R.id.space_dropdown);
 
         realTagLayout = view.findViewById(R.id.realTagLayout);
-        virtualTagLayout = view.findViewById(R.id.virtualTagLayout);
         typeTag = "real";
 
-        virtualTagLayout.getEditText().setEnabled(false);
 
-        virtualTagLayout.setEndIconOnClickListener(new View.OnClickListener() {
+
+        virtualTagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (virtualTagLayout.isEndIconCheckable()) {
-                    virtualTagLayout.setEndIconCheckable(false);
-                    virtualTagLayout.setEndIconDrawable(R.drawable.ic_baseline_check_circle_24);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     typeTag = "madeup";
-                    virtualTagLayout.getEditText().setText(findFirstVirtualTag(fieldPojoArrayList));
                     realTagLayout.getEditText().setText("");
                     realTagLayout.getEditText().setEnabled(false);
-                    virtualTagLayout.requestFocus();
+                    centerLayout.requestFocus();
                 } else {
-                    virtualTagLayout.setEndIconCheckable(true);
-                    virtualTagLayout.setEndIconDrawable(R.drawable.ic_baseline_radio_button_unchecked_24);
                     typeTag = "real";
                     realTagLayout.requestFocus();
                     realTagLayout.getEditText().setEnabled(true);
                     realTagLayout.getEditText().setText("");
-                    virtualTagLayout.getEditText().setText("");
                 }
             }
         });
@@ -335,9 +334,9 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tagcode = typeTag.equals("real") ? realTagLayout.getEditText().getText().toString() : virtualTagLayout.getEditText().getText().toString();
+                String tagcode = typeTag.equals("real") ? realTagLayout.getEditText().getText().toString() : "";
                 int tagId = findIdTag(fieldPojoArrayList, tagcode, typeTag);
-                if (tagId != -1) {
+                if (tagId != -1 || typeTag.equals("madeup")) {
                     Bundle bundle = new Bundle();
                     int subfamily = getArguments().getInt("subfamily");
                     HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");

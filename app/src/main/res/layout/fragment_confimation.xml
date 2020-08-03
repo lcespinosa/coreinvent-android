@@ -82,10 +82,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -96,8 +96,8 @@
                                 android:id="@+id/type"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Servidor"
                                 android:alpha="0.4"
+                                android:text="Servidor"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -118,10 +118,10 @@
                         android:id="@+id/brand_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -172,10 +172,10 @@
                         android:id="@+id/location_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -209,7 +209,6 @@
                                 android:textColor="@color/onBackground" />
 
 
-
                         </LinearLayout>
 
                         <View
@@ -221,14 +220,15 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/brand" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/location2_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -277,10 +277,10 @@
                         android:id="@+id/characteristics_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -291,8 +291,8 @@
                                 android:id="@+id/characteristics"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Características"
                                 android:alpha="0.4"
+                                android:text="Características"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -313,10 +313,10 @@
                         android:id="@+id/serie_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -327,8 +327,8 @@
                                 android:id="@+id/serie"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Número de serie"
                                 android:alpha="0.4"
+                                android:text="Número de serie"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -349,10 +349,10 @@
                         android:id="@+id/measures_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -363,8 +363,8 @@
                                 android:id="@+id/measures"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Dimensiones"
                                 android:alpha="0.4"
+                                android:text="Dimensiones"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -385,10 +385,10 @@
                         android:id="@+id/frameNumber_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -399,8 +399,8 @@
                                 android:id="@+id/frameNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Número factura proveedor"
                                 android:alpha="0.4"
+                                android:text="Número factura proveedor"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -421,10 +421,10 @@
                         android:id="@+id/plate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -435,8 +435,8 @@
                                 android:id="@+id/plate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Matrícula"
                                 android:alpha="0.4"
+                                android:text="Matrícula"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -457,10 +457,10 @@
                         android:id="@+id/postalCode_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -471,8 +471,8 @@
                                 android:id="@+id/postalCode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Código postal"
                                 android:alpha="0.4"
+                                android:text="Código postal"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -493,10 +493,10 @@
                         android:id="@+id/address_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -507,8 +507,8 @@
                                 android:id="@+id/address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/address"
                                 android:alpha="0.4"
+                                android:text="@string/address"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -529,10 +529,10 @@
                         android:id="@+id/surface_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -543,8 +543,8 @@
                                 android:id="@+id/surface"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Superficie"
                                 android:alpha="0.4"
+                                android:text="Superficie"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -565,10 +565,10 @@
                         android:id="@+id/length_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -579,8 +579,8 @@
                                 android:id="@+id/length"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Longitud"
                                 android:alpha="0.4"
+                                android:text="Longitud"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -601,10 +601,10 @@
                         android:id="@+id/area_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -615,8 +615,8 @@
                                 android:id="@+id/area"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Área"
                                 android:alpha="0.4"
+                                android:text="Área"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -637,10 +637,10 @@
                         android:id="@+id/inUseDate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -651,8 +651,8 @@
                                 android:id="@+id/inUseDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/in_use_date"
                                 android:alpha="0.4"
+                                android:text="@string/in_use_date"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -673,10 +673,10 @@
                         android:id="@+id/description_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -687,8 +687,8 @@
                                 android:id="@+id/description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/description"
                                 android:alpha="0.4"
+                                android:text="@string/description"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -703,6 +703,16 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/brand" />
+
+
+                        <CheckBox
+                            android:id="@+id/notificationCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:buttonTint="@color/secondaryLightVariant"
+                            android:text="Notificar incidencia"
+                            android:textColor="@color/onBackground" />
                     </LinearLayout>
 
                 </LinearLayout>

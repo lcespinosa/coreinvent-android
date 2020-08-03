@@ -9,18 +9,24 @@ import android.util.Patterns;
 
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
+import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.interfaces.LoginApi;
 import com.coresolutions.coreinvent.data.model.LoggedInUser;
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.data.pojos.User;
+import com.coresolutions.coreinvent.data.pojos.Year;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.os.Debug.waitForDebugger;
@@ -29,6 +35,7 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private MutableLiveData<List<User>> userResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     LoginViewModel(LoginRepository loginRepository) {
@@ -41,6 +48,10 @@ public class LoginViewModel extends ViewModel {
 
     LiveData<LoginResult> getLoginResult() {
         return loginResult;
+    }
+
+    public LiveData<List<User>> getUserResult() {
+        return userResult;
     }
 
     public void login(String username, String password, final SharedPreferences settings) {
@@ -108,6 +119,33 @@ public class LoginViewModel extends ViewModel {
         return loginApi.logoutUser("token " + token);
     }
 
+
+    public void getAllUsers(String token) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        LoginApi loginApi = retrofit.create(LoginApi.class);
+        Call<List<User>> allUser = loginApi.getAllUser(token);
+        allUser.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> yearList = response.body();
+                    userResult.setValue(yearList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                userResult.setValue(null);
+            }
+        });
+    }
+
+
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
             loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
@@ -117,6 +155,7 @@ public class LoginViewModel extends ViewModel {
             loginFormState.setValue(new LoginFormState(true));
         }
     }
+
 
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {

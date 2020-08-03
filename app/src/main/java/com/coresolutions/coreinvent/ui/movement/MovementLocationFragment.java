@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,17 +33,23 @@ import com.coresolutions.coreinvent.data.pojos.Center;
 import com.coresolutions.coreinvent.data.pojos.Edifice;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Level;
+import com.coresolutions.coreinvent.data.pojos.Notification;
 import com.coresolutions.coreinvent.data.pojos.Space;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.baja.BajaReasonFragment;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.InputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovementLocationFragment extends Fragment {
+public class MovementLocationFragment extends Fragment implements NotificationFragment.OnClickListener, NotificationFragment.OnCloseListener {
 
     private FindAssetPojo asset;
     private ImageView asset_img;
@@ -57,6 +66,8 @@ public class MovementLocationFragment extends Fragment {
     private AutoCompleteTextView space_dropdown;
 
     private String token;
+    private MovementRequestBody movementRequestBody;
+    private CheckBox notificationCheckBox;
 
     public MovementLocationFragment() {
         // Required empty public constructor
@@ -72,7 +83,7 @@ public class MovementLocationFragment extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
@@ -88,15 +99,20 @@ public class MovementLocationFragment extends Fragment {
         level_dropdown = view.findViewById(R.id.level_dropdown);
         space_dropdown = view.findViewById(R.id.space_dropdown);
 
+        notificationCheckBox = view.findViewById(R.id.notificationCheckBox);
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("Cargando datos...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        movementRequestBody = new MovementRequestBody();
+
 
         if (getArguments().getSerializable("asset") != null) {
             asset = (FindAssetPojo) getArguments().getSerializable("asset");
+            movementRequestBody.setAssetId(asset.getId());
         }
 
         if (asset != null) {
@@ -112,10 +128,37 @@ public class MovementLocationFragment extends Fragment {
             }
         });
 
+        notificationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NotificationFragment notificationFragment = new NotificationFragment(token, MovementLocationFragment.this, MovementLocationFragment.this);
+                    notificationFragment.show(getFragmentManager(), "notification");
+                } else {
+                    movementRequestBody.clearNotification();
+                }
+            }
+        });
+
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                progressDialog.show();
+                altaViewModel.assetMovement(token, movementRequestBody);
+            }
+        });
+
+        altaViewModel.getResponseBodyUnsubscription().observe(this, new Observer<HashMap<String, String>>() {
+            @Override
+            public void onChanged(HashMap<String, String> responseHashMap) {
+                progressDialog.dismiss();
+                if (!responseHashMap.containsKey("errors")) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", "Registro de traslado guardado con éxito");
+                    Navigation.findNavController(view).navigate(R.id.action_movement_location_fragment_to_movementResultFragment, bundle);
+                } else {
+                    Toast.makeText(getContext(), responseHashMap.get("errors"), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -124,7 +167,7 @@ public class MovementLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Center center = (Center) center_dropdown.getAdapter().getItem(position);
-//                assetPojo.setCenter(String.valueOf(optionPojo.getId()));
+                movementRequestBody.setCenter(center.getId());
                 edifice_dropdown.clearListSelection();
                 edifice_dropdown.setText("");
                 level_dropdown.clearListSelection();
@@ -139,7 +182,7 @@ public class MovementLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Edifice edifice = (Edifice) edifice_dropdown.getAdapter().getItem(position);
-//                assetPojo.setEdificeId(String.valueOf(edifice.getId()));
+                movementRequestBody.setEdificeId(edifice.getId());
                 level_dropdown.clearListSelection();
                 level_dropdown.setText("");
                 space_dropdown.clearListSelection();
@@ -152,6 +195,7 @@ public class MovementLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Level level = (Level) level_dropdown.getAdapter().getItem(position);
+                movementRequestBody.setLevel(level.getId());
                 space_dropdown.clearListSelection();
                 space_dropdown.setText("");
                 space_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, level.getSpaces()));
@@ -162,7 +206,7 @@ public class MovementLocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Space space = (Space) space_dropdown.getAdapter().getItem(position);
-//                assetPojo.setSpace(String.valueOf(space.getId()));
+                movementRequestBody.setSpace(space.getId());
             }
         });
 
@@ -176,6 +220,18 @@ public class MovementLocationFragment extends Fragment {
 
         altaViewModel.getCenters(token);
 
+    }
+
+    @Override
+    public void OnClickListener(int user_id, String description) {
+        movementRequestBody.addNotifyUser(user_id);
+        movementRequestBody.setNotifyText(description);
+
+    }
+
+    @Override
+    public void OnCloseListener() {
+        notificationCheckBox.setChecked(false);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -203,5 +259,105 @@ public class MovementLocationFragment extends Fragment {
             progressDialog.dismiss();
 //            loading.setVisibility(View.GONE);
         }
+    }
+
+
+    public class MovementRequestBody implements Serializable {
+
+        @SerializedName("asset_id")
+        @Expose
+        private Integer assetId;
+        @SerializedName("center")
+        @Expose
+        private Integer center;
+        @SerializedName("edifice_id")
+        @Expose
+        private Integer edificeId;
+        @SerializedName("level")
+        @Expose
+        private Integer level;
+        @SerializedName("space")
+        @Expose
+        private Integer space;
+        @SerializedName("notify_users")
+        @Expose
+        private List<Integer> notifyUsers = null;
+        @SerializedName("notify_text")
+        @Expose
+        private String notifyText;
+        private final static long serialVersionUID = -8517564530565055380L;
+
+
+        public MovementRequestBody() {
+            notifyUsers = new ArrayList<>();
+            notifyText = "";
+        }
+
+        public Integer getAssetId() {
+            return assetId;
+        }
+
+        public void setAssetId(Integer assetId) {
+            this.assetId = assetId;
+        }
+
+        public Integer getCenter() {
+            return center;
+        }
+
+        public void setCenter(Integer center) {
+            this.center = center;
+        }
+
+        public Integer getEdificeId() {
+            return edificeId;
+        }
+
+        public void setEdificeId(Integer edificeId) {
+            this.edificeId = edificeId;
+        }
+
+        public Integer getLevel() {
+            return level;
+        }
+
+        public void setLevel(Integer level) {
+            this.level = level;
+        }
+
+        public Integer getSpace() {
+            return space;
+        }
+
+        public void setSpace(Integer space) {
+            this.space = space;
+        }
+
+        public List<Integer> getNotifyUsers() {
+            return notifyUsers;
+        }
+
+        public void setNotifyUsers(List<Integer> notifyUsers) {
+            this.notifyUsers = notifyUsers;
+        }
+
+        public void addNotifyUser(int userId) {
+            this.notifyUsers.add(userId);
+        }
+
+        public void clearNotification() {
+            this.notifyUsers.clear();
+            this.notifyText = "";
+        }
+
+
+        public String getNotifyText() {
+            return notifyText;
+        }
+
+        public void setNotifyText(String notifyText) {
+            this.notifyText = notifyText;
+        }
+
     }
 }

@@ -56,7 +56,7 @@ public class MovementResultFragment extends Fragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_bajaResultFragment_to_tag_fragment);
+                Navigation.findNavController(v).navigate(R.id.action_movementResultFragment_to_movement_tag_fragment);
             }
         });
 
