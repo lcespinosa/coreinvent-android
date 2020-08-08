@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.main;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.ui.alta.AltaViewModel;
 import com.coresolutions.coreinvent.ui.baja.BajaActivity;
@@ -37,7 +40,9 @@ import com.coresolutions.coreinvent.ui.login.LoginActivity;
 import com.coresolutions.coreinvent.ui.movement.MovementActivity;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -111,6 +116,8 @@ public class DetailFragment extends DialogFragment {
     private LinearLayout baja_layout;
     private LinearLayout movement_layout;
 
+    private ArrayList<FieldPojo> fieldPojoArrayList;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -173,7 +180,6 @@ public class DetailFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
-
 
         loading = view.findViewById(R.id.loading);
         tag_code = view.findViewById(R.id.tag_code);
@@ -240,6 +246,7 @@ public class DetailFragment extends DialogFragment {
             @Override
             public void onChanged(FindAssetPojo findAssetPojo) {
                 asset = findAssetPojo;
+                altaViewModel.getFields(asset.getType().getSubFamilyId(), settings.getString("access_token", ""));
                 new DownloadImageTask(asset_img)
                         .execute(Constants.SERVER_URL + asset.getUrl_photo());
                 if (asset.getTag() != null) {
@@ -289,13 +296,17 @@ public class DetailFragment extends DialogFragment {
 //                        }
                 if (asset.getCharacteristics() != null) {
                     characteristics_layout.setVisibility(View.VISIBLE);
-                    characteristics.setText(asset.getCharacteristics().getImportado());
-                    characteristics.setAlpha(1);
+                    if (asset.getCharacteristics().getImportado() != null) {
+                        characteristics.setText(asset.getCharacteristics().getImportado());
+                        characteristics.setAlpha(1);
+                    }
                 }
                 if (asset.getSerialNumber() != null) {
                     serie_layout.setVisibility(View.VISIBLE);
-                    serie.setText(asset.getSerialNumber());
-                    serie.setAlpha(1);
+                    if (!asset.getSerialNumber().equals("")) {
+                        serie.setText(asset.getSerialNumber());
+                        serie.setAlpha(1);
+                    }
                 }
 
 
@@ -344,7 +355,55 @@ public class DetailFragment extends DialogFragment {
 
         });
 
+        altaViewModel.getRegisterResult().observe(this, new Observer<List<FieldPojo>>() {
+            @Override
+            public void onChanged(List<FieldPojo> fieldPojos) {
+                fieldPojoArrayList = new ArrayList<FieldPojo>(fieldPojos);
+                for (FieldPojo field : fieldPojoArrayList) {
+
+//            if (field.getColumnName().equals("brand") && !field.getOptionPojos().isEmpty()) {
+                    if (field.getColumnName().equals("brand")) {
+                        brand_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("serial_number")) {
+                        serie_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("characteristics")) {
+                        characteristics_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("plate")) {
+                        plate_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("frame_number")) {
+                        frameNumber_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("width")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("height")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("depth")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("address")) {
+                        address_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("postal_code")) {
+                        postalCode_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("surface")) {
+                        surface_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("length")) {
+                        length_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("center")) {
+                        if (!field.getOptionPojos().isEmpty()) {
+                            location_layout.setVisibility(View.VISIBLE);
+
+                        }
+                    } else if (field.getColumnName().equals("edifice")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("level")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("space")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
         altaViewModel.getAssetById(id, token);
+
 
 
         close.setOnClickListener(new View.OnClickListener() {

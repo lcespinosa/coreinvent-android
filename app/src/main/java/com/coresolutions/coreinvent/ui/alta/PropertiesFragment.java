@@ -346,7 +346,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                     assetPojo.setTagType(typeTag.equals("madeup") ? "2" : "3");
                     assetPojo.setAddress(address_dropdown.getText().toString());
                     selectedMap.put("address", address_dropdown.getText().toString());
-                    assetPojo.setSubfamily(String.valueOf(subfamily));
+                    assetPojo.setSubfamily(subfamily);
                     assetPojo.setSurface(surface_dropdown.getText().toString());
                     selectedMap.put("surface", surface_dropdown.getText().toString());
                     assetPojo.setLength(length_dropdown.getText().toString());

@@ -47,7 +47,7 @@ public class AltaViewModel extends AndroidViewModel {
     private MutableLiveData<List<FamilyPojo>> familyResult = new MutableLiveData<>();
     private MutableLiveData<List<FieldPojo>> fieldResult = new MutableLiveData<>();
     private MutableLiveData<List<FindAssetPojo>> findResult = new MutableLiveData<>();
-    private MutableLiveData<Integer> subscriptionResult = new MutableLiveData<>();
+    private MutableLiveData<HashMap<String, String>> subscriptionResult = new MutableLiveData<>();
     private MutableLiveData<FindAssetPojo> assetResult = new MutableLiveData<>();
     private MutableLiveData<Unsubscription> unsubscriptionResult = new MutableLiveData<>();
     private MutableLiveData<HashMap<String, String>> responseBodyUnsubscription = new MutableLiveData<>();
@@ -74,7 +74,7 @@ public class AltaViewModel extends AndroidViewModel {
         return centerResult;
     }
 
-    LiveData<List<FieldPojo>> getRegisterResult() {
+    public LiveData<List<FieldPojo>> getRegisterResult() {
         return fieldResult;
     }
 
@@ -150,7 +150,7 @@ public class AltaViewModel extends AndroidViewModel {
     }
 
 
-    public MutableLiveData<Integer> getSubscriptionResult() {
+    public MutableLiveData<HashMap<String, String>> getSubscriptionResult() {
         return subscriptionResult;
     }
 
@@ -170,7 +170,7 @@ public class AltaViewModel extends AndroidViewModel {
         HashMap<String, RequestBody> maps = new HashMap<>();
 
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue()));
+            maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(entry.getValue())));
         }
 //        maps.put("notify_users", RequestBody.create(MediaType.parse("multipart/form-data"), gson.toJson(assetPojo.getNotifyUsers())));
         List<MultipartBody.Part> parts = new ArrayList<>();
@@ -192,7 +192,7 @@ public class AltaViewModel extends AndroidViewModel {
             public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
 //                waitForDebugger();
                 HashMap<String, String> hashMap = response.body();
-                subscriptionResult.setValue(response.code());
+                subscriptionResult.setValue(hashMap);
             }
 
             @Override
@@ -321,8 +321,8 @@ public class AltaViewModel extends AndroidViewModel {
                 .build();
 
 
-//        Gson gson = new Gson();
-//        String json = gson.toJson(unsubscriptionRequestBody);
+        Gson gson = new Gson();
+        String json = gson.toJson(unsubscriptionRequestBody);
 
         AltasApi altaApi = retrofit.create(AltasApi.class);
         Call<HashMap<String, String>> family = altaApi.assetUnSubscription(token, unsubscriptionRequestBody);

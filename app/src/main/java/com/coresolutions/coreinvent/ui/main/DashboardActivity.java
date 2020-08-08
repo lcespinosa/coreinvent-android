@@ -130,7 +130,7 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         token = settings.getString("access_token", "");
         selected_year = findViewById(R.id.selected_year);
-        selected_year.setText(settings.getString("exercise_year_name", "Seleccione el año"));
+        selected_year.setText(settings.getString("exercise_year_name", "Todos"));
         session = findViewById(R.id.session);
         dropdown_year = findViewById(R.id.dropdown_year);
         newOperation = findViewById(R.id.newOperation);
@@ -145,9 +145,6 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
             @Override
             public void onChanged(List<Year> years) {
                 yearListAdapter.setYears(years);
-                if (settings.getInt("exercise_year_id", 0) == 0 && years != null) {
-                    dashboardViewModel.getDashboardInfo(token, years.get(0).getId());
-                }
                 progressDialog.dismiss();
             }
         });
@@ -351,9 +348,8 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
     private void update_dashboard() {
         progressDialog.show();
         dashboardViewModel.getYears(token);
-        if (settings.getInt("exercise_year_id", 0) != 0) {
-            dashboardViewModel.getDashboardInfo(token, settings.getInt("exercise_year_id", 0));
-        }
+        selected_year.setText(settings.getString("exercise_year_name", "Todos"));
+        dashboardViewModel.getDashboardInfo(token, settings.getInt("exercise_year_id", 0));
     }
 
     @Override

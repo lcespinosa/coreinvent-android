@@ -24,7 +24,10 @@ public interface DashboardApi {
     Call<List<Year>> getYears(@Header("authorization") String token);
 
     @GET("dashboard/info")
-    Call<Dashboard> getDashboardInfo(@Header("authorization") String token, @Query("year") int year);
+    Call<Dashboard> getDashboardInfoByYear(@Header("authorization") String token, @Query("year") int year);
+
+    @GET("dashboard/info")
+    Call<Dashboard> getAllDashboardInfo(@Header("authorization") String token);
 
 
 }

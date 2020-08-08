@@ -18,7 +18,7 @@ public class AssetPojo implements Serializable {
 
     @SerializedName("subfamily")
     @Expose
-    private String subfamily;
+    private Integer subfamily;
     @SerializedName("center")
     @Expose
     private String center;
@@ -147,11 +147,11 @@ public class AssetPojo implements Serializable {
         this.center = center;
     }
 
-    public String getSubfamily() {
+    public Integer getSubfamily() {
         return subfamily;
     }
 
-    public void setSubfamily(String subfamily) {
+    public void setSubfamily(Integer subfamily) {
         this.subfamily = subfamily;
     }
 

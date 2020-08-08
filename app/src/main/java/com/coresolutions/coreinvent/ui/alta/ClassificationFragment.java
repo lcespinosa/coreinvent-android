@@ -96,6 +96,7 @@ public class ClassificationFragment extends Fragment {
                 sub_family_dropdown.setText("");
                 type_dropdown.clearListSelection();
                 type_dropdown.setText("");
+                type = null;
                 sub_family_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, familyPojo.getSubFamilies()));
             }
         });
@@ -107,6 +108,7 @@ public class ClassificationFragment extends Fragment {
                 type_dropdown.setText("");
                 subFamilyPojo = (SubFamilyPojo) sub_family_dropdown.getAdapter().getItem(position);
                 type_dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, subFamilyPojo.getTypes()));
+                type = null;
             }
         });
 
@@ -131,17 +133,21 @@ public class ClassificationFragment extends Fragment {
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                HashMap<String, String> selectedMap = new HashMap<String, String>();
-                selectedMap.put("family", family_dropdown.getText().toString());
-                selectedMap.put("subfamily", sub_family_dropdown.getText().toString());
-                selectedMap.put("type", type_dropdown.getText().toString());
-                AssetPojo assetPojo = new AssetPojo();
-                assetPojo.setType(String.valueOf(type.getId()));
-                bundle.putInt("subfamily", subFamilyPojo.getId());
-                bundle.putSerializable("assetPojo", assetPojo);
-                bundle.putSerializable("selectedMap", selectedMap);
-                Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_properties, bundle);
+                if (!type_dropdown.getText().toString().equals("") && type != null) {
+                    Bundle bundle = new Bundle();
+                    HashMap<String, String> selectedMap = new HashMap<String, String>();
+                    selectedMap.put("family", family_dropdown.getText().toString());
+                    selectedMap.put("subfamily", sub_family_dropdown.getText().toString());
+                    selectedMap.put("type", type_dropdown.getText().toString());
+                    AssetPojo assetPojo = new AssetPojo();
+                    assetPojo.setType(String.valueOf(type.getId()));
+                    bundle.putInt("subfamily", subFamilyPojo.getId());
+                    bundle.putSerializable("assetPojo", assetPojo);
+                    bundle.putSerializable("selectedMap", selectedMap);
+                    Navigation.findNavController(v).navigate(R.id.action_nav_home_to_nav_properties, bundle);
+                } else {
+                    Toast.makeText(getContext(), "Debe completar todos los campos", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

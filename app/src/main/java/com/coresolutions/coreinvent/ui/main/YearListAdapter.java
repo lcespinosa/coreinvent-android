@@ -65,6 +65,7 @@ public class YearListAdapter extends RecyclerView.Adapter<YearListAdapter.YearVi
     }
 
     public void setYears(List<Year> years) {
+        years.add(0, new Year());
         mYears = years;
         notifyDataSetChanged();
     }

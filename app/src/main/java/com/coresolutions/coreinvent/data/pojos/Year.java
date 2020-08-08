@@ -18,6 +18,12 @@ public class Year implements Serializable {
     private String code;
     private final static long serialVersionUID = 2792497244695559380L;
 
+    public Year() {
+        this.id = 0;
+        this.name = "Todos";
+        this.code = "all";
+    }
+
     public Integer getId() {
         return id;
     }

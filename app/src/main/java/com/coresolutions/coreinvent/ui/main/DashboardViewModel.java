@@ -84,7 +84,10 @@ public class DashboardViewModel extends AndroidViewModel {
 
 
         DashboardApi dashboardApi = retrofit.create(DashboardApi.class);
-        Call<Dashboard> dashboard = dashboardApi.getDashboardInfo(token, year);
+        Call<Dashboard> dashboard = dashboardApi.getDashboardInfoByYear(token, year);
+        if (year == 0) {
+            dashboard = dashboardApi.getAllDashboardInfo(token);
+        }
         dashboard.enqueue(new Callback<Dashboard>() {
             @Override
             public void onResponse(Call<Dashboard> call, Response<Dashboard> response) {

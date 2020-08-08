@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.coresolutions.coreinvent.ui.movement.NotificationFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -238,6 +240,7 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
                 } else if (entry.getKey().equals("characteristics")) {
                     characteristics_layout.setVisibility(View.VISIBLE);
                     characteristics.setText(entry.getValue());
+                    characteristics.setAlpha(1);
                 } else if (entry.getKey().equals("serie")) {
                     serie_layout.setVisibility(View.VISIBLE);
                     serie.setText(entry.getValue());
@@ -278,15 +281,65 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
             }
         }
 
-
-        altaViewModel.getSubscriptionResult().observe(this, new Observer<Integer>() {
+        altaViewModel.getRegisterResult().observe(this, new Observer<List<FieldPojo>>() {
             @Override
-            public void onChanged(Integer code) {
+            public void onChanged(List<FieldPojo> fieldPojos) {
+                fieldPojoArrayList = new ArrayList<FieldPojo>(fieldPojos);
+                for (FieldPojo field : fieldPojoArrayList) {
+
+//            if (field.getColumnName().equals("brand") && !field.getOptionPojos().isEmpty()) {
+                    if (field.getColumnName().equals("brand")) {
+                        brand_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("serial_number")) {
+                        serie_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("characteristics")) {
+                        characteristics_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("plate")) {
+                        plate_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("frame_number")) {
+                        frameNumber_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("width")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("height")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("depth")) {
+                        measures_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("address")) {
+                        address_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("postal_code")) {
+                        postalCode_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("surface")) {
+                        surface_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("length")) {
+                        length_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("center")) {
+                        if (!field.getOptionPojos().isEmpty()) {
+                            location_layout.setVisibility(View.VISIBLE);
+
+                        }
+                    } else if (field.getColumnName().equals("edifice")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("level")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("space")) {
+                        location_layout.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
+        altaViewModel.getFields(assetPojo.getSubfamily(), settings.getString("access_token", ""));
+
+
+        altaViewModel.getSubscriptionResult().observe(this, new Observer<HashMap<String, String>>() {
+            @Override
+            public void onChanged(HashMap<String, String> hashMap) {
                 Bundle bundle = new Bundle();
-                if (code == 200) {
+                if (!hashMap.containsKey("errors")) {
                     bundle.putString("result", "Registro de alta guardado con éxito");
                 } else {
                     bundle.putString("result", "Ha ocurrido un error al registrar el alta");
+                    Log.e("subcription", hashMap.get("errors"));
                 }
 
                 Navigation.findNavController(view).navigate(R.id.action_nav_confimation_to_nav_result, bundle);

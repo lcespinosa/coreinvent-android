@@ -108,7 +108,12 @@ public class BajaReasonFragment extends Fragment implements NotificationFragment
         altaViewModel.getUnsubscriptionResult().observe(this, new Observer<Unsubscription>() {
             @Override
             public void onChanged(Unsubscription unsubscription) {
-                baja_reason.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, unsubscription.getUnsubscriptionVars()));
+                if (unsubscription != null) {
+                    baja_reason.setAdapter(new ArrayAdapter<>(getContext(), R.layout.dropdown_menu_popup_item, unsubscription.getUnsubscriptionVars()));
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Se ha perdido la conexión con el servidor", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -171,7 +176,8 @@ public class BajaReasonFragment extends Fragment implements NotificationFragment
                 if (hashMap != null) {
                     Bundle bundle = new Bundle();
                     if (hashMap.containsKey("errors")) {
-                        Toast.makeText(getContext(), hashMap.get("errors"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Motivo de baja incorrecto para este bien", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     } else {
                         bundle.putString("result", "Operación realizada correctamente");
                         progressDialog.dismiss();
