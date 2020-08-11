@@ -9,6 +9,7 @@ import android.util.Patterns;
 
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
+import com.coresolutions.coreinvent.data.RetrofitClient;
 import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.interfaces.LoginApi;
 import com.coresolutions.coreinvent.data.model.LoggedInUser;
@@ -55,14 +56,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String username, String password, final SharedPreferences settings) {
-        // can be launched in a separate asynchronous job
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.API_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-
-        LoginApi loginApi = retrofit.create(LoginApi.class);
+        LoginApi loginApi = RetrofitClient.getInstance().getLoginApi();
 //        Call<String> loginUser = loginApi.loginUser("a@a.cu", "a");
         Call<String> loginUser = loginApi.loginUser(username, password);
         loginUser.enqueue(new Callback<String>() {

@@ -23,6 +23,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.pojos.AssetModel;
@@ -227,7 +228,6 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
         typeTag = "real";
 
 
-
         virtualTagSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -346,7 +346,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                     assetPojo.setTagType(typeTag.equals("madeup") ? "2" : "3");
                     assetPojo.setAddress(address_dropdown.getText().toString());
                     selectedMap.put("address", address_dropdown.getText().toString());
-                    assetPojo.setSubfamily(subfamily);
+                    assetPojo.setSubfamily(String.valueOf(subfamily));
                     assetPojo.setSurface(surface_dropdown.getText().toString());
                     selectedMap.put("surface", surface_dropdown.getText().toString());
                     assetPojo.setLength(length_dropdown.getText().toString());
@@ -378,7 +378,7 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                     bundle.putSerializable("selectedMap", selectedMap);
                     Navigation.findNavController(v).navigate(R.id.action_nav_properties_to_nav_description, bundle);
                 } else {
-
+                    Toast.makeText(getContext(), "Debe introducir una etiqueta", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.LoginRepository;
+import com.coresolutions.coreinvent.data.RetrofitClient;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
 import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
@@ -155,12 +156,8 @@ public class AltaViewModel extends AndroidViewModel {
     }
 
     public void assetSubscription(String token, AssetPojo assetPojo) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        AltasApi altaApi = retrofit.create(AltasApi.class);
+        AltasApi altaApi = RetrofitClient.getInstance().getAltasApi();
         Gson gson = new Gson();
         String json = gson.toJson(assetPojo);
 
@@ -170,7 +167,7 @@ public class AltaViewModel extends AndroidViewModel {
         HashMap<String, RequestBody> maps = new HashMap<>();
 
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(entry.getValue())));
+            maps.put(entry.getKey(), RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue()));
         }
 //        maps.put("notify_users", RequestBody.create(MediaType.parse("multipart/form-data"), gson.toJson(assetPojo.getNotifyUsers())));
         List<MultipartBody.Part> parts = new ArrayList<>();
@@ -184,9 +181,12 @@ public class AltaViewModel extends AndroidViewModel {
             parts.add(part);
 //            parts.add(part1);
         }
-        //  Integer[] myArray = new Integer[assetPojo.getNotifyUsers().size()];
+        Integer[] myArray = new Integer[assetPojo.getNotifyUsers().size()];
         //, assetPojo.getNotifyUsers().toArray(myArray)
-        Call<HashMap<String, String>> family = altaApi.assetSubscription(token, maps, parts);
+        List<Integer> notify_users = assetPojo.getNotifyUsers();
+        List<String> items = new ArrayList();
+        items.add("1");
+        Call<HashMap<String, String>> family = altaApi.assetSubscription(token, maps, parts, notify_users);
         family.enqueue(new Callback<HashMap<String, String>>() {
             @Override
             public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {

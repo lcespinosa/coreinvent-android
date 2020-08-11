@@ -42,7 +42,7 @@ public interface AltasApi {
 
     @Multipart
     @POST("operations/subscription/close")
-    Call<HashMap<String, String>> assetSubscription(@Header("authorization") String token, @PartMap() Map<String, RequestBody> partMap, @Part List<MultipartBody.Part> images);
+    Call<HashMap<String, String>> assetSubscription(@Header("authorization") String token, @PartMap() Map<String, RequestBody> partMap, @Part List<MultipartBody.Part> images, @Part("notify_users[]") List<Integer> notify_users);
 
     @POST("assets/search")
     Call<List<FindAssetPojo>> findAsset(@Header("authorization") String token, @Body Search search);

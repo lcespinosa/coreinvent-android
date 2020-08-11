@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.coresolutions.coreinvent.data.Constants;
+import com.coresolutions.coreinvent.data.RetrofitClient;
 import com.coresolutions.coreinvent.data.interfaces.AltasApi;
 import com.coresolutions.coreinvent.data.interfaces.DashboardApi;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
@@ -52,13 +53,7 @@ public class DashboardViewModel extends AndroidViewModel {
     }
 
     public void getYears(String token) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-
-        DashboardApi dashboardApi = retrofit.create(DashboardApi.class);
+        DashboardApi dashboardApi = RetrofitClient.getInstance().getDashboardApi();
         Call<List<Year>> years = dashboardApi.getYears(token);
         years.enqueue(new Callback<List<Year>>() {
             @Override

@@ -328,7 +328,7 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
             }
         });
 
-        altaViewModel.getFields(assetPojo.getSubfamily(), settings.getString("access_token", ""));
+        altaViewModel.getFields(Integer.parseInt(assetPojo.getSubfamily()), settings.getString("access_token", ""));
 
 
         altaViewModel.getSubscriptionResult().observe(this, new Observer<HashMap<String, String>>() {
