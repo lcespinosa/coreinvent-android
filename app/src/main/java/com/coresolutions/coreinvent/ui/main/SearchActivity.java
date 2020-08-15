@@ -1,9 +1,14 @@
 package com.coresolutions.coreinvent.ui.main;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +59,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
     private DashboardViewModel dashboardViewModel;
 
     private DetailFragment detailFragment;
+    private  ItemViewModel itemViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +94,30 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         findLayout = findViewById(R.id.findLayout);
         recyclerView = findViewById(R.id.recyclerAssetsDrawer);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+//        ItemViewModel itemViewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
+
+        itemViewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T)new ItemViewModel (token, new Search(findLayout.getEditText().getText().toString()));
+            }
+        }).get(ItemViewModel.class);
+
+
+
+        itemViewModel.itemPagedList.observe(this, new Observer<PagedList<FindAssetPojo>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<FindAssetPojo> items) {
+                assetListAdapter.submitList(items);
+            }
+        });
+
+
         recyclerView.setAdapter(assetListAdapter);
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -124,7 +153,6 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         });
 
 
-//        altaViewModel.findAsset(token, new Search(""));
         search_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +165,9 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
                     progressDialog.setMessage("Cargando datos...");
                     progressDialog.setCancelable(false);
                     progressDialog.show();
-                    altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+//                    altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+                    itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
+                    itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
                 }
                 searching = true;
                 search_layout.setVisibility(View.VISIBLE);
@@ -159,7 +189,9 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
                 progressDialog.setMessage("Cargando datos...");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-                altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+//                altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+                itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
+                itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
             }
         });
 
@@ -190,7 +222,9 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
     protected void onPostResume() {
         super.onPostResume();
         dashboardViewModel.getYears(token);
-        altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+//        altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
+//        itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
+//        itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.coresolutions.coreinvent.data.pojos.Center;
 import com.coresolutions.coreinvent.data.pojos.FamilyPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
+import com.coresolutions.coreinvent.data.pojos.FindResponse;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Unsubscription;
 import com.coresolutions.coreinvent.data.pojos.UnsubscriptionRequestBody;
@@ -45,7 +46,7 @@ public interface AltasApi {
     Call<HashMap<String, String>> assetSubscription(@Header("authorization") String token, @PartMap() Map<String, RequestBody> partMap, @Part List<MultipartBody.Part> images, @Part("notify_users[]") List<Integer> notify_users);
 
     @POST("assets/search")
-    Call<List<FindAssetPojo>> findAsset(@Header("authorization") String token, @Body Search search);
+    Call<FindResponse> findAsset(@Header("authorization") String token, @Body Search search, @Query("page") int page);
 
     @GET("assets/{asset}")
     Call<FindAssetPojo> getAssetsById(@Path("asset") int assetid, @Header("authorization") String token);

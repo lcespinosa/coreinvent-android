@@ -56,7 +56,14 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String username, String password, final SharedPreferences settings) {
-        LoginApi loginApi = RetrofitClient.getInstance().getLoginApi();
+        // can be launched in a separate asynchronous job
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.API_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+
+        LoginApi loginApi = retrofit.create(LoginApi.class);
 //        Call<String> loginUser = loginApi.loginUser("a@a.cu", "a");
         Call<String> loginUser = loginApi.loginUser(username, password);
         loginUser.enqueue(new Callback<String>() {

@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coresolutions.coreinvent.R;
@@ -16,7 +18,7 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-public class AssetListAdapter extends RecyclerView.Adapter<AssetListAdapter.FindAssetPojoViewHolder> {
+public class AssetListAdapter extends PagedListAdapter<FindAssetPojo, AssetListAdapter.FindAssetPojoViewHolder> {
 
 
     public interface OnClickListener {
@@ -29,12 +31,14 @@ public class AssetListAdapter extends RecyclerView.Adapter<AssetListAdapter.Find
     private OnClickListener onClickListener;
 
     public AssetListAdapter(Context context, OnClickListener clickListener) {
+        super(DIFF_CALLBACK);
         layoutInflater = LayoutInflater.from(context);
         mcontext = context;
         this.onClickListener = clickListener;
     }
 
     public AssetListAdapter(Context context) {
+        super(DIFF_CALLBACK);
         layoutInflater = LayoutInflater.from(context);
         mcontext = context;
         this.onClickListener = null;
@@ -73,6 +77,19 @@ public class AssetListAdapter extends RecyclerView.Adapter<AssetListAdapter.Find
     public void setSelected(int selected) {
         notifyDataSetChanged();
     }
+
+    private static DiffUtil.ItemCallback<FindAssetPojo> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<FindAssetPojo>() {
+                @Override
+                public boolean areItemsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
+                    return oldItem.getCode().equals(newItem.getCode());
+                }
+            };
 
 
     public class FindAssetPojoViewHolder extends RecyclerView.ViewHolder {

@@ -207,32 +207,32 @@ public class AltaViewModel extends AndroidViewModel {
     }
 
 
-    public void findAsset(String token, Search search) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        AltasApi altaApi = retrofit.create(AltasApi.class);
-//        Gson gson = new Gson();
-//        String json = gson.toJson(assetPojo);
-        Call<List<FindAssetPojo>> family = altaApi.findAsset(token, search);
-        family.enqueue(new Callback<List<FindAssetPojo>>() {
-            @Override
-            public void onResponse(Call<List<FindAssetPojo>> call, Response<List<FindAssetPojo>> response) {
-//                waitForDebugger();
-                List<FindAssetPojo> findAssetPojos = response.body();
-                findResult.setValue(findAssetPojos);
-            }
-
-            @Override
-            public void onFailure(Call<List<FindAssetPojo>> call, Throwable t) {
-//                waitForDebugger();
-                findResult.setValue(null);
-            }
-
-        });
-    }
+//    public void findAsset(String token, Search search, int page) {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(Constants.API_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        AltasApi altaApi = retrofit.create(AltasApi.class);
+////        Gson gson = new Gson();
+////        String json = gson.toJson(assetPojo);
+//        Call<List<FindAssetPojo>> family = altaApi.findAsset(token, search, page);
+//        family.enqueue(new Callback<List<FindAssetPojo>>() {
+//            @Override
+//            public void onResponse(Call<List<FindAssetPojo>> call, Response<List<FindAssetPojo>> response) {
+////                waitForDebugger();
+//                List<FindAssetPojo> findAssetPojos = response.body();
+//                findResult.setValue(findAssetPojos);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<FindAssetPojo>> call, Throwable t) {
+////                waitForDebugger();
+//                findResult.setValue(null);
+//            }
+//
+//        });
+//    }
 
 
     public void getAssetById(int assetid, String token) {
