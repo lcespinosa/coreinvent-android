@@ -28,6 +28,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.coresolutions.coreinvent.R;
+import com.coresolutions.coreinvent.data.Constants;
 import com.coresolutions.coreinvent.data.pojos.FindAssetPojo;
 import com.coresolutions.coreinvent.data.pojos.Search;
 import com.coresolutions.coreinvent.data.pojos.Year;
@@ -44,6 +45,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
     private AltaViewModel altaViewModel;
     private SharedPreferences settings;
     private AssetListAdapter assetListAdapter;
+    private FeedListAdapter feedListAdapter;
     private ImageView search_img;
     private ImageView logo_img;
     private PopupWindow popUpYear;
@@ -59,7 +61,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
     private DashboardViewModel dashboardViewModel;
 
     private DetailFragment detailFragment;
-    private  ItemViewModel itemViewModel;
+    private ItemViewModel itemViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         altaViewModel = ViewModelProviders.of(this).get(AltaViewModel.class);
         token = settings.getString("access_token", "");
         assetListAdapter = new AssetListAdapter(this, this);
+        feedListAdapter = new FeedListAdapter(this, this);
         search_img = findViewById(R.id.search_img);
         logo_img = findViewById(R.id.logo_img);
         selected_year = findViewById(R.id.selected_year);
@@ -102,21 +105,25 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T)new ItemViewModel (token, new Search(findLayout.getEditText().getText().toString()));
+                return (T) new ItemViewModel(token);
             }
         }).get(ItemViewModel.class);
-
 
 
         itemViewModel.itemPagedList.observe(this, new Observer<PagedList<FindAssetPojo>>() {
             @Override
             public void onChanged(@Nullable PagedList<FindAssetPojo> items) {
-                assetListAdapter.submitList(items);
+                feedListAdapter.submitList(items);
+                progressDialog.dismiss();
             }
         });
 
+        itemViewModel.getNetworkState().observe(this, networkState -> {
+            feedListAdapter.setNetworkState(networkState);
+        });
 
-        recyclerView.setAdapter(assetListAdapter);
+
+        recyclerView.setAdapter(feedListAdapter);
 
 
         progressDialog = new ProgressDialog(this);
@@ -166,7 +173,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 //                    altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
-                    itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
+                    Constants.setSEARCH(findLayout.getEditText().getText().toString());
                     itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
                 }
                 searching = true;
@@ -190,7 +197,7 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 //                altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
-                itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
+                Constants.setSEARCH("");
                 itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
             }
         });

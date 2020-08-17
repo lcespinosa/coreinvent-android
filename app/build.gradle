@@ -24,11 +24,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
-    def paging_version = "2.1.2"
+    implementation 'androidx.paging:paging-runtime:2.1.2'
+    def paging_version = "1.0.0"
+    def view_model_version = "1.1.0"
+    def support_version = "27.1.0"
+    def glide_version = "4.3.1"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -48,7 +56,17 @@ dependencies {
     implementation 'com.github.jkwiecien:EasyImage:3.0.4'
     implementation 'io.alterac.blurkit:blurkit:1.0.0'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61'
-    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    //adding paging
+//    implementation "android.arch.paging:runtime:$paging_version"
+
+    //adding glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
 
 }

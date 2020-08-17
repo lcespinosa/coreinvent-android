@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,31 +15,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/tag_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:maxWidth="120dp"
-            android:maxLines="1"
-            android:text="Etiqueta:"
-            android:textColor="@color/onBackground"
+        <ImageView
+            android:id="@+id/assets_thumbnails"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/default_img"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="10dp"
             android:maxLines="1"
-            android:text="Cámara / Axis / M160"
+            android:text="Tipo"
             android:textColor="@color/onBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tag_text"/>
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@+id/assets_thumbnails"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:maxLines="1"
+            android:text="Marca/Modelo"
+            android:textColor="@color/onBackground"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@+id/assets_thumbnails"
+            app:layout_constraintTop_toBottomOf="@+id/type" />
 
         <TextView
             android:id="@+id/tag"
@@ -47,46 +57,22 @@
             android:layout_margin="5dp"
             android:text="F30196-5454"
             android:textColor="@color/secondaryLightVariant"
-            app:layout_constraintStart_toEndOf="@+id/tag_text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/location_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:maxLines="1"
-            android:text="Ubicación:"
-            android:textColor="@color/onBackground"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/type" />
 
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-
-            android:maxLines="1"
-            android:text="Sevilla / P3 / P140"
+            android:layout_margin="5dp"
+            android:maxLines="2"
+            android:text="Ubicación"
             android:textColor="@color/onBackground"
             android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/location_text"
-            app:layout_constraintTop_toBottomOf="@+id/type" />
+            app:layout_constraintStart_toEndOf="@+id/assets_thumbnails"
+            app:layout_constraintTop_toBottomOf="@+id/model" />
 
-        <TextView
-            android:id="@+id/inventory_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="2985,00€"
-            android:layout_margin="5dp"
-            android:textColor="@color/onBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -37,12 +37,12 @@ public class AssetListAdapter extends PagedListAdapter<FindAssetPojo, AssetListA
         this.onClickListener = clickListener;
     }
 
-    public AssetListAdapter(Context context) {
-        super(DIFF_CALLBACK);
-        layoutInflater = LayoutInflater.from(context);
-        mcontext = context;
-        this.onClickListener = null;
-    }
+//    public AssetListAdapter(Context context) {
+//        super(DIFF_CALLBACK);
+//        layoutInflater = LayoutInflater.from(context);
+//        mcontext = context;
+//        this.onClickListener = null;
+//    }
 
     @NonNull
     @Override
@@ -60,14 +60,15 @@ public class AssetListAdapter extends PagedListAdapter<FindAssetPojo, AssetListA
             holder.setListeners();
         }
 
-    }
 
-    @Override
-    public int getItemCount() {
-        if (mFindAssetPojos != null) {
-            return mFindAssetPojos.size();
-        } else return 0;
     }
+//
+//    @Override
+//    public int getItemCount() {
+//        if (mFindAssetPojos != null) {
+//            return mFindAssetPojos.size();
+//        } else return 0;
+//    }
 
     public void setFindAssetPojos(List<FindAssetPojo> assets) {
         mFindAssetPojos = assets;
@@ -94,29 +95,31 @@ public class AssetListAdapter extends PagedListAdapter<FindAssetPojo, AssetListA
 
     public class FindAssetPojoViewHolder extends RecyclerView.ViewHolder {
         private TextView type;
+        private TextView model;
         private TextView tag;
         private TextView location;
-        private TextView inventory_value;
+        private ImageView assets_thumbnails;
         private MaterialCardView cardView;
         private int mPosition;
 
         public FindAssetPojoViewHolder(@NonNull View itemView) {
             super(itemView);
             type = itemView.findViewById(R.id.type);
+            model = itemView.findViewById(R.id.model);
             tag = itemView.findViewById(R.id.tag);
             location = itemView.findViewById(R.id.location);
-            inventory_value = itemView.findViewById(R.id.inventory_value);
             cardView = itemView.findViewById(R.id.cardView);
-
-
+            assets_thumbnails = itemView.findViewById(R.id.assets_thumbnails);
         }
 
         public void setData(FindAssetPojo assets, int position) {
-            type.setText(assets.getHeadTitle());
+            type.setText(assets.getType().getName());
             tag.setText(assets.getTag().getCode());
             location.setText(assets.getLocalization());
+            String brand = (assets.getAssetModel().getBrand() != null) ? assets.getAssetModel().getBrand().getName() : "Indefinida";
+            String txt_model = (assets.getAssetModel().getId() != 1) ? assets.getAssetModel().getName() : "Indefinida";
+            model.setText(brand + "/" + txt_model);
             String value = assets.getInventoryValue() == null ? "0" : assets.getInventoryValue();
-            inventory_value.setText(value + "€");
             mPosition = position;
         }
 

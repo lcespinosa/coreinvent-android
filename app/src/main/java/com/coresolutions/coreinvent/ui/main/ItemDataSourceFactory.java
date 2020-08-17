@@ -11,25 +11,29 @@ public class ItemDataSourceFactory extends DataSource.Factory {
 
     //creating the mutable live data
     private MutableLiveData<PageKeyedDataSource<Integer, FindAssetPojo>> itemLiveDataSource = new MutableLiveData<>();
+    private MutableLiveData<ItemDataSource> mutableLiveData;
     private String token;
-    private Search search;
 
-    public ItemDataSourceFactory(String token, Search search) {
+    public ItemDataSourceFactory(String token) {
         this.token = token;
-        this.search = search;
+        this.mutableLiveData = new MutableLiveData<ItemDataSource>();
     }
 
     @Override
     public DataSource<Integer, FindAssetPojo> create() {
         //getting our data source object
-        ItemDataSource itemDataSource = new ItemDataSource(token, search);
+        ItemDataSource itemDataSource = new ItemDataSource(token);
         //posting the datasource to get the values
         itemLiveDataSource.postValue(itemDataSource);
+        mutableLiveData.postValue(itemDataSource);
 
         //returning the datasource
         return itemDataSource;
     }
 
+    public MutableLiveData<ItemDataSource> getMutableLiveData() {
+        return mutableLiveData;
+    }
 
     //getter for itemlivedatasource
     public MutableLiveData<PageKeyedDataSource<Integer, FindAssetPojo>> getItemLiveDataSource() {

@@ -1,6 +1,8 @@
 package com.coresolutions.coreinvent.data.pojos;
 
 
+import androidx.recyclerview.widget.DiffUtil;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -122,6 +124,20 @@ public class FindAssetPojo implements Serializable {
     @Expose
     private String url_photo;
     private final static long serialVersionUID = -8946538409396176729L;
+
+
+    public static DiffUtil.ItemCallback<FindAssetPojo> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<FindAssetPojo>() {
+                @Override
+                public boolean areItemsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
+                    return oldItem.getCode().equals(newItem.getCode());
+                }
+            };
 
     public Integer getId() {
         return id;
