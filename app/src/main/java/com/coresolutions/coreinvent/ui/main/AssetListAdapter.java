@@ -83,12 +83,12 @@ public class AssetListAdapter extends PagedListAdapter<FindAssetPojo, AssetListA
             new DiffUtil.ItemCallback<FindAssetPojo>() {
                 @Override
                 public boolean areItemsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
-                    return oldItem.getId() == newItem.getId();
+                    return oldItem.getId().equals(newItem.getId());
                 }
 
                 @Override
                 public boolean areContentsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
-                    return oldItem.getCode().equals(newItem.getCode());
+                    return oldItem.getId().equals(newItem.getId());
                 }
             };
 

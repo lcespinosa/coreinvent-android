@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:text="9025321"
+            android:text="---"
             android:textColor="@color/onBackground"
 
             app:layout_constraintStart_toEndOf="@+id/tag"
@@ -148,8 +148,8 @@
                                 android:id="@+id/type"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Tipo"
                                 android:alpha="0.4"
+                                android:text="Tipo"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -185,8 +185,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="Marca"
                                 android:alpha="0.4"
+                                android:text="Marca"
                                 android:textColor="@color/onBackground" />
 
                             <TextView
@@ -239,29 +239,35 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:alpha="0.4"
                                 android:text="Centro"
-                                android:alpha="0.4"
-                                android:textColor="@color/onBackground" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="2dp"
-                                android:layout_marginTop="2dp"
-                                android:text="/"
                                 android:textColor="@color/onBackground"
                                 android:visibility="gone" />
 
-                            <TextView
-                                android:id="@+id/edifice"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:id="@+id/edifice_layout"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Edificio"
-                                android:alpha="0.4"
-                                android:textColor="@color/onBackground"
-                                android:visibility="gone" />
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginTop="2dp"
+                                    android:text="/"
+                                    android:textColor="@color/onBackground" />
+
+                                <TextView
+                                    android:id="@+id/edifice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:alpha="0.4"
+                                    android:text="Edificio"
+                                    android:textColor="@color/onBackground" />
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -294,27 +300,35 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
+                                android:visibility="gone"
+                                android:alpha="0.4"
                                 android:text="Nivel"
-                                android:alpha="0.4"
                                 android:textColor="@color/onBackground" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:id="@+id/space_layout"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="2dp"
-                                android:layout_marginTop="2dp"
-                                android:text="/"
-                                android:textColor="@color/onBackground" />
+                                android:visibility="gone"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/space"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:alpha="0.4"
-                                android:text="Espacio"
-                                android:textColor="@color/onBackground" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginTop="2dp"
+                                    android:text="/"
+                                    android:textColor="@color/onBackground" />
 
+                                <TextView
+                                    android:id="@+id/space"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:alpha="0.4"
+                                    android:text="Espacio"
+                                    android:textColor="@color/onBackground" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <View
@@ -345,8 +359,8 @@
                                 android:id="@+id/characteristics"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Características"
                                 android:alpha="0.4"
+                                android:text="Características"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -381,8 +395,8 @@
                                 android:id="@+id/serie"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Número de serie"
                                 android:alpha="0.4"
+                                android:text="Número de serie"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -417,8 +431,8 @@
                                 android:id="@+id/measures"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Dimensiones"
                                 android:alpha="0.4"
+                                android:text="Dimensiones"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -453,8 +467,8 @@
                                 android:id="@+id/frameNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Número factura proveedor"
                                 android:alpha="0.4"
+                                android:text="Número factura proveedor"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -489,8 +503,8 @@
                                 android:id="@+id/plate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Matrícula"
                                 android:alpha="0.4"
+                                android:text="Matrícula"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -525,8 +539,8 @@
                                 android:id="@+id/postalCode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Código postal"
                                 android:alpha="0.4"
+                                android:text="Código postal"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -561,8 +575,8 @@
                                 android:id="@+id/address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/address"
                                 android:alpha="0.4"
+                                android:text="@string/address"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -597,8 +611,8 @@
                                 android:id="@+id/surface"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Superficie"
                                 android:alpha="0.4"
+                                android:text="Superficie"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -633,8 +647,8 @@
                                 android:id="@+id/length"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Longitud"
                                 android:alpha="0.4"
+                                android:text="Longitud"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -669,8 +683,8 @@
                                 android:id="@+id/area"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Área"
                                 android:alpha="0.4"
+                                android:text="Área"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -693,8 +707,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -705,8 +718,8 @@
                                 android:id="@+id/inUseDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/in_use_date"
                                 android:alpha="0.4"
+                                android:text="@string/in_use_date"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />
@@ -741,8 +754,8 @@
                                 android:id="@+id/description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/description"
                                 android:alpha="0.4"
+                                android:text="@string/description"
                                 android:textColor="@color/onBackground"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/asset_img" />

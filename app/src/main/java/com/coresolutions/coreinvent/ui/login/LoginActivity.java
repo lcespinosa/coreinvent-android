@@ -36,7 +36,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog2;
     private SharedPreferences settings;
+    private String token;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,26 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final MaterialButton loginButton = findViewById(R.id.login);
+        token = settings.getString("access_token", "");
+
+        loginViewModel.getResponseCodeResult().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer code) {
+                progressDialog2.dismiss();
+                if (code == 200) {
+                    Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
+
+        progressDialog2 = new ProgressDialog(LoginActivity.this);
+        progressDialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog2.setMessage("Comprobando secciones activas...");
+        progressDialog2.setCancelable(false);
+        progressDialog2.show();
+        loginViewModel.getUser(token);
 
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {

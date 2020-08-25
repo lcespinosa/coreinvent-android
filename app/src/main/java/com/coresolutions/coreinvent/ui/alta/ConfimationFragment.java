@@ -1,5 +1,6 @@
 package com.coresolutions.coreinvent.ui.alta;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import com.coresolutions.coreinvent.R;
 import com.coresolutions.coreinvent.data.pojos.AssetPojo;
 import com.coresolutions.coreinvent.data.pojos.FieldPojo;
+import com.coresolutions.coreinvent.ui.login.LoginActivity;
 import com.coresolutions.coreinvent.ui.movement.MovementLocationFragment;
 import com.coresolutions.coreinvent.ui.movement.NotificationFragment;
 
@@ -60,8 +62,10 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
     private LinearLayout location2_layout;
     private TextView center;
     private TextView edifice;
+    private LinearLayout edifice_layout;
     private TextView level;
     private TextView space;
+    private LinearLayout space_layout;
 
     private LinearLayout characteristics_layout;
     private TextView characteristics;
@@ -102,6 +106,8 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
     private CheckBox notificationCheckBox;
     private String token;
 
+    private ProgressDialog progressDialog;
+
     public ConfimationFragment() {
         // Required empty public constructor
     }
@@ -126,6 +132,11 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
         assetPojo = (AssetPojo) getArguments().getSerializable("assetPojo");
         token = settings.getString("access_token", "");
 
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Conectando con el servidor...");
+        progressDialog.setCancelable(false);
+
         notificationCheckBox = view.findViewById(R.id.notificationCheckBox);
 
 
@@ -141,8 +152,10 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
         location2_layout = view.findViewById(R.id.location2_layout);
         center = view.findViewById(R.id.center);
         edifice = view.findViewById(R.id.edifice);
+        edifice_layout = view.findViewById(R.id.edifice_layout);
         level = view.findViewById(R.id.level);
         space = view.findViewById(R.id.space);
+        space_layout = view.findViewById(R.id.space_layout);
 
         characteristics_layout = view.findViewById(R.id.characteristics_layout);
         characteristics = view.findViewById(R.id.characteristics);
@@ -219,22 +232,22 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
                     model.setAlpha(1);
                 } else if (entry.getKey().equals("center")) {
                     location_layout.setVisibility(View.VISIBLE);
-                    location2_layout.setVisibility(View.VISIBLE);
+                    center.setVisibility(View.VISIBLE);
                     center.setText(entry.getValue());
                     center.setAlpha(1);
                 } else if (entry.getKey().equals("edifice")) {
                     location_layout.setVisibility(View.VISIBLE);
-                    location2_layout.setVisibility(View.VISIBLE);
+                    edifice_layout.setVisibility(View.VISIBLE);
                     edifice.setText(entry.getValue());
                     edifice.setAlpha(1);
                 } else if (entry.getKey().equals("level")) {
-                    location_layout.setVisibility(View.VISIBLE);
                     location2_layout.setVisibility(View.VISIBLE);
+                    level.setVisibility(View.VISIBLE);
                     level.setText(entry.getValue());
                     level.setAlpha(1);
                 } else if (entry.getKey().equals("space")) {
-                    location_layout.setVisibility(View.VISIBLE);
                     location2_layout.setVisibility(View.VISIBLE);
+                    space_layout.setVisibility(View.VISIBLE);
                     space.setText(entry.getValue());
                     space.setAlpha(1);
                 } else if (entry.getKey().equals("characteristics")) {
@@ -312,17 +325,22 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
                         surface_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("length")) {
                         length_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("description")) {
+                        description_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("center")) {
                         if (!field.getOptionPojos().isEmpty()) {
                             location_layout.setVisibility(View.VISIBLE);
-
+                            center.setVisibility(View.VISIBLE);
                         }
                     } else if (field.getColumnName().equals("edifice")) {
                         location_layout.setVisibility(View.VISIBLE);
+                        edifice_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("level")) {
-                        location_layout.setVisibility(View.VISIBLE);
+                        location2_layout.setVisibility(View.VISIBLE);
+                        level.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("space")) {
-                        location_layout.setVisibility(View.VISIBLE);
+                        location2_layout.setVisibility(View.VISIBLE);
+                        space_layout.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -341,6 +359,7 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
                     bundle.putString("result", "Ha ocurrido un error al registrar el alta");
                     Log.e("subcription", hashMap.get("errors"));
                 }
+                progressDialog.dismiss();
 
                 Navigation.findNavController(view).navigate(R.id.action_nav_confimation_to_nav_result, bundle);
             }
@@ -358,6 +377,7 @@ public class ConfimationFragment extends Fragment implements NotificationFragmen
         forward_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 altaViewModel.assetSubscription(settings.getString("access_token", ""), assetPojo);
             }
         });

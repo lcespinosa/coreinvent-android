@@ -337,48 +337,51 @@ public class PropertiesFragment extends Fragment implements DatePickerDialog.OnD
                 String tagcode = typeTag.equals("real") ? realTagLayout.getEditText().getText().toString() : "";
                 int tagId = findIdTag(fieldPojoArrayList, tagcode, typeTag);
                 if (tagId != -1 || typeTag.equals("madeup")) {
-                    Bundle bundle = new Bundle();
-                    int subfamily = getArguments().getInt("subfamily");
-                    HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
-                    bundle.putInt("subfamily", subfamily);
-                    selectedMap.put("tag", tagcode);
-                    assetPojo.setTag(String.valueOf(tagId));
-                    assetPojo.setTagType(typeTag.equals("madeup") ? "2" : "3");
-                    assetPojo.setAddress(address_dropdown.getText().toString());
-                    selectedMap.put("address", address_dropdown.getText().toString());
-                    assetPojo.setSubfamily(String.valueOf(subfamily));
-                    assetPojo.setSurface(surface_dropdown.getText().toString());
-                    selectedMap.put("surface", surface_dropdown.getText().toString());
-                    assetPojo.setLength(length_dropdown.getText().toString());
-                    selectedMap.put("length", length_dropdown.getText().toString());
-                    assetPojo.setCharacteristics(characteristics_dropdown.getText().toString());
-                    selectedMap.put("characteristics", characteristics_dropdown.getText().toString());
-                    assetPojo.setFrameNumber(frame_number_dropdown.getText().toString());
-                    selectedMap.put("frame_number", frame_number_dropdown.getText().toString());
-                    assetPojo.setInUseDate(date_dropdown.getText().toString());
-                    selectedMap.put("in_use_date", date_dropdown.getText().toString());
-                    assetPojo.setSerialNumber(serie_dropdown.getText().toString());
-                    selectedMap.put("serie", serie_dropdown.getText().toString());
-                    assetPojo.setPlate(plate_dropdown.getText().toString());
-                    selectedMap.put("plate", plate_dropdown.getText().toString());
-                    assetPojo.setPostalCode(postal_code_dropdown.getText().toString());
-                    selectedMap.put("postal_code", postal_code_dropdown.getText().toString());
-                    selectedMap.put("center", center_dropdown.getText().toString());
-                    selectedMap.put("edifice", edifice_dropdown.getText().toString());
-                    selectedMap.put("level", level_dropdown.getText().toString());
-                    selectedMap.put("space", space_dropdown.getText().toString());
-                    selectedMap.put("brand", brand_dropdown.getText().toString());
-                    selectedMap.put("model", model_dropdown.getText().toString());
-
-                    String measures = (!width_dropdown.getText().toString().equals("") && !height_dropdown.getText().toString().equals("") && !depth_dropdown.getText().toString().equals("")) ? width_dropdown.getText().toString() + "x" + height_dropdown.getText().toString() + "x" + depth_dropdown.getText().toString() : "";
-                    assetPojo.setMeasures(measures);
-                    selectedMap.put("measures", measures);
-                    bundle.putSerializable("fieldPojos", fieldPojoArrayList);
-                    bundle.putSerializable("assetPojo", assetPojo);
-                    bundle.putSerializable("selectedMap", selectedMap);
-                    Navigation.findNavController(v).navigate(R.id.action_nav_properties_to_nav_description, bundle);
+                    if(assetPojo.getCenter()!=null) {
+                        Bundle bundle = new Bundle();
+                        int subfamily = getArguments().getInt("subfamily");
+                        HashMap<String, String> selectedMap = (HashMap<String, String>) getArguments().getSerializable("selectedMap");
+                        bundle.putInt("subfamily", subfamily);
+                        selectedMap.put("tag", tagcode);
+                        assetPojo.setTag(String.valueOf(tagId));
+                        assetPojo.setTagType(typeTag.equals("madeup") ? "2" : "3");
+                        assetPojo.setAddress(address_dropdown.getText().toString());
+                        selectedMap.put("address", address_dropdown.getText().toString());
+                        assetPojo.setSubfamily(String.valueOf(subfamily));
+                        assetPojo.setSurface(surface_dropdown.getText().toString());
+                        selectedMap.put("surface", surface_dropdown.getText().toString());
+                        assetPojo.setLength(length_dropdown.getText().toString());
+                        selectedMap.put("length", length_dropdown.getText().toString());
+                        assetPojo.setCharacteristics(characteristics_dropdown.getText().toString());
+                        selectedMap.put("characteristics", characteristics_dropdown.getText().toString());
+                        assetPojo.setFrameNumber(frame_number_dropdown.getText().toString());
+                        selectedMap.put("frame_number", frame_number_dropdown.getText().toString());
+                        assetPojo.setInUseDate(date_dropdown.getText().toString());
+                        selectedMap.put("in_use_date", date_dropdown.getText().toString());
+                        assetPojo.setSerialNumber(serie_dropdown.getText().toString());
+                        selectedMap.put("serie", serie_dropdown.getText().toString());
+                        assetPojo.setPlate(plate_dropdown.getText().toString());
+                        selectedMap.put("plate", plate_dropdown.getText().toString());
+                        assetPojo.setPostalCode(postal_code_dropdown.getText().toString());
+                        selectedMap.put("postal_code", postal_code_dropdown.getText().toString());
+                        selectedMap.put("center", center_dropdown.getText().toString());
+                        selectedMap.put("edifice", edifice_dropdown.getText().toString());
+                        selectedMap.put("level", level_dropdown.getText().toString());
+                        selectedMap.put("space", space_dropdown.getText().toString());
+                        selectedMap.put("brand", brand_dropdown.getText().toString());
+                        selectedMap.put("model", model_dropdown.getText().toString());
+                        String measures = (!width_dropdown.getText().toString().equals("") && !height_dropdown.getText().toString().equals("") && !depth_dropdown.getText().toString().equals("")) ? width_dropdown.getText().toString() + "x" + height_dropdown.getText().toString() + "x" + depth_dropdown.getText().toString() : "";
+                        assetPojo.setMeasures(measures);
+                        selectedMap.put("measures", measures);
+                        bundle.putSerializable("fieldPojos", fieldPojoArrayList);
+                        bundle.putSerializable("assetPojo", assetPojo);
+                        bundle.putSerializable("selectedMap", selectedMap);
+                        Navigation.findNavController(v).navigate(R.id.action_nav_properties_to_nav_description, bundle);
+                    }else{
+                        Toast.makeText(getContext(), "Debe seleccionar un centro para continuar.", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getContext(), "Debe introducir una etiqueta", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "La etiqueta introducida no existe o está en uso.", Toast.LENGTH_LONG).show();
                 }
             }
         });

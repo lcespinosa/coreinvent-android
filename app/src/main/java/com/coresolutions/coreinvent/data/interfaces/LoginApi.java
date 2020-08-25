@@ -27,5 +27,8 @@ public interface LoginApi {
     @GET("auth/users")
     Call<List<User>> getAllUser(@Header("authorization") String token);
 
+    @GET("auth/user")
+    Call<HashMap<String, Object>> getUser(@Header("authorization") String token);
+
 
 }

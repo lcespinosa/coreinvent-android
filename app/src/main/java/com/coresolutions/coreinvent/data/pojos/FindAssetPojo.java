@@ -135,9 +135,19 @@ public class FindAssetPojo implements Serializable {
 
                 @Override
                 public boolean areContentsTheSame(FindAssetPojo oldItem, FindAssetPojo newItem) {
-                    return oldItem.getCode().equals(newItem.getCode());
+                    return oldItem.equals(newItem);
                 }
             };
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+        FindAssetPojo findAssetPojo = (FindAssetPojo) obj;
+        return findAssetPojo.id == this.id;
+    }
+
 
     public Integer getId() {
         return id;

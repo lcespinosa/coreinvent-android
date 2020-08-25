@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,6 +38,7 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private MutableLiveData<List<User>> userResult = new MutableLiveData<>();
+    private MutableLiveData<Integer> responseCodeResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     LoginViewModel(LoginRepository loginRepository) {
@@ -49,6 +51,10 @@ public class LoginViewModel extends ViewModel {
 
     LiveData<LoginResult> getLoginResult() {
         return loginResult;
+    }
+
+    public LiveData<Integer> getResponseCodeResult() {
+        return responseCodeResult;
     }
 
     public LiveData<List<User>> getUserResult() {
@@ -145,6 +151,25 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+
+    public void getUser(String token) {
+
+        Call<HashMap<String, Object>> user = RetrofitClient.getInstance().getLoginApi().getUser(token);
+        user.enqueue(new Callback<HashMap<String, Object>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, Object>> call, Response<HashMap<String, Object>> response) {
+                if (response.isSuccessful()) {
+                    responseCodeResult.setValue(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String, Object>> call, Throwable t) {
+                responseCodeResult.setValue(401);
+            }
+        });
+    }
+
 
 
     public void loginDataChanged(String username, String password) {

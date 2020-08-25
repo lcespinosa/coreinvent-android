@@ -42,6 +42,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -145,7 +146,6 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
             @Override
             public void onChanged(List<Year> years) {
                 yearListAdapter.setYears(years);
-                progressDialog.dismiss();
             }
         });
 
@@ -162,14 +162,16 @@ public class DashboardActivity extends AppCompatActivity implements YearListAdap
             public void onChanged(Dashboard dashboard) {
                 if (dashboard != null) {
                     sub_asset_count.setText(String.valueOf(dashboard.getSubscription().getAssetCount()));
-                    sub_asset_value.setText(String.valueOf(dashboard.getSubscription().getAssetValue()));
+                    DecimalFormat df = new DecimalFormat("#.##");
+
+                    sub_asset_value.setText( df.format(dashboard.getSubscription().getAssetValue()));
                     sub_last_record.setText(dashboard.getSubscription().getLastRecord() != null ? dashboard.getSubscription().getLastRecord().getCode() : "---");
 
                     unsub_asset_count.setText(String.valueOf(dashboard.getUnsubscriptionInfo().getAssetCount()));
-                    unsub_asset_value.setText(String.valueOf(dashboard.getUnsubscriptionInfo().getAssetValue()));
+                    unsub_asset_value.setText(df.format(dashboard.getUnsubscriptionInfo().getAssetValue()));
                     unsub_last_record.setText(dashboard.getUnsubscriptionInfo().getLastRecord() != null ? dashboard.getUnsubscriptionInfo().getLastRecord().getCode() : "---");
 
-                    investment_value.setText(String.valueOf(dashboard.getInvestments().getInvestmentValue()));
+                    investment_value.setText(df.format(dashboard.getInvestments().getInvestmentValue()));
                     cant_notific.setText(String.valueOf(dashboard.getNotifications().size()));
 
                     critical.setText(String.valueOf(dashboard.getRisks().getRiskSummary().getCritical()));

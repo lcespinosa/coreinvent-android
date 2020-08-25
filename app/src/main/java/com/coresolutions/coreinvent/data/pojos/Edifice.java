@@ -34,6 +34,13 @@ public class Edifice implements Serializable {
     @SerializedName("levels")
     @Expose
     private List<Level> levels = null;
+    @SerializedName("center")
+    @Expose
+    private Center center;
+
+    public Center getCenter() {
+        return center;
+    }
 
     public Integer getId() {
         return id;

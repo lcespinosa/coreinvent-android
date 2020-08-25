@@ -231,7 +231,8 @@ public class SearchActivity extends AppCompatActivity implements AssetListAdapte
         dashboardViewModel.getYears(token);
 //        altaViewModel.findAsset(settings.getString("access_token", ""), new Search(findLayout.getEditText().getText().toString()));
 //        itemViewModel.setSearch(new Search(findLayout.getEditText().getText().toString()));
-//        itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
+        if (itemViewModel.itemPagedList.getValue() != null)
+            itemViewModel.itemPagedList.getValue().getDataSource().invalidate();
     }
 
     @Override

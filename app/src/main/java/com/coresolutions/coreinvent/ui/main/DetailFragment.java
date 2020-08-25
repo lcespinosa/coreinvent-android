@@ -73,8 +73,10 @@ public class DetailFragment extends DialogFragment {
     private LinearLayout location2_layout;
     private TextView center;
     private TextView edifice;
+    private LinearLayout edifice_layout;
     private TextView level;
     private TextView space;
+    private LinearLayout space_layout;
 
     private LinearLayout characteristics_layout;
     private TextView characteristics;
@@ -194,8 +196,10 @@ public class DetailFragment extends DialogFragment {
         location2_layout = view.findViewById(R.id.location2_layout);
         center = view.findViewById(R.id.center);
         edifice = view.findViewById(R.id.edifice);
+        edifice_layout = view.findViewById(R.id.edifice_layout);
         level = view.findViewById(R.id.level);
         space = view.findViewById(R.id.space);
+        space_layout = view.findViewById(R.id.space_layout);
 
         characteristics_layout = view.findViewById(R.id.characteristics_layout);
         characteristics = view.findViewById(R.id.characteristics);
@@ -266,34 +270,29 @@ public class DetailFragment extends DialogFragment {
                     }
                 }
                 if (asset.getAssetModel() != null) {
-                    brand_layout.setVisibility(View.VISIBLE);
-                    model.setText(asset.getAssetModel().getName());
-                    model.setAlpha(1);
+                    if (!asset.getAssetModel().getName().equals("General") && !asset.getAssetModel().getName().equals("Undefined")) {
+                        brand_layout.setVisibility(View.VISIBLE);
+                        model.setText(asset.getAssetModel().getName());
+                        model.setAlpha(1);
+                    }
                 }
-                if (asset.getLocalization() != null) {
+                if (asset.getSpace().getLevel().getEdifice().getCenter() != null) {
                     location_layout.setVisibility(View.VISIBLE);
-//                    location2_layout.setVisibility(View.VISIBLE);
-                    center.setText(asset.getLocalization());
+                    center.setText(asset.getSpace().getLevel().getEdifice().getCenter().getName());
                     center.setAlpha(1);
                 }
-//                        if (entry.getKey().equals("edifice")) {
-//                            location_layout.setVisibility(View.VISIBLE);
-//                            location2_layout.setVisibility(View.VISIBLE);
-//                            edifice.setText(entry.getValue());
-//                            edifice.setAlpha(1);
-//                        }
-//                        if (entry.getKey().equals("level")) {
-//                            location_layout.setVisibility(View.VISIBLE);
-//                            location2_layout.setVisibility(View.VISIBLE);
-//                            level.setText(entry.getValue());
-//                            level.setAlpha(1);
-//                        }
-//                        if (entry.getKey().equals("space")) {
-//                            location_layout.setVisibility(View.VISIBLE);
-//                            location2_layout.setVisibility(View.VISIBLE);
-//                            space.setText(entry.getValue());
-//                            space.setAlpha(1);
-//                        }
+                if (!asset.getSpace().getLevel().getEdifice().getName().equals("General")) {
+                    edifice.setText(asset.getSpace().getLevel().getEdifice().getName());
+                    edifice.setAlpha(1);
+                }
+                if (!asset.getSpace().getLevel().getName().equals("General")) {
+                    level.setText(asset.getSpace().getLevel().getName());
+                    level.setAlpha(1);
+                }
+                if (!asset.getSpace().getName().equals("General")) {
+                    space.setText(asset.getSpace().getName());
+                    space.setAlpha(1);
+                }
                 if (asset.getCharacteristics() != null) {
                     characteristics_layout.setVisibility(View.VISIBLE);
                     if (asset.getCharacteristics().getImportado() != null) {
@@ -341,7 +340,7 @@ public class DetailFragment extends DialogFragment {
                     length.setText(asset.getLength().toString());
                     length.setAlpha(1);
                 }
-                if (asset.getEconomicAspect() != null) {
+                if (asset.getEconomicAspect().getInUseDate() != null) {
                     inUseDate_layout.setVisibility(View.VISIBLE);
                     inUseDate.setText(asset.getEconomicAspect().getInUseDate().toString());
                     inUseDate.setAlpha(1);
@@ -386,24 +385,28 @@ public class DetailFragment extends DialogFragment {
                         surface_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("length")) {
                         length_layout.setVisibility(View.VISIBLE);
+                    } else if (field.getColumnName().equals("description")) {
+                        description_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("center")) {
                         if (!field.getOptionPojos().isEmpty()) {
                             location_layout.setVisibility(View.VISIBLE);
-
+                            center.setVisibility(View.VISIBLE);
                         }
                     } else if (field.getColumnName().equals("edifice")) {
                         location_layout.setVisibility(View.VISIBLE);
+                        edifice_layout.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("level")) {
-                        location_layout.setVisibility(View.VISIBLE);
+                        location2_layout.setVisibility(View.VISIBLE);
+                        level.setVisibility(View.VISIBLE);
                     } else if (field.getColumnName().equals("space")) {
-                        location_layout.setVisibility(View.VISIBLE);
+                        location2_layout.setVisibility(View.VISIBLE);
+                        space_layout.setVisibility(View.VISIBLE);
                     }
                 }
             }
         });
 
         altaViewModel.getAssetById(id, token);
-
 
 
         close.setOnClickListener(new View.OnClickListener() {

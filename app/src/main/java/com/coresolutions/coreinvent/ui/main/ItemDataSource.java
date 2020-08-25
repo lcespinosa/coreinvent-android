@@ -105,7 +105,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, FindAssetPojo> 
         networkState.postValue(NetworkState.LOADING);
 
         RetrofitClient.getInstance()
-                .getAltasApi().findAsset(token, new Search(Constants.SEARCH), FIRST_PAGE)
+                .getAltasApi().findAsset(token, new Search(Constants.SEARCH),  params.key)
                 .enqueue(new Callback<FindResponse>() {
                     @Override
                     public void onResponse(Call<FindResponse> call, Response<FindResponse> response) {
@@ -113,9 +113,9 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, FindAssetPojo> 
                         if (response.body() != null) {
                             //if the response has next page
                             //incrementing the next page number
-                            Integer key = response.body().getCurrentPage() < response.body().getLastPage() ? params.key + 1 : null;
+                            Integer nextKey = (params.key == response.body().getLastPage()) ? null : params.key+1;
                             //passing the loaded data and next page value
-                            callback.onResult(response.body().getData(), key);
+                            callback.onResult(response.body().getData(), nextKey);
                             networkState.postValue(NetworkState.LOADED);
                         } else {
                             networkState.postValue(new NetworkState(NetworkState.Status.FAILED, response.message()));

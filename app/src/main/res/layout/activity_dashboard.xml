@@ -206,7 +206,7 @@
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.126" />
+                        android:text="0" />
 
                     <TextView
                         android:id="@+id/investment_value_end"
@@ -292,7 +292,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
                             android:alpha="0.6"
-                            android:text="3"
+                            android:text="0"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -395,7 +395,7 @@
                             android:id="@+id/critical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="454"
+                            android:text="0"
                             android:textColor="#B71E24"
                             android:textSize="12sp" />
 
@@ -409,7 +409,7 @@
                             android:id="@+id/high"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="364"
+                            android:text="0"
                             android:textColor="#E53A3C"
                             android:textSize="12sp" />
 
@@ -423,7 +423,7 @@
                             android:id="@+id/medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24"
+                            android:text="0"
                             android:textColor="#FF5D5D"
                             android:textSize="12sp" />
 
@@ -437,7 +437,7 @@
                             android:id="@+id/low"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="91"
+                            android:text="0"
                             android:textColor="#F8A1A3"
                             android:textSize="12sp" />
 
@@ -451,7 +451,7 @@
                             android:id="@+id/none"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="121"
+                            android:text="0"
                             android:textColor="#FFEDF0"
                             android:textSize="12sp" />
 
@@ -538,7 +538,7 @@
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.126" />
+                        android:text="0" />
 
                     <TextView
                         android:id="@+id/sub_asset_value_end"
@@ -563,7 +563,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:alpha="0.5"
-                        android:text="126" />
+                        android:text="0" />
 
                     <TextView
                         style="@style/thirdLine"
@@ -673,7 +673,7 @@
                         style="@style/secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="23.11" />
+                        android:text="0" />
 
                     <TextView
                         android:id="@+id/unsub_asset_value_end"
@@ -698,7 +698,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:alpha="0.5"
-                        android:text="3" />
+                        android:text="0" />
 
                     <TextView
                         style="@style/thirdLine"

@@ -88,7 +88,7 @@ public class AltaActivity extends AppCompatActivity {
     public void ChooseImage() {
         String[] necessaryPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if (arePermissionsGranted(necessaryPermissions)) {
-            easyImage.openChooser(this);
+            easyImage.openChooser(AltaActivity.this);
         } else {
             requestPermissionsCompat(necessaryPermissions, CHOOSER_PERMISSIONS_REQUEST_CODE);
         }
